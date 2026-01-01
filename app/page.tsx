@@ -103,10 +103,6 @@ export default function Home() {
                   <p className="font-display font-bold text-4xl text-forge-500">5+</p>
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Years Web3</p>
                 </div>
-                <div className="opacity-0 animate-fade-in stagger-5">
-                  <p className="font-display font-bold text-4xl text-white">2342</p>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wider">Tests Written</p>
-                </div>
               </div>
             </div>
           </div>
