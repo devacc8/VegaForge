@@ -13,13 +13,16 @@ export default function Home() {
           <a href="/" className="font-display font-bold text-xl tracking-tight text-white">
             Vega<span className="text-forge-500">Forge</span>
           </a>
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6 md:gap-8">
             <a href="#work" className="text-sm text-neutral-400 hover:text-white transition-colors link-underline">
               Work
             </a>
-            <a 
-              href="https://x.com/vvegalex" 
-              target="_blank" 
+            <a href="#why-me" className="text-sm text-neutral-400 hover:text-white transition-colors link-underline">
+              Why Me
+            </a>
+            <a
+              href="https://x.com/vvegalex"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-sm px-4 py-2 border border-neutral-800 rounded-full text-neutral-300 hover:border-forge-500 hover:text-white transition-all"
             >
@@ -214,6 +217,73 @@ export default function Home() {
             </div>
           </a>
 
+        </div>
+      </section>
+
+      {/* Why Me Section */}
+      <section id="why-me" className="px-6 md:px-12 lg:px-20 py-32">
+        <div className="max-w-6xl mx-auto">
+          {/* Section header */}
+          <div className="mb-16">
+            <p className="font-mono text-xs tracking-widest text-forge-500 mb-4">WHY PRODUCT-MINDED?</p>
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+              Questions I Get Asked
+            </h2>
+          </div>
+
+          {/* FAQ Cards */}
+          <div className="space-y-6">
+            {/* Q1 */}
+            <div className="bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-800 rounded-2xl p-8 md:p-10">
+              <h3 className="font-display font-semibold text-xl text-white mb-4">
+                "AI can code now. Why hire a developer?"
+              </h3>
+              <div className="space-y-4 text-neutral-400 leading-relaxed">
+                <p>
+                  AI generates code, but doesn't understand context. Who verifies the smart contract has no reentrancy vulnerabilities? Who chooses the right pattern (escrow vs approval-based)? Who writes 2,342 tests including fuzz tests for edge cases?
+                </p>
+                <p>
+                  AI is a tool. You need someone who knows <em className="text-neutral-200 not-italic">what</em> to check and <em className="text-neutral-200 not-italic">why</em>.
+                </p>
+              </div>
+            </div>
+
+            {/* Q2 */}
+            <div className="bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-800 rounded-2xl p-8 md:p-10">
+              <h3 className="font-display font-semibold text-xl text-white mb-4">
+                "Why not hire a PM and developer separately?"
+              </h3>
+              <div className="space-y-4 text-neutral-400 leading-relaxed">
+                <p>
+                  In a startup, there's no time for the PM → Designer → Developer → QA chain. When one person sees the user's problem and solves it themselves, the cycle shrinks from weeks to days.
+                </p>
+                <div className="mt-6 pl-4 border-l-2 border-forge-600/50">
+                  <p className="text-sm text-neutral-500 mb-2">Example from BasePaint Market:</p>
+                  <p className="text-neutral-300">
+                    Collectors didn't know the real value of their sets on the secondary market. Instead of creating a ticket and waiting, I built an Analytics Dashboard in a day: daily floor price on OpenSea, day rarity scores, number of complete set holders, and missing NFTs that can't be purchased. The feature strengthened the core product and gave users the data they needed.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Q3 */}
+            <div className="bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-800 rounded-2xl p-8 md:p-10">
+              <h3 className="font-display font-semibold text-xl text-white mb-4">
+                "What does 'product thinking' actually mean?"
+              </h3>
+              <div className="space-y-4 text-neutral-400 leading-relaxed">
+                <p>
+                  It's the ability to see a user's problem and find a solution through the product — not just write code to a spec.
+                </p>
+                <div className="mt-6 pl-4 border-l-2 border-forge-600/50">
+                  <p className="text-sm text-neutral-500 mb-2">Example:</p>
+                  <p className="text-neutral-300">
+                    On OpenSea/Blur you can't sell 365 NFTs in one transaction. Why? No atomic bundle transfers. Solution: a smart contract with approval-based listings (not escrow — less gas, safer). Result: the first specialized marketplace for BasePaint collections.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
