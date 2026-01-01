@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description: 'Fullstack developer with product thinking. Building products, not just writing code. Solidity, React, Next.js.',
   keywords: ['developer', 'solidity', 'react', 'next.js', 'web3', 'blockchain', 'product'],
   authors: [{ name: 'Alex Vega' }],
+  icons: {
+    icon: '/icon.svg',
+  },
   openGraph: {
     title: 'VegaForge — Product-Minded Developer',
     description: 'Fullstack developer with product thinking. Building products, not just writing code.',
