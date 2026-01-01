@@ -49,3 +49,4 @@ docs_internal/
 
 # Windows artifacts
 nul
+*:Zone.Identifier
