@@ -25,13 +25,29 @@ export const metadata: Metadata = {
   },
 }
 
+const themeScript = `
+  (function() {
+    const stored = localStorage.getItem('vegaforge-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+`
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <div className="grain-overlay" />
         {children}
