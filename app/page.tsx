@@ -328,7 +328,7 @@ export default function Home() {
                 <p>
                   In a startup, there's no time for the PM → Designer → Developer → QA chain. When one person sees the user's problem and solves it themselves, the cycle shrinks from weeks to days.
                 </p>
-                <div className="mt-6 pl-4 border-l-2 border-forge-500/50 dark:border-forge-600/50">
+                <div className="mt-6 pl-4 border-l-2 border-forge-600/50">
                   <p className="text-sm text-neutral-500 mb-2">Example from BasePaint Market:</p>
                   <p className="text-neutral-700 dark:text-neutral-300">
                     Collectors didn't know the real value of their sets on the secondary market. Instead of creating a ticket and waiting, I built an Analytics Dashboard in a day: daily floor price on OpenSea, day rarity scores, number of complete set holders, and missing NFTs that can't be purchased. The feature strengthened the core product and gave users the data they needed.
@@ -346,7 +346,7 @@ export default function Home() {
                 <p>
                   It's the ability to see a user's problem and find a solution through the product — not just write code to a spec.
                 </p>
-                <div className="mt-6 pl-4 border-l-2 border-forge-500/50 dark:border-forge-600/50">
+                <div className="mt-6 pl-4 border-l-2 border-forge-600/50">
                   <p className="text-sm text-neutral-500 mb-2">Example:</p>
                   <p className="text-neutral-700 dark:text-neutral-300">
                     On OpenSea/Blur you can't sell 365 NFTs in one transaction. Why? No atomic bundle transfers. Solution: a smart contract with approval-based listings (not escrow — less gas, safer). Result: the first specialized marketplace for BasePaint collections.

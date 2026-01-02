@@ -28,7 +28,7 @@ function getSystemTheme(): 'dark' | 'light' {
 }
 
 export function ThemeSwitcher() {
-  const [theme, setThemeState] = useState<Theme>('system')
+  const [theme, setThemeState] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export function ThemeSwitcher() {
     if (stored && ['dark', 'light', 'system'].includes(stored)) {
       setThemeState(stored)
     }
+    // Default is 'dark' if nothing stored
   }, [])
 
   useEffect(() => {

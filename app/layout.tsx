@@ -30,10 +30,11 @@ const themeScript = `
     const stored = localStorage.getItem('vegaforge-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark)) {
-      document.documentElement.classList.add('dark');
-    } else {
+    // Default to dark if no preference stored
+    if (stored === 'light' || (stored === 'system' && !prefersDark)) {
       document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
     }
   })();
 `
