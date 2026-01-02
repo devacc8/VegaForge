@@ -224,7 +224,7 @@ export default function Home() {
               {/* Stats grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 py-6 border-y border-neutral-800">
                 <div>
-                  <p className="font-display font-bold text-2xl text-white">~50KB</p>
+                  <p className="font-display font-bold text-2xl text-white">50KB</p>
                   <p className="text-xs text-neutral-500">Lightweight</p>
                 </div>
                 <div>
