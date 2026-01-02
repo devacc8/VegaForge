@@ -189,6 +189,72 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Project Card: CoinPeek */}
+          <div className="mt-8 group relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 border border-neutral-800 hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500">
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div className="relative z-10">
+              {/* Project header */}
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div>
+                  <p className="font-mono text-xs text-forge-500 mb-2">2025 — CHROME EXTENSION</p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-white">
+                    CoinPeek
+                  </h3>
+                </div>
+                <a
+                  href="https://github.com/devacc8/coinpeek"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-700 hover:border-forge-500 rounded-full text-sm text-neutral-300 hover:text-white transition-all"
+                >
+                  View on GitHub
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Description */}
+              <p className="text-neutral-400 leading-relaxed mb-8 max-w-2xl">
+                A fast, lightweight Chrome extension for crypto monitoring. Real-time Bitcoin price on the badge, ETH prices, gas fees for both networks, and a smart converter. Background updates every minute with optimized memory footprint.
+              </p>
+
+              {/* Stats grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 py-6 border-y border-neutral-800">
+                <div>
+                  <p className="font-display font-bold text-2xl text-white">60s</p>
+                  <p className="text-xs text-neutral-500">Update Interval</p>
+                </div>
+                <div>
+                  <p className="font-display font-bold text-2xl text-forge-500">5</p>
+                  <p className="text-xs text-neutral-500">API Integrations</p>
+                </div>
+                <div>
+                  <p className="font-display font-bold text-2xl text-white">25%</p>
+                  <p className="text-xs text-neutral-500">Code Optimized</p>
+                </div>
+                <div>
+                  <p className="font-display font-bold text-2xl text-white">MIT</p>
+                  <p className="text-xs text-neutral-500">Open Source</p>
+                </div>
+              </div>
+
+              {/* Tech stack */}
+              <div className="flex flex-wrap gap-2">
+                {['JavaScript', 'Chrome APIs', 'Manifest V3', 'CoinGecko', 'Blocknative', 'mempool.space'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-neutral-800/50 border border-neutral-700/50 rounded-full text-xs text-neutral-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Hackathon Card */}
           <a
             href="https://blog.chain.link/ethonline-2020-chainlink-hackathon-winners/"
