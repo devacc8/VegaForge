@@ -132,7 +132,7 @@ export default function Home() {
               {/* Project header */}
               <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                 <div>
-                  <p className="font-mono text-xs text-forge-500 mb-2">2024 — LIVE ON BASE MAINNET</p>
+                  <p className="font-mono text-xs text-forge-500 mb-2">2025 — LIVE ON BASE MAINNET</p>
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-white">
                     BasePaint Market
                   </h3>
@@ -198,7 +198,7 @@ export default function Home() {
               {/* Project header */}
               <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                 <div>
-                  <p className="font-mono text-xs text-forge-500 mb-2">2025 — CHROME EXTENSION</p>
+                  <p className="font-mono text-xs text-forge-500 mb-2">2020–2026 — CHROME EXTENSION</p>
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-white">
                     CoinPeek
                   </h3>
@@ -218,7 +218,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-neutral-400 leading-relaxed mb-8 max-w-2xl">
-                A fast, lightweight Chrome extension for crypto monitoring. Real-time Bitcoin price on the badge, ETH prices, gas fees for both networks, and a smart converter. Background updates every minute with optimized memory footprint.
+                Chrome extension for instant crypto monitoring. Shows Bitcoin price right on the toolbar badge, plus ETH prices, network gas fees, and a smart BTC/ETH/USD converter. Automatic updates every 60 seconds with minimal resource usage.
               </p>
 
               {/* Stats grid */}
@@ -232,8 +232,8 @@ export default function Home() {
                   <p className="text-xs text-neutral-500">API Integrations</p>
                 </div>
                 <div>
-                  <p className="font-display font-bold text-2xl text-white">25%</p>
-                  <p className="text-xs text-neutral-500">Code Optimized</p>
+                  <p className="font-display font-bold text-2xl text-white">3</p>
+                  <p className="text-xs text-neutral-500">Fallback APIs</p>
                 </div>
                 <div>
                   <p className="font-display font-bold text-2xl text-white">MIT</p>
