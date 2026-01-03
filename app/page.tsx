@@ -157,7 +157,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8 max-w-2xl">
-                The first specialized marketplace for trading complete BasePaint year collections on Base L2. Enables buying and selling complete sets (365 NFTs) in a single atomic transaction — something impossible on OpenSea or Blur.
+                The first specialized marketplace for trading complete BasePaint year collections on Base L2. Enables buying and selling complete sets (365 NFTs) in a single atomic transaction. Something impossible on OpenSea or Blur.
               </p>
 
               {/* Stats grid */}
@@ -365,12 +365,12 @@ export default function Home() {
               </h3>
               <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
-                  It's the ability to see a user's problem and find a solution through the product — not just write code to a spec.
+                  It's the ability to see a user's problem and find a solution through the product, not just write code to a spec.
                 </p>
                 <div className="mt-6 pl-4 border-l-2 border-forge-600/50">
                   <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">Example:</p>
                   <p className="text-neutral-700 dark:text-neutral-300">
-                    On OpenSea/Blur you can't sell 365 NFTs in one transaction. Why? No atomic bundle transfers. Solution: a smart contract with approval-based listings (not escrow — less gas, safer). Result: the first specialized marketplace for BasePaint collections.
+                    On OpenSea/Blur you can't sell 365 NFTs in one transaction. Why? No atomic bundle transfers. Solution: a smart contract with approval-based listings (not escrow: less gas, safer). Result: the first specialized marketplace for BasePaint collections.
                   </p>
                 </div>
               </div>
