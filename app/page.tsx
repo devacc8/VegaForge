@@ -274,7 +274,7 @@ export default function Home() {
                 </svg>
               </div>
               <div className="flex-1">
-                <p className="font-mono text-xs text-neutral-500 mb-1">2020 — ETHONLINE HACKATHON</p>
+                <p className="font-mono text-xs text-neutral-500 dark:text-neutral-400 mb-1">2020 — ETHONLINE HACKATHON</p>
                 <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-2">
                   Special Prize from PoolTogether
                 </h3>
