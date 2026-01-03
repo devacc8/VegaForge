@@ -118,7 +118,7 @@ export default function Home() {
       </section>
 
       {/* Work Section */}
-      <section id="work" className="px-6 md:px-12 lg:px-20 py-32">
+      <section id="work" className="px-6 md:px-12 lg:px-20 pt-32 pb-16">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">
@@ -146,7 +146,7 @@ export default function Home() {
                   href="https://basepaint.market"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-neutral-700 hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-neutral-300 hover:text-forge-600 dark:hover:text-white transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   Visit Site
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -212,7 +212,7 @@ export default function Home() {
                   href="https://github.com/devacc8/coinpeek"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-neutral-700 hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-neutral-300 hover:text-forge-600 dark:hover:text-white transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   View on GitHub
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,6 +267,8 @@ export default function Home() {
             rel="noopener noreferrer"
             className="mt-8 group relative bg-neutral-50 dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 transition-all duration-500 block"
           >
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
               <div className="shrink-0 w-16 h-16 bg-forge-100 dark:bg-forge-600/10 border border-forge-200 dark:border-forge-600/30 rounded-xl flex items-center justify-center">
                 <svg className="w-8 h-8 text-forge-600 dark:text-forge-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -292,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* Why Me Section */}
-      <section id="why-me" className="px-6 md:px-12 lg:px-20 py-32">
+      <section id="why-me" className="px-6 md:px-12 lg:px-20 pt-16 pb-32">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">
@@ -305,11 +307,13 @@ export default function Home() {
           {/* FAQ Cards */}
           <div className="space-y-6">
             {/* Q1 */}
-            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
-              <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
+            <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none transition-all duration-500">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="relative z-10 font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "AI can code now. Why hire a developer?"
               </h3>
-              <div className="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
                   AI generates code, but doesn't understand context. Who verifies the smart contract has no reentrancy vulnerabilities? Who chooses the right pattern (escrow vs approval-based)? Who writes 2,342 tests including fuzz tests for edge cases?
                 </p>
@@ -320,11 +324,13 @@ export default function Home() {
             </div>
 
             {/* Q2 */}
-            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
-              <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
+            <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none transition-all duration-500">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="relative z-10 font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "Why not hire a PM and developer separately?"
               </h3>
-              <div className="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
                   In a startup, there's no time for the PM → Designer → Developer → QA chain. When one person sees the user's problem and solves it themselves, the cycle shrinks from weeks to days.
                 </p>
@@ -338,11 +344,13 @@ export default function Home() {
             </div>
 
             {/* Q3 */}
-            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
-              <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
+            <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none transition-all duration-500">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="relative z-10 font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "What does 'product thinking' actually mean?"
               </h3>
-              <div className="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
                   It's the ability to see a user's problem and find a solution through the product — not just write code to a spec.
                 </p>
