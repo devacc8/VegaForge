@@ -117,11 +117,11 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={cycleTheme}
-      className="p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
+      className="p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
       aria-label={`Current theme: ${getLabel()}. Click to change.`}
       title={getLabel()}
     >
-      <span className="transition-transform duration-200 block hover:rotate-12">
+      <span className="transition-transform duration-200 block group-hover:rotate-12">
         {getIcon()}
       </span>
     </button>
