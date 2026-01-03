@@ -29,7 +29,7 @@ export default function Home() {
               href="https://x.com/vvegalex"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm px-4 py-2 border border-neutral-300 dark:border-neutral-800 rounded-full text-neutral-700 dark:text-neutral-300 hover:border-forge-500 hover:text-forge-600 dark:hover:text-white transition-all"
+              className="text-sm px-4 py-2 border border-neutral-300 dark:border-forge-600/50 rounded-full text-neutral-700 dark:text-forge-400 hover:border-forge-500 dark:hover:border-forge-500 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
             >
               Contact
             </a>
