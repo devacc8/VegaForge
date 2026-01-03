@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
       {/* Background gradient */}
-      <div className="fixed inset-0 bg-gradient-to-b from-neutral-100 via-neutral-50 to-white dark:from-[#0a0a0a] dark:via-[#0d0908] dark:to-[#050505] -z-10 transition-colors duration-300" />
+      <div className="fixed inset-0 bg-linear-to-b from-neutral-100 via-neutral-50 to-white dark:from-[#0a0a0a] dark:via-[#0d0908] dark:to-[#050505] -z-10 transition-colors duration-300" />
 
       {/* Subtle radial glow */}
       <div className="fixed top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-forge-500/5 dark:bg-forge-600/5 rounded-full blur-[120px] -z-10" />
@@ -101,7 +101,7 @@ export default function Home() {
             </div>
 
             {/* Stats sidebar (desktop only) */}
-            <div className="hidden xl:block flex-shrink-0">
+            <div className="hidden xl:block shrink-0">
               <div className="space-y-8 text-right">
                 <div className="opacity-0 animate-fade-in stagger-3">
                   <p className="font-display font-bold text-4xl text-neutral-900 dark:text-white">7+</p>
@@ -129,7 +129,7 @@ export default function Home() {
           </div>
 
           {/* Project Card: BasePaint Market */}
-          <div className="group relative bg-white dark:bg-gradient-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500 shadow-sm dark:shadow-none">
+          <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500 shadow-xs dark:shadow-none">
             {/* Glow effect on hover */}
             <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -195,7 +195,7 @@ export default function Home() {
           </div>
 
           {/* Project Card: CoinPeek */}
-          <div className="mt-8 group relative bg-white dark:bg-gradient-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500 shadow-sm dark:shadow-none">
+          <div className="mt-8 group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500 shadow-xs dark:shadow-none">
             {/* Glow effect on hover */}
             <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -265,10 +265,10 @@ export default function Home() {
             href="https://blog.chain.link/ethonline-2020-chainlink-hackathon-winners/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 group relative bg-neutral-50 dark:bg-gradient-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 transition-all duration-500 block"
+            className="mt-8 group relative bg-neutral-50 dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 transition-all duration-500 block"
           >
             <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
-              <div className="flex-shrink-0 w-16 h-16 bg-forge-100 dark:bg-forge-600/10 border border-forge-200 dark:border-forge-600/30 rounded-xl flex items-center justify-center">
+              <div className="shrink-0 w-16 h-16 bg-forge-100 dark:bg-forge-600/10 border border-forge-200 dark:border-forge-600/30 rounded-xl flex items-center justify-center">
                 <svg className="w-8 h-8 text-forge-600 dark:text-forge-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
@@ -282,7 +282,7 @@ export default function Home() {
                   Chainlink-powered hackathon winner. Built a DeFi solution during ETHOnline 2020.
                 </p>
               </div>
-              <svg className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-forge-500 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-forge-500 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </div>
@@ -305,7 +305,7 @@ export default function Home() {
           {/* FAQ Cards */}
           <div className="space-y-6">
             {/* Q1 */}
-            <div className="bg-white dark:bg-gradient-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-sm dark:shadow-none">
+            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
               <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "AI can code now. Why hire a developer?"
               </h3>
@@ -320,7 +320,7 @@ export default function Home() {
             </div>
 
             {/* Q2 */}
-            <div className="bg-white dark:bg-gradient-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-sm dark:shadow-none">
+            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
               <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "Why not hire a PM and developer separately?"
               </h3>
@@ -338,7 +338,7 @@ export default function Home() {
             </div>
 
             {/* Q3 */}
-            <div className="bg-white dark:bg-gradient-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-sm dark:shadow-none">
+            <div className="bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none">
               <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
                 "What does 'product thinking' actually mean?"
               </h3>
