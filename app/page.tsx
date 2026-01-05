@@ -375,6 +375,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Q4 */}
+            <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none transition-all duration-500">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="relative z-10 font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
+                "Isn't this just vibe coding?"
+              </h3>
+              <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                <p>
+                  Not quite. Vibe coding means fully delegating to AI without understanding what's being built. My approach is different: I architect the system, define constraints, review every decision. AI accelerates execution, but direction comes from 7 years of experience.
+                </p>
+                <p>
+                  The result is faster delivery with higher quality than a traditional team, not despite the human involvement, but <em className="text-neutral-800 dark:text-neutral-200 not-italic">because</em> of it.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
