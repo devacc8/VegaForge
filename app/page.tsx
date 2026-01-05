@@ -293,11 +293,21 @@ export default function Home() {
                 <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-2">
                   PoolTogether Prize Winner
                 </h3>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                <p className="text-neutral-500 dark:text-neutral-400 text-sm mb-3">
                   Built a PoolTogether extension that introduced meme coin pools to the no-loss lottery protocol. Won special prize at ETHGlobal's ETHOnline 2020 — one of the largest Chainlink-sponsored Ethereum hackathons.
                 </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Solidity', 'DeFi', 'PoolTogether', 'Chainlink', 'ETHGlobal'].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <svg className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-forge-500 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-forge-500 transition-colors shrink-0 hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </div>
