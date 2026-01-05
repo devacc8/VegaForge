@@ -221,7 +221,7 @@ export default function Home() {
                     Install Extension
                   </a>
                   <a
-                    href="https://github.com/nickstuaw/CoinPeek"
+                    href="https://github.com/devacc8/coinpeek"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
