@@ -291,10 +291,10 @@ export default function Home() {
               <div className="flex-1">
                 <p className="font-mono text-xs text-neutral-500 dark:text-neutral-400 mb-1">2020 — ETHONLINE HACKATHON</p>
                 <h3 className="font-display font-semibold text-xl text-neutral-900 dark:text-white mb-2">
-                  Special Prize from PoolTogether
+                  PoolTogether Prize Winner
                 </h3>
                 <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                  Chainlink-powered hackathon winner. Built a DeFi solution during ETHOnline 2020.
+                  Built a PoolTogether extension that introduced meme coin pools to the no-loss lottery protocol. Won special prize at ETHGlobal's ETHOnline 2020 — one of the largest Chainlink-sponsored Ethereum hackathons.
                 </p>
               </div>
               <svg className="w-5 h-5 text-neutral-400 dark:text-neutral-600 group-hover:text-forge-500 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
