@@ -142,7 +142,7 @@ body {
 .ember-line {
   height: 2px;
   background: var(--forge-ember);
-  width: 0;
+  width: 1.2rem;
 }
 
 /* Glowing text effect */

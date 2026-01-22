@@ -12,9 +12,11 @@ export default function Home() {
 
     const handleScroll = () => {
       const scrollY = window.scrollY
-      const maxScroll = 500
+      const maxScroll = 200
       const progress = Math.min(scrollY / maxScroll, 1)
-      const width = progress * 6
+      const minWidth = 1.2
+      const maxWidth = 6
+      const width = minWidth + progress * (maxWidth - minWidth)
       emberLine.style.width = `${width}rem`
     }
 
