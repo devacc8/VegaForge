@@ -10,19 +10,18 @@ export default function Home() {
     const emberLine = emberLineRef.current
     if (!emberLine) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            emberLine.classList.add('animate')
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const maxScroll = 500
+      const progress = Math.min(scrollY / maxScroll, 1)
+      const width = progress * 6
+      emberLine.style.width = `${width}rem`
+    }
 
-    observer.observe(emberLine)
-    return () => observer.disconnect()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   return (
     <main className="min-h-screen relative overflow-hidden">
