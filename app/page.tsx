@@ -91,7 +91,7 @@ export default function Home() {
               </p>
 
               {/* Ember line */}
-              <div ref={emberLineRef} className="ember-line w-24 mb-10 opacity-0 animate-fade-up stagger-4" />
+              <div ref={emberLineRef} className="ember-line mb-10 opacity-0 animate-fade-up stagger-4" />
 
               {/* Main text */}
               <div className="space-y-5 text-neutral-600 dark:text-neutral-400 leading-relaxed opacity-0 animate-fade-up stagger-5">

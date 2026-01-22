@@ -141,14 +141,13 @@ body {
 /* Ember line accent */
 .ember-line {
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--forge-ember), transparent);
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--forge-ember);
+  width: 0;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
 }
 
 .ember-line.animate {
-  transform: scaleX(1);
+  width: 6rem;
 }
 
 /* Glowing text effect */
