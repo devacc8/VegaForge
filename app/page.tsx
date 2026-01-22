@@ -5,6 +5,13 @@ import { ThemeSwitcher } from './components/ThemeSwitcher'
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
+      {/* Skip link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-forge-600 focus:text-white focus:rounded-lg focus:outline-none"
+      >
+        Skip to main content
+      </a>
       {/* Background gradient */}
       <div className="fixed inset-0 bg-linear-to-b from-neutral-100 via-neutral-50 to-white dark:from-[#0a0a0a] dark:via-[#0d0908] dark:to-[#050505] -z-10 transition-colors duration-300" />
 
@@ -38,7 +45,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 pt-24">
+      <section id="main-content" className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 pt-24">
         <div className="max-w-6xl mx-auto w-full">
           <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-12">
             {/* Main content */}
@@ -57,9 +64,9 @@ export default function Home() {
 
               {/* Subheadline */}
               <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed mb-8 opacity-0 animate-fade-up stagger-3">
-                Fullstack developer with product thinking.
+                Fullstack developer with product thinking
                 <br className="hidden md:block" />
-                Building products, not just writing code.
+                Building products, not just writing code
               </p>
 
               {/* Ember line */}
@@ -424,9 +431,10 @@ export default function Home() {
               href="https://x.com/vvegalex"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow on X (Twitter)"
               className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
@@ -434,9 +442,10 @@ export default function Home() {
               href="https://github.com/devacc8"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="View GitHub profile"
               className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
               </svg>
             </a>
