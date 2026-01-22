@@ -1,8 +1,29 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { ThemeSwitcher } from './components/ThemeSwitcher'
 
 export default function Home() {
+  const emberLineRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const emberLine = emberLineRef.current
+    if (!emberLine) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            emberLine.classList.add('animate')
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    observer.observe(emberLine)
+    return () => observer.disconnect()
+  }, [])
   return (
     <main className="min-h-screen relative overflow-hidden">
       {/* Skip link for accessibility */}
@@ -70,7 +91,7 @@ export default function Home() {
               </p>
 
               {/* Ember line */}
-              <div className="ember-line w-24 mb-10 opacity-0 animate-fade-up stagger-4" />
+              <div ref={emberLineRef} className="ember-line w-24 mb-10 opacity-0 animate-fade-up stagger-4" />
 
               {/* Main text */}
               <div className="space-y-5 text-neutral-600 dark:text-neutral-400 leading-relaxed opacity-0 animate-fade-up stagger-5">
