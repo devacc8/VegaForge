@@ -118,6 +118,10 @@ export default function Home() {
                   <p className="font-display font-bold text-4xl text-forge-600 dark:text-forge-500">5+</p>
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Years Web3</p>
                 </div>
+                <div className="opacity-0 animate-fade-in stagger-5">
+                  <p className="font-display font-bold text-4xl text-neutral-900 dark:text-white">OSS</p>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wider">Contributor</p>
+                </div>
               </div>
             </div>
           </div>
@@ -315,6 +319,52 @@ export default function Home() {
               {/* Tech stack */}
               <div className="flex flex-wrap gap-2">
                 {['Solidity', 'DeFi', 'PoolTogether', 'Chainlink', 'ETHGlobal'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Project Card: Open Source Contributions */}
+          <div className="mt-8 group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-12 transition-all duration-500 shadow-xs dark:shadow-none">
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div className="relative z-10">
+              {/* Project header */}
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div>
+                  <p className="font-mono text-xs text-forge-600 dark:text-forge-500 mb-2">2025 — OPEN SOURCE</p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-neutral-900 dark:text-white">
+                    Open Source Contributor
+                  </h3>
+                </div>
+                <a
+                  href="https://github.com/devacc8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
+                >
+                  GitHub
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                  </svg>
+                </a>
+              </div>
+
+              {/* Description */}
+              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8 max-w-2xl">
+                Contributing to Web3 ecosystem growth. PRs merged to Talent Protocol. Active contributor to Base ecosystem with pending PRs in official documentation and Unity SDK.
+              </p>
+
+              {/* Tech stack */}
+              <div className="flex flex-wrap gap-2">
+                {['Open Source', 'Base', 'Talent Protocol', 'Documentation', 'Unity SDK'].map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
