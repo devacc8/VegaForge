@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { ThemeSwitcher } from './components/ThemeSwitcher'
+import { Navigation } from './components/Navigation'
 
 export default function Home() {
   const emberLineRef = useRef<HTMLDivElement>(null)
@@ -41,30 +41,7 @@ export default function Home() {
       <div className="fixed top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-forge-500/5 dark:bg-forge-600/5 rounded-full blur-[120px] -z-10" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 lg:px-20 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800/50 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <a href="/" className="font-display font-bold text-xl tracking-tight text-neutral-900 dark:text-white">
-            Vega<span className="text-forge-500">Forge</span>
-          </a>
-          <div className="flex items-center gap-4 md:gap-6">
-            <a href="#work" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
-              Work
-            </a>
-            <a href="#why-me" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
-              Why Me
-            </a>
-            <ThemeSwitcher />
-            <a
-              href="https://x.com/vvegalex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm px-4 py-2 border border-neutral-300 dark:border-forge-600/50 rounded-full text-neutral-700 dark:text-forge-400 hover:border-forge-500 dark:hover:border-forge-500 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
-            >
-              Contact
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section id="main-content" className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 pt-24">
