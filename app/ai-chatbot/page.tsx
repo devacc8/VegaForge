@@ -276,7 +276,7 @@ export default function AIChatbotPage() {
             {[
               {
                 q: 'How does the bot learn about my business?',
-                a: 'You share your documents — PDFs, FAQs, product info, website content. I process them into a vector database with semantic search. The bot retrieves relevant information before answering, so every response is based on your actual data, not generic AI knowledge.',
+                a: 'You share your documents — PDFs, FAQs, product info, website content. We process them into a vector database with semantic search. The bot retrieves relevant information before answering, so every response is based on your actual data, not generic AI knowledge.',
               },
               {
                 q: 'What AI models do you use?',
@@ -284,7 +284,7 @@ export default function AIChatbotPage() {
               },
               {
                 q: 'Can I update the knowledge base myself?',
-                a: 'Yes. I provide a simple process to add new documents anytime. The bot learns from new content immediately — no code changes needed.',
+                a: 'Yes. We provide a simple process to add new documents anytime. The bot learns from new content immediately — no code changes needed.',
               },
               {
                 q: 'What if the bot cannot answer a question?',
@@ -320,7 +320,7 @@ export default function AIChatbotPage() {
             Ready to Get Started?
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mb-10 max-w-lg mx-auto">
-            Tell me about your business and what you need. I will get back to you within 24 hours with a plan
+            Tell us about your business and what you need. We will get back to you within 24 hours with a plan
           </p>
           <a
             href="mailto:devacc8@pm.me"
