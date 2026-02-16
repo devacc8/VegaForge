@@ -60,7 +60,7 @@ export default function AIChatbotPage() {
             <span className="text-forge-600 dark:text-forge-500">Your Business</span>
           </h1>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl mb-10">
-            Trained on your documents, not generic internet data. Every answer is grounded in your business knowledge. Smart model routing cuts API costs 40-60%
+            Trained on your documents, not generic internet data. Your customers and team get accurate answers instantly, 24/7, across every channel
           </p>
 
           <div className="flex flex-wrap gap-4">
