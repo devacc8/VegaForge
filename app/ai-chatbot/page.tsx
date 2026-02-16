@@ -46,13 +46,6 @@ export default function AIChatbotPage() {
       {/* Hero Section */}
       <section id="main-content" className="min-h-[70vh] flex items-center px-6 md:px-12 lg:px-20 pt-24">
         <div className="max-w-6xl mx-auto w-full">
-          <a href="/" className="inline-flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 hover:text-forge-600 dark:hover:text-forge-500 transition-colors mb-8">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Home
-          </a>
-
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">AI CHATBOT SERVICE</p>
           <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-neutral-900 dark:text-white mb-6">
             AI Chatbot for
