@@ -44,7 +44,7 @@ export default function AIAgentPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section id="main-content" className="min-h-[70vh] flex items-center px-6 md:px-12 lg:px-20 pt-24">
+      <section id="main-content" className="min-h-[50vh] md:min-h-[70vh] flex items-center px-6 md:px-12 lg:px-20 pt-20 md:pt-24">
         <div className="max-w-6xl mx-auto w-full">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">AI AGENT SERVICE</p>
           <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-neutral-900 dark:text-white mb-6">
@@ -77,7 +77,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* Ideal For */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">WHO IT&apos;S FOR</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -124,7 +124,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-24">
+      <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">ARCHITECTURE</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -178,7 +178,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* A Day in the Life */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">A TYPICAL DAY</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -212,7 +212,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* What You Get */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">FEATURES</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -259,7 +259,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* Hiring vs AI Agent */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">COMPARISON</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -304,7 +304,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* Running Costs */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">RUNNING COSTS</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-6">
@@ -367,7 +367,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* Process */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">PROCESS</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -395,7 +395,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* Tailored to You */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-12 shadow-xs dark:shadow-none">
             <div className="relative z-10">
@@ -438,7 +438,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">FAQ</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -487,7 +487,7 @@ export default function AIAgentPage() {
       </section>
 
       {/* CTA Footer */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-6">
             Ready to Automate?

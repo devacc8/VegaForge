@@ -44,7 +44,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section id="main-content" className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 pt-24">
+      <section id="main-content" className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 pt-20 md:pt-24">
         <div className="max-w-6xl mx-auto w-full">
           <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-12">
             {/* Main content */}
@@ -128,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* Work Section */}
-      <section id="work" className="px-6 md:px-12 lg:px-20 pt-32 pb-16">
+      <section id="work" className="px-6 md:px-12 lg:px-20 pt-16 md:pt-32 pb-8 md:pb-16">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">
@@ -379,7 +379,7 @@ export default function Home() {
       </section>
 
       {/* Why Me Section */}
-      <section id="why-me" className="px-6 md:px-12 lg:px-20 pt-16 pb-32">
+      <section id="why-me" className="px-6 md:px-12 lg:px-20 pt-8 md:pt-16 pb-16 md:pb-32">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">

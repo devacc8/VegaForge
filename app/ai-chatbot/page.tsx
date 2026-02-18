@@ -44,7 +44,7 @@ export default function AIChatbotPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section id="main-content" className="min-h-[70vh] flex items-center px-6 md:px-12 lg:px-20 pt-24">
+      <section id="main-content" className="min-h-[50vh] md:min-h-[70vh] flex items-center px-6 md:px-12 lg:px-20 pt-20 md:pt-24">
         <div className="max-w-6xl mx-auto w-full">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">AI CHATBOT SERVICE</p>
           <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-neutral-900 dark:text-white mb-6">
@@ -56,7 +56,7 @@ export default function AIChatbotPage() {
             Trained on your documents, not generic internet data. Your customers and team get accurate answers instantly, 24/7, across every channel
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3 md:gap-4">
             <a
               href="mailto:devacc8@pm.me"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
@@ -77,7 +77,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* Ideal For */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">WHO IT&apos;S FOR</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -124,7 +124,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-24">
+      <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">ARCHITECTURE</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -187,7 +187,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* What You Get */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">FEATURES</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -234,7 +234,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* A Day in the Life */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">A TYPICAL DAY</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -268,7 +268,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* Hiring vs AI Chatbot */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">COMPARISON</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -313,7 +313,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* Process */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">PROCESS</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -341,7 +341,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* Tailored to You */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-12 shadow-xs dark:shadow-none">
             <div className="relative z-10">
@@ -384,7 +384,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">FAQ</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
@@ -433,7 +433,7 @@ export default function AIChatbotPage() {
       </section>
 
       {/* CTA Footer */}
-      <section className="px-6 md:px-12 lg:px-20 py-24">
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-6">
             Ready to Get Started?
