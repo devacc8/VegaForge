@@ -34,13 +34,6 @@ export function Navigation() {
     }
   }, [servicesOpen])
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden'
-      return () => { document.body.style.overflow = '' }
-    }
-  }, [mobileOpen])
 
   return (
     <>
@@ -124,10 +117,10 @@ export function Navigation() {
 
       {/* Mobile Menu — rendered outside <nav> to avoid backdrop-blur stacking context */}
       {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-[65px] bg-white dark:bg-[#0a0a0a] z-50">
-          <div className="px-6 py-8 space-y-2">
+        <div className="md:hidden fixed top-[65px] left-0 right-0 z-50 bg-white dark:bg-[#0a0a0a] border-b border-neutral-200 dark:border-neutral-800 shadow-lg dark:shadow-neutral-950/50">
+          <div className="px-6 py-4 space-y-1">
             {/* Services section */}
-            <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-3 px-4">SERVICES</p>
+            <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-2 px-4">SERVICES</p>
             <a
               href="/ai-chatbot"
               className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/ai-chatbot' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
@@ -141,7 +134,7 @@ export function Navigation() {
               AI Agent
             </a>
 
-            <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-4" />
+            <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
 
             {/* Contact */}
             <a
