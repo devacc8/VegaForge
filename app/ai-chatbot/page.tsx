@@ -76,6 +76,53 @@ export default function AIChatbotPage() {
         </div>
       </section>
 
+      {/* Ideal For */}
+      <section className="px-6 md:px-12 lg:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">WHO IT&apos;S FOR</p>
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
+            Ideal For
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'E-Commerce',
+                desc: 'Answer product questions, track orders, handle returns — all from your actual catalog data, not generic responses',
+              },
+              {
+                title: 'SaaS Companies',
+                desc: 'Onboard new users, answer feature questions, reduce support ticket volume by handling common queries instantly',
+              },
+              {
+                title: 'Clinics & Healthcare',
+                desc: 'Schedule appointments, answer insurance questions, provide pre-visit instructions based on your specific procedures',
+              },
+              {
+                title: 'Real Estate',
+                desc: 'Qualify leads, answer property questions, schedule viewings. Available 24/7 when buyers browse listings at night',
+              },
+              {
+                title: 'Education & Courses',
+                desc: 'Answer student questions about curriculum, assignments, and enrollment. One bot handles what multiple TAs would',
+              },
+              {
+                title: 'HR & Internal Teams',
+                desc: 'Policy questions, onboarding guides, IT troubleshooting. Internal knowledge base accessible via chat for all employees',
+              },
+            ].map((item) => (
+              <div key={item.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 transition-all duration-500 shadow-xs dark:shadow-none">
+                <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-24">
         <div className="max-w-6xl mx-auto">
@@ -183,6 +230,85 @@ export default function AIChatbotPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* A Day in the Life */}
+      <section className="px-6 md:px-12 lg:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">A TYPICAL DAY</p>
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
+            A Day in the Life of Your Chatbot
+          </h2>
+
+          <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 md:p-12 shadow-xs dark:shadow-none">
+            <div className="relative z-10 space-y-6">
+              {[
+                { time: '2:30 AM', event: 'Customer in a different timezone asks about shipping. Bot answers instantly with your actual shipping policy' },
+                { time: '9:00 AM', event: 'Morning rush — 15 simultaneous questions about product specs, order status, returns. Bot handles all of them' },
+                { time: '11:30 AM', event: 'Complex technical question the bot cannot answer confidently. Collects customer email and escalates to your team' },
+                { time: '3:00 PM', event: 'New product FAQ added to the knowledge base. Bot starts using it immediately — no restart needed' },
+                { time: '6:00 PM', event: 'Daily summary: 47 conversations, 89% resolved without human help, 5 leads collected, 2 escalations' },
+              ].map((item) => (
+                <div key={item.time} className="flex items-start gap-4 md:gap-6">
+                  <span className="font-mono text-sm font-bold text-forge-600 dark:text-forge-500 shrink-0 w-20 md:w-24 pt-0.5">{item.time}</span>
+                  <div className="h-px flex-0 w-6 bg-forge-600/20 dark:bg-forge-500/20 mt-3 shrink-0 hidden md:block" />
+                  <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">{item.event}</p>
+                </div>
+              ))}
+
+              <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                <p className="font-display font-semibold text-lg text-forge-600 dark:text-forge-500">
+                  Your team handled 2 escalations. The bot handled the other 45.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hiring vs AI Chatbot */}
+      <section className="px-6 md:px-12 lg:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">COMPARISON</p>
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
+            Support Agent vs AI Chatbot
+          </h2>
+
+          <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs dark:shadow-none">
+            <div className="relative z-10">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-neutral-200 dark:border-neutral-800">
+                    <th className="text-left p-4 md:p-6 font-display font-semibold text-sm text-neutral-500 dark:text-neutral-500"></th>
+                    <th className="text-left p-4 md:p-6 font-display font-semibold text-sm text-neutral-900 dark:text-white">Support Agent</th>
+                    <th className="text-left p-4 md:p-6 font-display font-semibold text-sm text-forge-600 dark:text-forge-500">AI Chatbot</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { label: 'Monthly cost', human: 'Full salary + benefits', bot: 'One-time setup + low API costs' },
+                    { label: 'Availability', human: '8 hours/day, weekdays', bot: '24/7, every day' },
+                    { label: 'Response time', human: 'Minutes to hours', bot: 'Seconds' },
+                    { label: 'Simultaneous chats', human: '3-5 max', bot: 'Unlimited' },
+                    { label: 'Consistency', human: 'Varies by agent', bot: 'Same quality every time' },
+                    { label: 'Knowledge updates', human: 'Retraining needed', bot: 'Add docs, instant update' },
+                    { label: 'Scalability', human: 'Hire more people', bot: 'Same bot, same cost' },
+                  ].map((row, i) => (
+                    <tr key={row.label} className={i < 6 ? 'border-b border-neutral-100 dark:border-neutral-800/50' : ''}>
+                      <td className="p-4 md:p-6 font-medium text-sm text-neutral-900 dark:text-white">{row.label}</td>
+                      <td className="p-4 md:p-6 text-sm text-neutral-600 dark:text-neutral-400">{row.human}</td>
+                      <td className="p-4 md:p-6 text-sm text-forge-600 dark:text-forge-400 font-medium">{row.bot}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p className="text-center mt-8 font-display font-semibold text-lg text-neutral-900 dark:text-white">
+            AI handles the volume. Humans handle the exceptions.
+          </p>
         </div>
       </section>
 
