@@ -122,7 +122,7 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-[65px] bg-white dark:bg-[#0a0a0a] z-40">
+        <div className="md:hidden fixed inset-0 top-[65px] bg-white dark:bg-[#0a0a0a] z-50">
           <div className="px-6 py-8 space-y-2">
             {/* Services section */}
             <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-3 px-4">SERVICES</p>
