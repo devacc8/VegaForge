@@ -1,0 +1,135 @@
+---
+title: "The Three-Body Problem of AI Agent Pricing"
+description: "Why every traditional pricing model breaks for AI agents — and the four approaches that actually work. Real cost breakdown from running an AI agent full-time."
+date: "2026-02-19"
+category: "AI Agents"
+tags: ["ai-agents", "pricing", "saas", "llm"]
+---
+
+Replit charges $1 to change a button color. Intercom charges $0.99 to resolve a customer support ticket. Both use AI agents. Both bill per action. One feels like a scam, the other like a bargain. The difference isn't the technology — it's the pricing model. And right now, the entire industry is guessing.
+
+I run an AI agent full-time. Her name is Aria, she lives on a $7/month VPS, and she handles research, email, social media, and content for my projects. She costs me roughly $120/month all-in. Some months she's worth ten times that. Other months I wonder if I'm subsidizing expensive token-burning for tasks a bash script could handle.
+
+This is the core tension every company building AI agents faces right now: how do you price something whose cost per task is unpredictable, whose value per task is subjective, and whose usage pattern varies wildly between users?
+
+## Why Every Traditional Pricing Model Breaks
+
+Traditional SaaS pricing assumes a predictable relationship between what the user does and what it costs the provider. User logs in, clicks buttons, data gets stored. The marginal cost of serving one more user is close to zero. Per-seat pricing works because the product does roughly the same thing for everyone.
+
+AI agents break this assumption completely.
+
+A coding agent asked to "change this button to blue" might grep the codebase, find the component, change one CSS value, and run a test — 30 seconds of compute. The same agent asked to "refactor the authentication system" might spend 20 minutes across dozens of files, burning through tokens at a rate that would make your CFO cry. Both are single user requests. The cost difference can be 100x.
+
+Chargebee calls this the **three-body problem** of AI pricing: your product changes its behavior based on input, your users consume it in unpredictable patterns, and your underlying costs fluctuate with every request. Three variables, all moving, all interdependent.
+
+Here's why each traditional model fails:
+
+| Pricing Model | Why It Fails for AI Agents |
+|:---|:---|
+| **Per-seat** | Agents replace seats. Charging per-seat for automation that eliminates headcount is a contradiction. |
+| **Flat monthly fee** | Heavy users destroy your margins. One power user can cost more than 50 casual ones. |
+| **Per-action** | Punishes engagement. Users start gaming the system — fewer, larger requests to reduce billing. |
+| **Per-API-call** | Meaningless to the customer. "Your agent made 847 API calls" tells them nothing about value received. |
+
+None of these map to how AI agents actually create value. The industry needs something new.
+
+## Four Approaches That Actually Exist (With Real Numbers)
+
+### Outcome-Based: Pay Only When It Works
+
+Intercom's Fin AI agent charges **$0.99 per resolved customer conversation**. Not per message. Not per API call. Per resolution — meaning the customer's problem is actually solved.
+
+The results speak for themselves: Fin grew from $1M to over **$100M ARR** in roughly a year. It handles 80% of Intercom's customers' support volume and resolves over 1 million issues per week. Intercom backs this with a performance guarantee of up to **$1 million** — if Fin doesn't hit the agreed resolution targets, Intercom pays.
+
+Sierra, another AI support company, takes the same approach. They charge only for successful outcomes — a resolved conversation, a saved cancellation, an upsell. If the conversation gets escalated to a human? No charge.
+
+**When it works:** the outcome is binary and measurable. "Was the ticket resolved?" has a clear yes/no answer. Support, sales qualification, appointment booking — anywhere you can point at a specific result and say "that happened."
+
+**When it breaks:** creative and open-ended tasks. When does a piece of code count as "done"? When does a research report count as "good enough"? Outcome-based pricing needs a finish line, and many AI tasks don't have one.
+
+### Credit-Based: Pay for What You Consume
+
+Cursor and Replit both moved to credit-based systems in 2025 — and both triggered user revolts.
+
+Cursor's switch in June 2025 replaced a predictable "500 fast requests + unlimited slow" model with an opaque credit pool. Reddit lit up: "Cursor HAS to be silently getting more expensive every month." Theo Browne, a Cursor investor, was blunt about it: "We're moving away from loss leaders into more realistic pricing. And that's going to screw a lot of people."
+
+Replit's agent pricing creates similar friction. When a user asked the Replit Agent to change a button's color — objectively a 10-second task — the agent loaded the entire conversation context and treated it as a new task. Cost: **approximately $1**. The user saw a trivial change; the billing system saw a complex multi-step operation.
+
+X (Twitter) recently moved its entire API to pay-per-use credits. No more free tier, no more fixed monthly plans. Every API call deducts from your balance. The per-endpoint pricing isn't even publicly documented — you only see it inside the Developer Console.
+
+**When it works:** when users understand the relationship between their actions and the cost. AWS works because engineers know that more compute = more money, and they can optimize.
+
+**When it breaks:** when the cost is invisible until the bill arrives. AI agents make dozens of internal decisions per user request. The user sees "change button color." The billing system sees "loaded 15 files, ran 3 model inferences, executed 2 tool calls." This disconnect is where trust dies.
+
+### Flat Subscription: Predictable but Misaligned
+
+Claude Max costs $100/month. ChatGPT Plus costs $20/month. You get a model, you use it however much you want (within rate limits), and the bill doesn't change.
+
+This is how I run Aria. Claude Max gives me Opus and Sonnet at zero marginal cost per conversation. For research, writing, email management, code — all covered. The predictability is genuine: I know exactly what I'm spending before the month starts.
+
+But I also know I'm almost certainly a heavier user than average. Anthropic likely loses money on my usage. They subsidize power users with lighter users who pay the same fee but use a fraction of the capacity. This creates a ticking clock: the more value you extract, the more likely the provider raises prices or adds limits. Cursor's "unlimited" plan collapsed for exactly this reason.
+
+**When it works:** when usage patterns cluster around a predictable average. Netflix survives because most people watch a similar amount of content.
+
+**When it breaks:** when the gap between light and heavy users is extreme. In AI, that gap isn't 2x — it's 50x. One developer running agent mode all day burns through more inference than a hundred casual users combined. Flat pricing can't absorb that spread indefinitely.
+
+### Hybrid: Base Fee Plus Usage
+
+The emerging consensus. A base subscription covers access and a usage allowance. Beyond that, you pay per unit of consumption.
+
+Replit Core: $25/month plus $25 in usage credits. Need more? Buy more credits. This gives users a predictable floor while allowing the provider to capture revenue from heavy usage.
+
+The challenge is calibrating the included allowance. Too generous, and heavy users still destroy margins. Too stingy, and it feels like a bait-and-switch — "pay $25 for the privilege of paying more."
+
+**When it works:** when the base fee covers the majority of users and the overage captures the top 10-20% who drive disproportionate costs.
+
+**When it breaks:** when the user can't predict whether they'll stay within the allowance. If I don't know whether my next request costs $0.01 or $1.00, I can't budget — and I'll resent the surprise.
+
+## What Running an AI Agent Actually Costs
+
+Here's Aria's monthly breakdown — a real, working AI agent handling research, content, email, browser automation, and social media management:
+
+| Component | Type | Monthly Cost |
+|:---|:---|:---|
+| Claude Max (Opus + Sonnet) | Flat subscription | $100 |
+| Contabo VPS (12GB RAM) | Fixed infrastructure | $7 |
+| OpenRouter (Kimi K2 for vision tasks) | Pay-per-use | $3-8 |
+| Brave Search API | Free tier (2,000 req/month) | $0 |
+| X API credits | Pay-per-use | $1-5 |
+| Proton Mail | Free tier | $0 |
+| **Total** | **Hybrid** | **$111-120** |
+
+Three things stand out:
+
+**The LLM is 85% of the cost.** Everything else — hosting, APIs, tools — is noise compared to the model inference bill. This is true for almost every AI agent. Optimizing anything except model usage is premature optimization.
+
+**Smart routing matters enormously.** Aria uses Opus for writing and complex reasoning, Sonnet for subagent tasks and fallbacks, and Kimi K2 (via OpenRouter) for cheap vision tasks like browser automation. This model routing approach — directing simple tasks to cheap models and complex tasks to expensive ones — reduces effective cost by **40-60%** compared to running everything on a single frontier model. I apply the same approach when building AI chatbots for clients: the RAG pipeline routes simple FAQ lookups to a fast model and escalates ambiguous queries to a stronger one.
+
+**Predictability varies by component.** Claude Max is perfectly predictable. OpenRouter fluctuates based on how many browser automation tasks Aria runs. X API is a complete unknown — they don't even publish per-endpoint pricing. I've optimized for a mostly-fixed cost structure, but the variable tail can swing 30% month to month.
+
+## A Framework for Choosing Your Pricing Model
+
+After researching dozens of AI companies and running my own agent, the decision comes down to two axes:
+
+**Axis 1: How measurable is the outcome?**
+- **High measurability** (support resolution, lead qualified, appointment booked) → outcome-based pricing works. You can prove value delivered.
+- **Low measurability** (code generated, content created, research completed) → outcome-based is dangerous. You'll argue endlessly about what counts as "done."
+
+**Axis 2: How predictable is the per-task cost?**
+- **High predictability** (similar tasks, similar compute) → usage-based pricing works. Users can estimate their bill.
+- **Low predictability** (wildly varying task complexity) → flat or hybrid pricing protects users from bill shock.
+
+| | High Cost Predictability | Low Cost Predictability |
+|:---|:---|:---|
+| **High Outcome Measurability** | Outcome-based (Intercom Fin) | Outcome-based with caps (Sierra) |
+| **Low Outcome Measurability** | Usage/credit-based (AWS, X API) | Flat subscription or hybrid (Claude Max, Replit Core) |
+
+Most AI agents fall in the bottom-right quadrant: unpredictable costs, hard-to-measure outcomes. That's why flat subscriptions and hybrids dominate consumer AI right now. It's not the optimal model — it's the least painful one while the industry figures out how to measure AI value.
+
+## The Uncomfortable Truth
+
+The irony of AI agents is this: they promise to reduce costs by automating human labor, but the agents themselves have unpredictable and sometimes alarming costs. A company replaces a $60,000/year support rep with an AI agent — and discovers the agent's bill scales with volume in ways a salary never did.
+
+The companies that will win the AI agent era aren't necessarily the ones with the best models. They're the ones who figure out pricing first. Intercom didn't just build a good support bot — they built a pricing model that aligns their incentives with their customers' outcomes, and backed it with a million-dollar guarantee. That's why they hit $100M ARR while competitors with comparable technology are still arguing about credit systems.
+
+If you're building an AI agent product, figure out your pricing model before you write your first prompt. The three-body problem won't solve itself — but the founders who treat pricing as a product decision, not an afterthought, will be the ones still standing when the market shakes out.

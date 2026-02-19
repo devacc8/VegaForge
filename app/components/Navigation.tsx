@@ -8,6 +8,7 @@ export function Navigation() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const isServicePage = pathname === '/ai-chatbot' || pathname === '/ai-agent'
+  const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -50,6 +51,10 @@ export function Navigation() {
             </a>
             <a href={whyMeHref} className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
               Why Me
+            </a>
+
+            <a href="/blog" className={`text-sm transition-colors link-underline ${isBlog ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}>
+              Blog
             </a>
 
             {/* Services Dropdown */}
@@ -132,6 +137,15 @@ export function Navigation() {
               className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/ai-agent' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
             >
               AI Agent
+            </a>
+
+            <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
+
+            <a
+              href="/blog"
+              className={`block px-4 py-3 rounded-xl text-base transition-colors ${isBlog ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
+            >
+              Blog
             </a>
 
             <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
