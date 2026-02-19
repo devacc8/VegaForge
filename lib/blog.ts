@@ -11,6 +11,7 @@ export interface PostMeta {
   date: string
   category: string
   tags: string[]
+  image: string
   readingTime: number
 }
 
@@ -36,6 +37,7 @@ export function getAllPosts(): PostMeta[] {
       date: data.date ?? '',
       category: data.category ?? '',
       tags: data.tags ?? [],
+      image: data.image ?? '',
       readingTime: calculateReadingTime(content),
     } satisfies PostMeta
   })
@@ -60,6 +62,7 @@ export function getPostBySlug(slug: string) {
       date: data.date ?? '',
       category: data.category ?? '',
       tags: data.tags ?? [],
+      image: data.image ?? '',
       readingTime: calculateReadingTime(content),
     } satisfies PostMeta,
     content,

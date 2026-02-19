@@ -38,14 +38,14 @@ export function generateMetadata({
         type: 'article',
         publishedTime: meta.date,
         authors: ['Alex Vega'],
-        images: [{ url: '/og-image.png', width: 1200, height: 630, alt: meta.title }],
+        images: [{ url: meta.image || '/og-image.png', width: 1200, height: 630, alt: meta.title }],
       },
       twitter: {
         card: 'summary_large_image',
         title: meta.title,
         description: meta.description,
         creator: '@vvegalex',
-        images: ['/og-image.png'],
+        images: [meta.image || '/og-image.png'],
       },
     }
   })
@@ -117,7 +117,7 @@ export default async function BlogPostPage({
     },
     image: {
       '@type': 'ImageObject',
-      url: 'https://vegaforge.dev/og-image.png',
+      url: `https://vegaforge.dev${meta.image || '/og-image.png'}`,
       width: 1200,
       height: 630,
     },
@@ -200,6 +200,19 @@ export default async function BlogPostPage({
 
             <div className="h-px bg-neutral-200 dark:bg-neutral-800 mt-8" />
           </header>
+
+          {/* Hero image */}
+          {meta.image && (
+            <div className="mb-10 -mx-6 md:mx-0">
+              <img
+                src={meta.image}
+                alt={meta.title}
+                width={1400}
+                height={780}
+                className="w-full rounded-none md:rounded-2xl"
+              />
+            </div>
+          )}
 
           {/* Article body */}
           <div>

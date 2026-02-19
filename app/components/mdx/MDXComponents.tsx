@@ -117,6 +117,21 @@ export const mdxComponents: MDXComponentsType = {
     />
   ),
 
+  img: (props: ComponentPropsWithoutRef<'img'>) => (
+    <figure className="my-8">
+      <img
+        className="w-full rounded-xl border border-neutral-200 dark:border-neutral-800"
+        loading="lazy"
+        {...props}
+      />
+      {props.alt && (
+        <figcaption className="mt-3 text-center text-xs text-neutral-500 dark:text-neutral-500">
+          {props.alt}
+        </figcaption>
+      )}
+    </figure>
+  ),
+
   hr: () => (
     <hr className="my-10 border-neutral-200 dark:border-neutral-800" />
   ),
