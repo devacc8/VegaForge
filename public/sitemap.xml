@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vegaforge.dev/ai-agent</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://vegaforge.dev/blog</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>

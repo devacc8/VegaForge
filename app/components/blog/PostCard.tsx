@@ -8,7 +8,7 @@ export function PostCard({ post }: { post: PostMeta }) {
   })
 
   return (
-    <a href={`/blog/${post.slug}`} className="group block">
+    <a href={`/blog/${post.slug}`} className="group block" aria-label={`Read: ${post.title}`}>
       <article className="relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
         <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

@@ -14,7 +14,6 @@ export function Navigation() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const workHref = isHome ? '#work' : '/#work'
-  const whyMeHref = isHome ? '#why-me' : '/#why-me'
 
   // Close everything on route change
   useEffect(() => {
@@ -48,9 +47,6 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-6">
             <a href={workHref} className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
               Work
-            </a>
-            <a href={whyMeHref} className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
-              Why Me
             </a>
 
             <a href="/blog" className={`text-sm transition-colors link-underline ${isBlog ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}>

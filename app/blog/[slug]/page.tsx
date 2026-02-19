@@ -98,12 +98,29 @@ export default async function BlogPostPage({
     day: 'numeric',
   })
 
+  const wordCount = content.trim().split(/\s+/).length
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: meta.title,
     description: meta.description,
     datePublished: meta.date,
+    dateModified: meta.date,
+    wordCount,
+    keywords: meta.tags.join(', '),
+    inLanguage: 'en-US',
+    url: `https://vegaforge.dev/blog/${meta.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://vegaforge.dev/blog/${meta.slug}`,
+    },
+    image: {
+      '@type': 'ImageObject',
+      url: 'https://vegaforge.dev/og-image.png',
+      width: 1200,
+      height: 630,
+    },
     author: {
       '@type': 'Person',
       name: 'Alex Vega',
@@ -185,7 +202,7 @@ export default async function BlogPostPage({
           </header>
 
           {/* Article body */}
-          <div className="prose-forge">
+          <div>
             {mdxContent}
           </div>
 
