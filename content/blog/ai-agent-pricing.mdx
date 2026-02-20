@@ -100,6 +100,23 @@ Here's Aria's monthly breakdown — a real, working AI agent handling research, 
 | Proton Mail | Free tier | $0 |
 | **Total** | **Hybrid** | **$111-120** |
 
+**Update (February 2026):** Anthropic recently [updated its Consumer Terms of Service](https://www.anthropic.com/legal/consumer-terms) and explicitly prohibited using Claude subscriptions (Free, Pro, Max) with automated tools, bots, scripts, or third-party applications — including the Agent SDK. Only the official Claude Code CLI and claude.ai are allowed. If you're building an AI agent, you need API keys with usage-based billing, not a subscription.
+
+This changes the math above. The $100/month Claude Max line item no longer works for an autonomous agent. The alternative: route through [OpenRouter](https://openrouter.ai) — a unified API gateway that gives you one API key for 300+ models across 60+ providers. No vendor lock-in, automatic fallback between providers, and pay-per-token pricing.
+
+The cost-effective options for agent workloads right now:
+
+| Model | Input (per 1M tokens) | Output (per 1M tokens) | Context | Best for |
+|:---|:---|:---|:---|:---|
+| **Kimi K2.5** (Moonshot AI) | $0.50 | $2.80 | 262K | General reasoning, vision, coding |
+| **MiniMax M1** | $0.40 | $2.20 | 1M | Long-context tasks, agentic tool use |
+| **Claude Sonnet 4** (via API) | $3.00 | $15.00 | 200K | Complex writing, nuanced reasoning |
+| **Claude Opus 4** (via API) | $15.00 | $75.00 | 200K | Hardest tasks only |
+
+Kimi K2.5 is roughly **5-8x cheaper** than Claude Sonnet on both input and output. MiniMax M1 offers a million-token context window at even lower prices. For an agent doing 50-100 tasks per day — research, drafts, browser automation — smart model routing between these options can bring the monthly LLM bill to **$15-40** instead of $100. The revised Aria budget with OpenRouter: **$25-55/month total** instead of $111-120.
+
+The lesson: subscription pricing looked like a shortcut, but it was always borrowed time. Usage-based billing through a model aggregator like OpenRouter is both cheaper and compliant. The trade-off is less predictability — but that's the reality of running AI agents.
+
 Three things stand out:
 
 **The LLM is 85% of the cost.** Everything else — hosting, APIs, tools — is noise compared to the model inference bill. This is true for almost every AI agent. Optimizing anything except model usage is premature optimization.
