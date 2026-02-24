@@ -1,0 +1,110 @@
+---
+title: "Vibe Coding Is Producing Legacy Code at Startup Speed"
+description: "Six out of ten AI-generated solutions pass tests. One out of ten is secure. A data-driven look at vibe coding's security track record after one year of mainstream adoption."
+date: "2026-02-24"
+category: "AI Dev Tools"
+tags: ["vibe-coding", "security", "ai-agents", "claude-code"]
+image: ""
+---
+
+Six out of ten AI-generated solutions pass functional tests. One out of ten is secure. That ratio, from a [University of Virginia study](https://arxiv.org/html/2512.03262v1) of 200 real-world feature requests, defines vibe coding in 2026.
+
+The NYT Daily podcast just [told millions of listeners](https://www.nytimes.com/2026/02/18/podcasts/the-daily/ai-vibecoding-claude-code.html) they can build apps by talking to AI. They're right — you can. But nobody mentioned what happens when [170 of those apps](https://en.wikipedia.org/wiki/Vibe_coding) are leaking user data through missing access controls.
+
+## What Does One Year of Security Data Actually Show?
+
+Vibe coding's security track record after twelve months of mainstream adoption is specific, measurable, and bad.
+
+[Veracode tested over 100 LLMs](https://www.veracode.com/blog/genai-code-security-report/) across 80 security-sensitive tasks. 45% of AI-generated code contained OWASP Top-10 vulnerabilities. That number hasn't moved in two years of model improvements. Java code failed 70% of the time. XSS defense failures hit 86%. Log injection: 88%.
+
+Escape.tech [scanned 5,600 vibe-coded apps](https://escape.tech/blog/methodology-how-we-discovered-vulnerabilities-apps-built-with-vibe-coding/) built on Lovable, Bolt.new, and Create.xyz. They found over 2,000 vulnerabilities, 400 exposed secrets, and 175 instances of leaked PII — including medical records and bank accounts. That was a passive scan. The real number is higher.
+
+Firehound ran iOS-specific analysis and found [196 out of 198 AI apps](https://www.webpronews.com/firehound-reveals-data-leaks-in-196-ios-apps-on-app-store/) leaking data. A 98.9% failure rate. Over 406 million records exposed across 18 million users.
+
+Cybernews audited 38,630 AI apps on Android and discovered [197,000 hardcoded secrets](https://cybernews.com/security/android-ai-apps-leaking-google-secrets/) and 730 terabytes of exposed data. 72% of apps had credentials baked into the client.
+
+These aren't hypothetical risks. These are production applications with real users.
+
+## What Happens When Vibe-Coded Apps Reach Users?
+
+The breach timeline reads like a catalog of identical mistakes.
+
+The Tea dating app [exposed 72,000 images](https://hackread.com/tea-app-breach-women-dating-platform-user-images-leak/), including 13,000 government IDs and 1.1 million private messages containing disclosures about abortions, abuse, and infidelity. The cause: Firebase default permissions left untouched.
+
+Chat & Ask AI leaked [300 million messages](https://www.heise.de/en/news/Millionfold-data-leaks-at-AI-apps-User-data-publicly-accessible-11148030.html) from 25 million users. The Firebase security rule was a single line: `allow read: if true`. Every message from every user, available to anyone who asked.
+
+Bondu, an AI toy for children, exposed [50,000 chat transcripts](https://cybernews.com/security/android-ai-apps-leaking-google-secrets/) between kids and the AI. Any Google account could access admin functions.
+
+The pattern repeats: Firebase or Supabase misconfiguration, hardcoded API keys in frontend code, authorization checks implemented in the UI instead of the backend. These aren't exotic attack vectors. They're the security equivalent of leaving your front door open.
+
+## Why Are Models Good at Some Bugs and Terrible at Others?
+
+AI coding tools handle SQL injection and cross-site scripting well — those patterns appear frequently in training data. The models have seen thousands of examples of parameterized queries and output encoding. Classic vulnerabilities are mostly solved.
+
+Business logic vulnerabilities are the gap. [Tenzai tested five tools](https://www.csoonline.com/article/4116923/output-from-vibe-coding-tools-prone-to-critical-security-flaws-study-finds.html) — Claude Code, Codex, Cursor, Replit, and Devin — by building 15 identical applications. They found 69 vulnerabilities, six of them critical. Four of the critical flaws came from Claude Code.
+
+The failures were authorization bypass, missing access controls, accepting negative quantities in payment flows, unauthenticated delete endpoints. Tenzai's conclusion: "Agents lack common sense and depend mainly on explicit instructions."
+
+That conclusion exposes vibe coding's structural problem. Karpathy [defined vibe coding](https://en.wikipedia.org/wiki/Vibe_coding) as giving in to the vibes, accepting code you don't fully understand, and seeing if it works. The entire point is NOT spelling things out. But business logic security requires spelling things out — who can access what, under which conditions, with what validation.
+
+The mismatch is fundamental, not temporary.
+
+## Can Models Write Secure Code If You Ask?
+
+Yes. [Databricks' AI Red Team](https://www.databricks.com/blog/passing-security-vibe-check-dangers-vibe-coding) demonstrated this clearly. Claude generated a snake game with pickle deserialization — a remote code execution vulnerability. When explicitly prompted to implement securely, Claude identified and fixed the issue proactively.
+
+This creates a paradox. The tools can produce secure code when security is part of the prompt. But vibe coding's workflow doesn't include security prompts. The user describes what the app should do, not what the app should prevent. The code compiles, the demo works, the deploy button gets clicked.
+
+Two years of model improvements confirm this isn't a capability problem. The 45% vulnerability rate hasn't budged despite models getting dramatically better at functional code generation. Models optimize for what they're asked to optimize for — working features — and security remains an externality.
+
+Research makes this worse, not better. The University of Virginia study found that critical vulnerabilities [increase 37% after five iterations](https://arxiv.org/html/2512.03262v1) of the fix-it loop. Each round of "paste the error, get a fix" introduces new security holes while resolving functional bugs. Explicitly security-ignoring prompts generated 158 new vulnerabilities, 29 of them critical.
+
+The iterative loop — the core mechanic of vibe coding — is an anti-pattern for security.
+
+## Who Is Building With These Tools?
+
+These aren't niche tools with a handful of early adopters. The scale of adoption defines the scale of the risk.
+
+Anthropic reports [90% of their internal code](https://www.theatlantic.com/technology/2026/02/post-chatbot-claude-code-ai-agents/686029/) is now AI-generated. Microsoft's CEO says 30% currently, and the CTO expects 95% by the end of the decade. In 2024, [41% of all code written globally](https://ravenna.ai/blog/vibe-coding-security-risks-it-workflows) — 256 billion lines — came from AI tools. 92% of US developers use AI coding tools daily.
+
+Claude Code [earned Anthropic $1 billion](https://www.nytimes.com/2026/02/18/opinion/ai-software.html) in its first six months. Software engineering accounts for roughly [50% of all agent API tool calls](https://the-decoder.com/ai-agents-are-thriving-in-software-development-but-barely-exist-anywhere-else-anthropic-study-finds/). Claude Code's longest autonomous sessions have grown from 25 minutes to 45 minutes between October 2025 and January 2026.
+
+About [40% of Y Combinator's Winter 2025 batch](https://www.keywordsstudios.com/en/about-us/news-events/news/the-state-of-vibe-coding-a-2026-strategic-blueprint/) has codebases that are 95% or more AI-generated. These are funded startups heading toward production with real users and real data.
+
+Vibe coding created a new user archetype: people who can ship but can't audit. Previous generations of developers at least knew what they didn't know. A junior dev understood that code review existed for a reason. A vibe coder thinks the working demo is the finished product.
+
+## Where Is the Security Layer?
+
+The tooling gap is the real story.
+
+We have Cursor, Claude Code, Lovable, Bolt.new, and Replit for writing code. For auditing that code at the same level of accessibility, we have almost nothing.
+
+[Rafter](https://rafter.so/blog/lovable-security-audit) offers five-minute security audits specifically for Lovable apps — static analysis for leaked secrets and dependency CVEs. Snyk and Semgrep exist but aren't integrated into the vibe coding flow. TruffleHog catches hardcoded secrets. GitHub has secret scanning.
+
+None of these tools meet vibe coders where they are. A Lovable user who deploys by clicking a button won't run Semgrep from a terminal. The security tooling needs to be as frictionless as the code generation — one click, embedded in the deploy flow, blocking on critical findings.
+
+Even professional security tools miss the real threats. [Intruder, a security firm](https://dev.to/mothasa/vibe-coding-has-a-security-problem-nobody-wants-to-talk-about-3gj7), used AI to write a security tool. The AI-generated code got exploited. Neither Semgrep nor GoSec caught the vulnerability. Pattern-matching tools don't understand business logic — they can't tell you that your delete endpoint has no auth check.
+
+The supply chain compounds the risk. CurXecute ([CVE-2025-54135](https://dev.to/mothasa/vibe-coding-has-a-security-problem-nobody-wants-to-talk-about-3gj7)) enabled remote code execution through Cursor's MCP connection. Anthropic's own MCP server had an arbitrary file read/write vulnerability ([CVE-2025-53109](https://dev.to/mothasa/vibe-coding-has-a-security-problem-nobody-wants-to-talk-about-3gj7)). Claude Code itself was vulnerable to [data exfiltration via DNS prompt injection](https://dev.to/mothasa/vibe-coding-has-a-security-problem-nobody-wants-to-talk-about-3gj7).
+
+The tools writing the code have their own security holes.
+
+## How Do You Use AI Code Without Getting Burned?
+
+Three practices separate AI-assisted engineering from vibe coding. None of them are exciting.
+
+**Read the diffs — selectively.** You don't need to review every line of generated CSS. You do need to review every line that touches authentication, data access, payment processing, and API permissions. I use Claude Code daily for an AI agent project with MCP integrations, browser automation, and access to personal data. The codebase works because I read the diffs on anything security-relevant. Simon Willison [drew the distinction](https://en.wikipedia.org/wiki/Vibe_coding) clearly: "If you've reviewed, tested, and understood it all, that's not vibe coding — that's using an LLM as a typing assistant."
+
+**Test for authorization, not just function.** Functional tests ask "does this work?" Security tests ask "does this work for people who shouldn't have access?" Write authorization tests yourself. "Can user A read user B's data?" "Can an unauthenticated request hit this endpoint?" "What happens when quantity is negative?" These are the tests AI won't generate unless you ask, and vibe coders never ask.
+
+**Treat AI code like vendor code.** When you integrate a third-party library, you check its permissions, review its access patterns, and monitor its behavior. AI-generated code deserves the same posture. It's not your code just because it's in your repo. You didn't write it, you don't fully understand it, and [the tool that wrote it has a 45% vulnerability rate](https://www.kaspersky.com/blog/vibe-coding-2025-risks/54584/).
+
+## What Comes Next?
+
+Palo Alto Networks launched [SHIELD](https://dev.to/mothasa/vibe-coding-has-a-security-problem-nobody-wants-to-talk-about-3gj7), a dedicated governance framework for vibe coding security. It's first-generation, but it signals where the industry is heading: specialized security infrastructure for AI-generated code.
+
+The market opportunity is obvious. Every vibe coding platform needs an integrated security layer — not a separate product, not a CLI tool, not a checkbox. A real-time analysis that blocks deploys when it finds hardcoded secrets, missing auth checks, or exposed admin endpoints. The company that builds this and embeds it into Lovable, Bolt.new, and Replit will own the next layer of the AI coding stack.
+
+Until that tooling exists, the defense is human judgment. That's the approach I take with my own projects — vibes for the UI, line-by-line review for anything touching auth or data. Not on every line — on the lines that matter. Auth flows, data access patterns, payment logic, admin endpoints. The rest can be vibes. But the security-critical paths need someone who asks "should this be allowed?" before clicking deploy.
+
+Boris Cherny, creator of Claude Code, recently [predicted](https://www.businessinsider.com/anthropic-claude-code-founder-ai-impacts-software-engineer-role-2026-2) that the "software engineer" title is going away. He might be right about the title. But the skill — understanding what code should and shouldn't do — that's not going away. It's becoming the only thing that matters.
