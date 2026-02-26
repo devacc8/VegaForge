@@ -34,7 +34,7 @@ Code Mode implementations split into two approaches. Client-side execution, used
 |----------|---------------|------------------|----------------|----------|
 | Client-side (Goose, Claude SDK) | 98-99% | Requires local sandbox | Agent controls execution | Development environments with shell access |
 | Server-side (Cloudflare MCP) | 99.9% | Standard MCP client only | Provider manages sandbox | Production agents, CI/CD, multi-user systems |
-| Traditional MCP tools | Baseline | Simple | Standard API auth | Small API surfaces (<50 endpoints) |
+| Traditional MCP tools | Baseline | Simple | Standard API auth | Small API surfaces (under 50 endpoints) |
 
 Cloudflare's server-side approach has two advantages for production use. First, the agent needs no special capabilities — any standard MCP client works. Second, sensitive operations stay within Cloudflare's security perimeter. API credentials never reach the agent's context; they live in the sandbox binding where the generated code executes.
 
@@ -67,11 +67,11 @@ When ready to act, the agent calls `execute()` with orchestrated API requests:
 async () => {
   const ddos = await cloudflare.request({
     method: "GET",
-    path: `/zones/${zoneId}/rulesets/phases/ddos_l7/entrypoint`
+    path: "/zones/" + zoneId + "/rulesets/phases/ddos_l7/entrypoint"
   });
   const waf = await cloudflare.request({
     method: "GET",
-    path: `/zones/${zoneId}/rulesets/phases/http_request_firewall_managed/entrypoint`
+    path: "/zones/" + zoneId + "/rulesets/phases/http_request_firewall_managed/entrypoint"
   });
   // Chain additional operations, handle pagination, check responses
   return { ddosConfig: ddos.result, wafConfig: waf.result };
