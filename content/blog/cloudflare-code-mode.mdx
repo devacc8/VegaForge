@@ -1,0 +1,131 @@
+---
+title: "Cloudflare Code Mode: From 1.17 Million Tokens to 1,000"
+description: "MCP has a fundamental scaling problem — large APIs exceed entire context windows. Cloudflare's Code Mode collapses 2,500 endpoints into two functions and 1,000 tokens. Here's how it works and what it means for agent builders."
+date: "2026-02-26"
+category: "MCP & Frameworks"
+tags: ["mcp", "cloudflare", "agents", "token-optimization"]
+image: "/blog/cloudflare-code-mode-hero.webp"
+readingTime: 9
+---
+
+The Cloudflare API has over 2,500 endpoints. Load them all into a model's context window through standard Model Context Protocol (MCP), and you hit 1.17 million tokens. That exceeds the context window of every production LLM today — even Claude's 200K and Gemini's 1M fall short when you account for the space needed for actual reasoning. Cloudflare's answer is Code Mode: a technique that collapses the same API surface into roughly 1,000 tokens. This is not an incremental optimization. It rewrites the rules for how agents interact with external tools.
+
+## What Makes MCP Tools Consume So Many Tokens?
+
+MCP servers expose tools through JSON schemas that describe every endpoint, parameter, and return type. A single tool definition might include nested objects, enum values, validation rules, and documentation strings. Multiply that by hundreds or thousands of endpoints, and the context window fills before the agent processes a single user request.
+
+Cloudflare measured this directly. Their complete API spec, expressed as traditional MCP tool definitions, consumes 1,170,000 tokens. The problem compounds when agents chain multiple operations. Each intermediate result flows back through the context window. A 10,000-row spreadsheet fetched from Google Drive and pushed to Salesforce passes through the model twice. A two-hour meeting transcript copied between systems adds 50,000 tokens to the conversation.
+
+Traditional tool calling forces the model to act as a data router. The agent calls a tool, receives the full result, then calls another tool with that data as input. Every byte travels through the context window. This worked when agents had a dozen tools. It collapses when MCP hands them thousands.
+
+## How Does Code Mode Solve the Token Problem?
+
+Code Mode replaces individual tool calls with executable code that the agent writes against typed SDKs. Instead of loading 2,500 tool definitions, the agent receives two functions: `search()` to explore the API spec, and `execute()` to run JavaScript against it. The agent discovers capabilities progressively, loads only the definitions it needs, and processes data inside a sandbox before returning results.
+
+Cloudflare's implementation runs this code in a Dynamic Worker Loader: a V8 isolate with no file system, no environment variables, and external fetches disabled by default. The agent writes TypeScript, the server executes it safely, and only the final result returns to the model. For the full Cloudflare API, this reduces context usage by 99.9%.
+
+Anthropic reached the same conclusion months earlier. Their "Code Execution with MCP" post, published in November 2025, describes an identical pattern: present tools as a file system of TypeScript modules, let the agent navigate and load only what it needs. Anthropic measured 150,000 tokens reduced to 2,000 — a 98.7% savings. Two teams, working independently, landed on the same architecture. When Cloudflare shipped their implementation in February 2026, it validated what Anthropic had proposed as a design pattern.
+
+## Server-Side vs Client-Side Code Mode
+
+Code Mode implementations split into two approaches. Client-side execution, used by Anthropic's Claude SDK and Block's Goose framework, runs code in a local sandbox on the agent's machine. Server-side execution, which Cloudflare uses for their MCP server, runs code in the provider's infrastructure and returns only the results.
+
+| Approach | Token Savings | Setup Complexity | Security Model | Best For |
+|----------|---------------|------------------|----------------|----------|
+| Client-side (Goose, Claude SDK) | 98-99% | Requires local sandbox | Agent controls execution | Development environments with shell access |
+| Server-side (Cloudflare MCP) | 99.9% | Standard MCP client only | Provider manages sandbox | Production agents, CI/CD, multi-user systems |
+| Traditional MCP tools | Baseline | Simple | Standard API auth | Small API surfaces (<50 endpoints) |
+
+Cloudflare's server-side approach has two advantages for production use. First, the agent needs no special capabilities — any standard MCP client works. Second, sensitive operations stay within Cloudflare's security perimeter. API credentials never reach the agent's context; they live in the sandbox binding where the generated code executes.
+
+## Progressive Discovery in Practice
+
+The practical benefit emerges when agents navigate large APIs. Consider a user request: "Protect my origin from DDoS attacks." With traditional MCP, the agent would need WAF and ruleset tool definitions loaded upfront, consuming thousands of tokens regardless of whether the user ever mentions DDoS.
+
+With Code Mode, the agent calls `search()` with a JavaScript filter:
+
+```javascript
+async () => {
+  const results = [];
+  for (const [path, methods] of Object.entries(spec.paths)) {
+    if (path.includes('/zones/') &&
+        (path.includes('firewall/waf') || path.includes('rulesets'))) {
+      for (const [method, op] of Object.entries(methods)) {
+        results.push({ method: method.toUpperCase(), path, summary: op.summary });
+      }
+    }
+  }
+  return results;
+}
+```
+
+The server runs this code against the OpenAPI spec — all 2,500 endpoints — but only the filtered results return to the model. The agent discovers ten relevant endpoints without the full spec ever entering context. It then drills into schema details, inspects available phases, and constructs an execution plan.
+
+When ready to act, the agent calls `execute()` with orchestrated API requests:
+
+```javascript
+async () => {
+  const ddos = await cloudflare.request({
+    method: "GET",
+    path: `/zones/${zoneId}/rulesets/phases/ddos_l7/entrypoint`
+  });
+  const waf = await cloudflare.request({
+    method: "GET",
+    path: `/zones/${zoneId}/rulesets/phases/http_request_firewall_managed/entrypoint`
+  });
+  // Chain additional operations, handle pagination, check responses
+  return { ddosConfig: ddos.result, wafConfig: waf.result };
+}
+```
+
+Multiple API calls, response handling, and data transformation happen inside the sandbox. The agent receives only the distilled result. A workflow that might require twenty tool calls and twenty round-trips through the context window collapses to two.
+
+![Code Mode architecture: the agent sends JavaScript to a V8 sandbox which scans the full API spec and returns only filtered results, reducing context usage from 1.17M to ~1K tokens](/blog/cloudflare-code-mode-diagram.webp)
+
+## Beyond Token Savings: Privacy and State
+
+Code Mode enables patterns that traditional tool calling cannot support. Intermediate results stay in the execution environment by default. When processing sensitive data — customer contact details, financial records, health information — the agent can transform and move data without the model ever seeing the raw values.
+
+Anthropic's documentation describes tokenization for sensitive workloads. The MCP client intercepts PII, replaces it with tokens like `[EMAIL_1]` before the model sees it, then restores the original values when making downstream API calls. The real data flows from Google Sheets to Salesforce; the model sees only metadata and structure.
+
+State persistence becomes straightforward. Agents write intermediate results to files in the execution environment, then read them in subsequent operations. A lead import workflow can save a CSV after the first thousand records, resume without re-fetching if interrupted, and maintain progress across multiple execution contexts. Traditional tool calling forces the model to hold all state in context or push it to external databases; Code Mode provides lightweight persistence as a side effect of the architecture.
+
+## The Limits of Code Mode
+
+Code Mode introduces complexity that simple tool calling avoids. Running agent-generated code requires sandboxing, resource limits, and execution monitoring. Cloudflare's Dynamic Worker Loader provides this infrastructure, but self-hosted implementations must solve the same problems. A compromised sandbox could expose API credentials, leak data between users, or enable denial-of-service attacks through resource exhaustion.
+
+Not every API benefits from Code Mode. Small surfaces — a dozen endpoints, simple CRUD operations — see marginal gains that do not justify the implementation cost. The payoff comes when tool counts exceed context window capacity, when operations chain complex logic, or when intermediate results exceed token limits.
+
+Anthropic notes another constraint: code execution requires programming expertise to implement securely. Organizations without infrastructure engineering capabilities may find the operational overhead prohibitive. The traditional tool-calling pattern, despite its inefficiency, works reliably with minimal setup.
+
+## What This Means for Agent Builders
+
+Cloudflare and Anthropic arriving at the same architecture independently is telling. The early MCP ecosystem assumed more tools equals more capability. Code Mode reveals that tool quantity hits hard limits — context windows are not growing as fast as API surfaces are expanding.
+
+For developers building agents, three implications emerge:
+
+**First, progressive disclosure is now table stakes.** Loading all tools upfront fails at scale. Agents need mechanisms to discover capabilities on demand, whether through Code Mode's filesystem approach, search tools, or hierarchical tool organization. The model should only see what it needs for the current task.
+
+**Second, execution environments matter.** The boundary between what runs in the model and what runs in code shifts depending on data sensitivity, operation complexity, and latency requirements. Agent architectures must support both direct tool calling and code execution, selecting the appropriate mode per task.
+
+**Third, token economics reshape integration strategies.** A SaaS provider offering 500 API endpoints through traditional MCP creates an adoption barrier: no agent can reasonably load all those tools. The same provider using Code Mode makes the full surface accessible. Token efficiency becomes a competitive advantage in the MCP ecosystem.
+
+## The Tool Tax Is Real
+
+I run Claude Code daily with multiple MCP servers connected — file system, browser automation, search APIs, deployment tools. I have hit the practical ceiling that Cloudflare describes. Enable five MCP servers, each with 20-30 tools, and the agent spends its first few thousand tokens just reading tool definitions before doing any actual work. Add a sixth server and responses slow down noticeably.
+
+My workaround has been manual curation: disable servers I don't need right now, keep the active set small, reconnect when the task changes. It works, but it is overhead that should not exist. Code Mode promises a world where that curation is unnecessary — where an agent can have access to everything and only load what the current task requires.
+
+What stands out about Cloudflare's approach is the server-side execution. I have seen what happens when agents handle sensitive operations client-side: API keys in context, intermediate data visible to the model, awkward workarounds to avoid leaking credentials. Keeping execution inside the provider's sandbox solves this cleanly. The agent never sees raw API keys or customer data — it writes code, the sandbox runs it, only results come back.
+
+For indie builders like me, the implication is practical. A solo developer can now offer their entire API surface through MCP without worrying that it will overwhelm the agent's context. Before Code Mode, a 500-endpoint API was unusable through MCP. After Code Mode, it is two tools and 1,000 tokens. That changes who can build competitive integrations.
+
+## Looking Forward: MCP Server Portals
+
+Cloudflare has signaled the next evolution. MCP Server Portals will compose multiple MCP servers behind a single gateway with unified authentication. Combined with Code Mode, this means an agent could access Cloudflare, GitHub, Stripe, and internal company APIs through a single connection with fixed token overhead regardless of how many services sit behind the gateway.
+
+The end state: agents that orchestrate across dozens of services without context window pressure. The technical path requires solving composition, permission scoping, and cross-service identity — hard problems, but Cloudflare's track record with connectivity infrastructure suggests they can deliver.
+
+If the pattern holds, Code Mode becomes the default for any MCP server with more than a few dozen endpoints. Traditional tool calling survives for simple surfaces and quick integrations, but anything with complex orchestration requirements migrates to code-based interaction. The line between "agent" and "program" blurs — agents write programs, sandboxes execute them, only results come back for high-level decisions.
+
+The MCP ecosystem is barely a year old and already hitting scaling walls that nobody anticipated. Code Mode is the first credible answer. The teams that adopt it early get access to API surfaces that remain impractical for everyone else — and in a landscape where integration breadth determines agent capability, that is a real advantage.
