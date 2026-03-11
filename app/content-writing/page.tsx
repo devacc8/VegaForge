@@ -4,13 +4,13 @@ import { Footer } from '../components/Footer'
 
 export const metadata: Metadata = {
   title: 'AI-Powered Content Writing for Crypto Projects | VegaForge',
-  description: 'Blog posts, Twitter threads, and documentation for crypto and Web3 projects. AI-assisted production at startup speed with human editorial quality.',
+  description: 'Human-edited blog posts, Twitter threads, and documentation for crypto projects. AI-accelerated research and drafting with human editorial quality.',
   alternates: {
     canonical: '/content-writing',
   },
   openGraph: {
     title: 'AI-Powered Content Writing for Crypto Projects | VegaForge',
-    description: 'Blog posts, Twitter threads, and documentation for crypto and Web3 projects. AI-assisted, human-edited.',
+    description: 'Human-edited content for crypto projects. AI-accelerated research, human editorial quality.',
     url: 'https://vegaforge.dev/content-writing',
     siteName: 'VegaForge',
     locale: 'en_US',
@@ -53,7 +53,7 @@ export default function ContentWritingPage() {
             <span className="text-forge-600 dark:text-forge-500">Crypto Projects</span>
           </h1>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl mb-10">
-            AI-powered content production with human editorial quality. Blog posts, Twitter content, and documentation — at startup speed, at half the cost of a full-time writer
+            Not AI slop. Not slow freelancers. A human editor with an AI research pipeline — producing crypto content faster than a full-time hire, at half the cost
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -102,8 +102,8 @@ export default function ContentWritingPage() {
                 highlight: false,
               },
               {
-                title: 'AI + Human Editor',
-                desc: 'AI drafts with domain expertise. Human reviews voice, facts, and strategy. Twice the output, half the cost',
+                title: 'Human Editor + AI Pipeline',
+                desc: 'AI researches and drafts. Human editor shapes the voice, verifies facts, and owns the final quality. You get a real person who happens to be 4x faster',
                 highlight: true,
               },
             ].map((item) => (
@@ -231,7 +231,7 @@ export default function ContentWritingPage() {
         <div className="max-w-6xl mx-auto">
           <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">HOW IT WORKS</p>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
-            AI Drafts. Human Edits. You Approve.
+            Human-Led. AI-Accelerated.
           </h2>
 
           <div className="grid md:grid-cols-4 gap-6 mb-8">
@@ -285,16 +285,16 @@ export default function ContentWritingPage() {
                 desc: 'We understand DeFi, L2s, smart contracts, tokenomics, and MEV. Not generic writers learning your industry on your dime',
               },
               {
-                title: 'Real AI Infrastructure',
-                desc: 'Custom AI agent with trained writing voice, feed monitoring, and automated research pipeline. Not someone copy-pasting from ChatGPT',
+                title: 'Human Editor, Not a Prompt',
+                desc: 'Every article is reviewed and shaped by a human editor with crypto domain expertise. AI accelerates research and first drafts — the human owns the final product',
               },
               {
                 title: 'Proof of Work',
                 desc: 'Browse our blog — real articles published weekly. Judge the quality yourself before committing',
               },
               {
-                title: 'Speed at Scale',
-                desc: '4 articles/month is baseline. Can scale to 8+ with the same quality. AI handles volume, human ensures quality',
+                title: 'Speed Without Sacrifice',
+                desc: '4 articles/month is baseline, scalable to 8+. AI handles research and drafting. Human ensures every piece sounds like you, not like a robot',
               },
             ].map((feature) => (
               <div key={feature.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
@@ -435,8 +435,8 @@ export default function ContentWritingPage() {
           <div className="space-y-4">
             {[
               {
-                q: 'How is this different from generic AI content?',
-                a: 'We use a custom AI agent with a trained writing voice — not vanilla ChatGPT. Every article goes through human editorial review for voice, factual accuracy, and strategic fit. The AI handles research and first drafts; the human ensures quality.',
+                q: 'Is this just AI-generated content?',
+                a: 'No. Every article is written and edited by a human with deep crypto expertise. AI is our research and drafting tool — it speeds up the process, but the human editor makes every editorial decision: voice, structure, fact-checking, and strategy. The result reads like a person wrote it, because a person did.',
               },
               {
                 q: 'Do you write in our brand voice?',
