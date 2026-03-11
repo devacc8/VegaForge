@@ -1,0 +1,153 @@
+---
+title: "The Weather Bots Quietly Making Millions on Polymarket"
+description: "While everyone trades elections and crypto, a small group of automated traders is printing money on weather markets. Here's how they do it — gopfan2's $2M, Hans323's $1.1M single bet, and the data pipeline that makes it possible."
+date: "2026-03-11"
+category: "AI & Crypto"
+tags: ["polymarket", "weather", "ai-agents", "prediction-markets", "automation"]
+image: "/blog/weather-bots-polymarket-hero.webp"
+---
+
+Nobody talks about weather markets on Polymarket. The crypto crowd is obsessed with election outcomes and token prices. The AI crowd is building general-purpose prediction agents. Meanwhile, a handful of traders are quietly making millions from markets that ask boring questions like "What will the highest temperature in London be on March 9?" and "Will the global average temperature in March 2026 be above the 1991-2020 baseline?"
+
+A trader known as **gopfan2** has earned over **$2 million** — mostly from weather markets. Polymarket's official account tweeted about it: "gopfan2 is up over half a million dollars betting that things won't happen." Another trader, **Hans323**, turned a single $92,632 bet into **$1.11 million** on a London weather market priced at just 8% implied probability. He started January with $741 in his account.
+
+These aren't quant funds. They're individual traders exploiting a simple information asymmetry: professional weather forecasting data is public and free, but the average Polymarket user doesn't bother reading it.
+
+## The Scale of Weather Markets
+
+Polymarket now runs over **364 active weather markets** at any given time, plus 133 global temperature markets and 130 climate-specific markets. Cities covered include New York, London, Paris, Seoul, Buenos Aires, Miami, Ankara, and Chicago.
+
+The mechanics are straightforward: markets ask about daily high temperatures, broken into discrete ranges (buckets). Shares trade between $0.01 and $0.99. If your side is correct at resolution, each share pays $1. A single Paris daily temperature market generated $131K in volume. Monthly temperature markets hit $500K+.
+
+Individual markets aren't huge — $50K to $500K in volume. Not enough to attract institutional traders. But perfect for a bot running with a $5-20K bankroll.
+
+## The Weather Traders Making Real Money
+
+Here's what's actually happening on-chain:
+
+| Trader | Profit | Strategy |
+|:---|:---|:---|
+| **gopfan2** | $2M+ | Buys YES at less than $0.15, NO at more than $0.45 when weather models back it. Active since 2024 |
+| **Hans323** | $1.11M (single bet) | Asymmetric risk-reward — buys at 2-8 cents on low-probability outcomes. Turned $741 → $1.1M+ |
+| **neobrother** | $20K+ | "Temperature laddering" across Buenos Aires, NYC, Miami, Ankara, Chicago. 2,373 predictions. Buys across multiple temperature ranges simultaneously |
+| **1pixel** | $18.5K from $2.3K | NYC and London weather only. Individual trades: $6 → $590, $15 → $547 on mispriced ranges |
+| **securebet** | $640 from $7 | NYC and Seattle temperature. 9,000%+ return across 3,000+ micro-predictions using NOAA data |
+| **meropi** | ~$30K | Fully automated bot, $1-3 micro bets. Monitors model outputs vs Polymarket prices in real-time |
+
+The range is striking — from securebet's $7 experiment to gopfan2's $2 million operation. But the underlying strategy is the same: compare professional weather forecasts to Polymarket prices, bet when there's a gap.
+
+## Why the Edge Exists
+
+**Weather prediction is a solved problem — for professionals.** NOAA's 24-hour temperature forecasts are 85-90% accurate. ECMWF hits 95-96% accuracy at 12 hours. These models run every 6-12 hours, producing ensemble outputs with 31-51 different simulations that yield precise probability distributions.
+
+But the average Polymarket trader doesn't read ECMWF ensemble outputs. They check their phone's weather app, skim a headline about "record heat expected," and make a gut call. That gap — between professional-grade forecasting and casual guesswork — is the edge.
+
+**Forecast accuracy by lead time:**
+
+| Lead Time | Accuracy (Temperature) |
+|:---|:---|
+| 12 hours | 95-96% |
+| 1-2 days | 85-90% |
+| 3 days | 85-95% |
+| 10 days | 65-80% |
+
+Temperature is significantly more predictable than precipitation (85% vs 70% accuracy), which is why most weather bots focus on temperature markets.
+
+**The latency edge:** Weather models run at most 4 times per day. When a new model run drops showing a temperature shift, there's a window where Polymarket odds haven't adjusted because other traders haven't noticed. Bots that ingest model data immediately can trade this window before the market catches up.
+
+## The Anatomy of a Weather Bot
+
+### Data Pipeline
+
+The bot pulls from several free sources:
+
+**GFS (Global Forecast System).** NOAA's primary model. Free, runs every 6 hours, 27km resolution, 31-member ensemble (GEFS). The workhorse for US temperature markets.
+
+**ECMWF Open Data.** The gold standard. 14km resolution, 51-member ensemble, runs every 12 hours. Since 2022, ECMWF releases a subset for free. The ensemble output lets you calculate probability distributions: "28 of 31 members project temperatures above 70F" = ~90% probability.
+
+**Open-Meteo API.** Free API providing GFS ensemble data in a developer-friendly format. This is what most open-source weather bots use — no API key required, no rate limits for reasonable usage.
+
+**Weather.gov API.** Free, no API key. Point forecasts, hourly data, alerts, and observations for any US location. Essential for short-term daily temperature markets.
+
+**Wethr.net.** A purpose-built analytics tool for weather prediction markets. Aggregates 16+ weather models (GFS, HRRR, NAM, NBM, ECMWF, ICON), covers 33 markets, and offers custom blended model creation with backtesting. Free tier has a 3-minute data delay.
+
+### How the Bot Calculates Edge
+
+The core logic is simple. For a market like "Will London's high temperature exceed 15 degrees C on March 15?":
+
+1. Pull the GFS ensemble forecast for London on that date
+2. Count how many of the 31 ensemble members show temperatures above 15C
+3. If 25 of 31 members say yes, that's roughly 81% probability
+4. If Polymarket prices the YES share at $0.65 (65% implied probability), you have a 16% edge
+5. If the edge exceeds the threshold (typically 8%), place a bet sized by fractional Kelly
+
+The bot doesn't need an LLM for this — it's straightforward math on ensemble data. But an LLM layer adds value when synthesizing multiple conflicting models, handling edge cases (model transitions, unusual weather patterns), and monitoring for conditions where the models are known to be unreliable.
+
+### Execution Strategies
+
+The traders above use different approaches:
+
+**Micro-betting (meropi, securebet).** Place hundreds of $1-3 bets across many markets. Low risk per trade, high volume. Works because even small mispricings compound over thousands of positions.
+
+**Temperature laddering (neobrother).** Buy across multiple temperature ranges simultaneously. If Paris might hit 29-34C, buy small positions in each bucket. You only need one to pay out at $1 per share. If you bought 5 buckets at $0.03 each and one resolves at $1, that's a 560% return even though 4 positions went to zero.
+
+**Asymmetric bets (Hans323).** Look for low-probability outcomes that the model says are more likely than the market implies. Buy shares at 2-8 cents. Most will expire worthless, but the occasional winner pays 12-50x. This is the Taleb barbell strategy applied to weather.
+
+**Systematic arbitrage (gopfan2).** Buy YES shares under $0.15 when models support it, buy NO shares above $0.45 when models contradict the market. Higher volume, lower risk per trade, consistent grinding.
+
+## The Resolution Controversy
+
+One important caveat: Polymarket's weather market resolution isn't always straightforward.
+
+For London markets, Polymarket resolves based on Weather Underground data from London City Airport (station code EGLC). For Paris, it uses Charles de Gaulle Airport. The problem: Weather Underground captures hourly snapshots and can miss the actual peak temperature between readings.
+
+Meteorologist Ryan Maue publicly called this out: "Any betting market resolving to Weather Underground temperature website is bogus, and not the official National Weather Service record. No other reason to do this except fraud." He cited a case where NYC LaGuardia's NWS reading showed 30 degrees F, but Polymarket resolved to 29 degrees F because Weather Underground's hourly snapshot missed the peak.
+
+Kalshi, the regulated competitor, resolves weather markets using NWS Daily Climate Reports — considered more authoritative. This resolution risk is something any weather bot builder needs to account for: your model might be right about the actual temperature but wrong about what Weather Underground reports.
+
+## Building Your Own Weather Bot
+
+An open-source weather bot already exists on GitHub: a Python system that trades temperature markets on both Kalshi and Polymarket using GFS ensemble data from Open-Meteo.
+
+The approach:
+- Pulls 31-member GFS ensemble forecasts
+- Counts the fraction of members exceeding each market threshold
+- Trades when edge exceeds 8%
+- Position sizing: fractional Kelly at 15%, per-trade cap of $100, max 5% of bankroll
+- Daily loss limit circuit breaker at $300
+- Scans markets every 5 minutes
+- Supported cities: New York, Chicago, Miami, Los Angeles, Denver
+
+**Total infrastructure cost:** under $30/month (VPS + Polygon gas). All weather data sources are free.
+
+If you want to build from scratch:
+
+1. **Data collection.** Pull GFS ensemble data via Open-Meteo or NOAA directly. Store locally. Run every 6 hours when new model runs come out.
+2. **Polymarket API.** Monitor active weather markets, current prices, volume. The API is well-documented and runs on Polygon (MATIC for gas, USDC for bets).
+3. **Edge calculation.** Compare ensemble probability to market price. Simple fraction: members above threshold / total members.
+4. **Risk management.** Fractional Kelly for sizing. Never more than 5% of bankroll on a single market. Daily loss limits.
+5. **Monitoring.** Telegram alerts for new positions, daily P&L, and warnings when new model runs shift probabilities against your positions.
+
+## The Risks
+
+**Resolution source mismatch.** Your weather model might be right about the actual temperature but wrong about what Weather Underground reports. Always verify which data source the market uses.
+
+**Model busts.** Sometimes the ensemble gets it wrong. A sudden pattern change can flip a 90% probability to 30% overnight. The bot can be on the wrong side of a major shift.
+
+**Survivorship bias.** Hans323's $1.11M win is real — but it required risking $92K on an 8% probability event. For every Hans323 who hits, there are dozens of traders who made the same bet and lost everything. The expected value was positive, but the variance is extreme.
+
+**Liquidity gaps.** Some weather markets have thin order books. Entering a large position can move the price against you, eating into the edge.
+
+**Market efficiency is increasing.** As more bots enter weather markets, margins will compress. The easy edges are already smaller than they were a year ago. But as long as casual bettors keep entering and setting prices based on gut feelings, there will be mispricings for systematic traders to exploit.
+
+## The Bigger Opportunity
+
+Weather markets are a niche. But the pattern they demonstrate — public data + domain expertise + systematic analysis = persistent edge over casual bettors — applies across prediction markets.
+
+Sports markets have similar dynamics (historical stats vs. casual fan sentiment). Science markets (paper replication, clinical trial outcomes) reward access to academic databases. Economic markets (jobs reports, inflation numbers) can be attacked with proprietary models.
+
+The lesson from weather bots isn't "bet on weather." It's that **domain-specific data pipelines are the moat** in prediction market trading. The models are a commodity — everyone has access to the same LLMs and weather APIs. The edge comes from how you combine them, how you size your bets, and how long you're willing to grind small mispricings before the market catches up.
+
+The weather bots are proof of concept. gopfan2 proved the ceiling. securebet proved the floor.
+
+I'm building my own weather-first prediction agent right now — starting with GFS ensemble data, paper trading on temperature markets, and scaling from there. I'll be sharing the architecture, the code, and the real P&L on this blog as the project progresses. If you're interested in building something similar, stay tuned — or better yet, start building. The data is free and the markets aren't getting any less mispriced.
