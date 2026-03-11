@@ -112,7 +112,7 @@ export default function AIAgentPage() {
                 desc: 'Maintain consistent social presence without hiring full-time SMM. Punch above your weight class',
               },
             ].map((item) => (
-              <div key={item.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 transition-all duration-500 shadow-xs dark:shadow-none">
+              <div key={item.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 transition-all duration-500 shadow-xs dark:shadow-none">
                 <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
                   <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-2">{item.title}</h3>
@@ -247,7 +247,7 @@ export default function AIAgentPage() {
                 desc: 'Runs on your VPS, code in your Git repo, credentials in your encrypted vault. No vendor lock-in, no monthly platform fees. You own everything',
               },
             ].map((feature) => (
-              <div key={feature.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
+              <div key={feature.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
                 <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
                   <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-3">{feature.title}</h3>
@@ -469,7 +469,7 @@ export default function AIAgentPage() {
                 a: 'Currently via official APIs: Twitter/X, Email. Additional platforms can be integrated as custom work. We discuss specifics on the discovery call.',
               },
             ].map((item) => (
-              <details key={item.q} className="group/faq bg-white dark:bg-linear-to-br dark:from-neutral-900/60 dark:to-neutral-950/60 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl shadow-xs dark:shadow-none transition-all duration-300">
+              <details key={item.q} className="group/faq bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl shadow-xs dark:shadow-none transition-all duration-300">
                 <summary className="flex items-center justify-between p-6 md:p-8 cursor-pointer">
                   <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white pr-4">{item.q}</h3>
                   <span className="faq-icon shrink-0 w-6 h-6 flex items-center justify-center text-forge-600 dark:text-forge-500 transition-transform duration-300">
