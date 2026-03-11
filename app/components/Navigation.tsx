@@ -7,7 +7,7 @@ import { ThemeSwitcher } from './ThemeSwitcher'
 export function Navigation() {
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const isServicePage = pathname === '/ai-chatbot' || pathname === '/ai-agent'
+  const isServicePage = pathname === '/ai-chatbot' || pathname === '/ai-agent' || pathname === '/content-writing'
   const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -79,6 +79,12 @@ export function Navigation() {
                   >
                     AI Agent
                   </a>
+                  <a
+                    href="/content-writing"
+                    className={`block px-4 py-3 text-sm transition-colors ${pathname === '/content-writing' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/5' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-white'}`}
+                  >
+                    Content Writing
+                  </a>
                 </div>
               )}
             </div>
@@ -133,6 +139,12 @@ export function Navigation() {
               className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/ai-agent' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
             >
               AI Agent
+            </a>
+            <a
+              href="/content-writing"
+              className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/content-writing' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
+            >
+              Content Writing
             </a>
 
             <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
