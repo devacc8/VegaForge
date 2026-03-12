@@ -59,7 +59,7 @@ export default function ContentWritingPage() {
           <div className="flex flex-wrap gap-4">
             <button
               data-tally-open="RG4QQ9"
-              data-tally-layout="modal"
+              data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
             >
               Get Started
@@ -151,7 +151,7 @@ export default function ContentWritingPage() {
                 </div>
                 <button
                   data-tally-open="RG4QQ9"
-                  data-tally-layout="modal"
+                  data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
                   className="block w-full text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer"
                 >
                   Get Started
@@ -183,7 +183,7 @@ export default function ContentWritingPage() {
                 </div>
                 <button
                   data-tally-open="RG4QQ9"
-                  data-tally-layout="modal"
+                  data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
                   className="block w-full text-center px-4 py-2.5 bg-forge-600 hover:bg-forge-500 text-white rounded-full text-sm font-medium transition-all cursor-pointer"
                 >
                   Get Started
@@ -213,7 +213,7 @@ export default function ContentWritingPage() {
                 </div>
                 <button
                   data-tally-open="RG4QQ9"
-                  data-tally-layout="modal"
+                  data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
                   className="block w-full text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer"
                 >
                   Get Started
@@ -486,7 +486,7 @@ export default function ContentWritingPage() {
           </p>
           <button
             data-tally-open="RG4QQ9"
-            data-tally-layout="modal"
+            data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg cursor-pointer"
           >
             Get a Content Plan

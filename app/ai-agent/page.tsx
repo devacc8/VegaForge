@@ -60,7 +60,7 @@ export default function AIAgentPage() {
           <div className="flex flex-wrap gap-4">
             <button
               data-tally-open="RG4QQ9"
-              data-tally-layout="modal"
+              data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
             >
               Get Your AI Agent
@@ -427,7 +427,7 @@ export default function AIAgentPage() {
 
               <button
                 data-tally-open="RG4QQ9"
-                data-tally-layout="modal"
+                data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
                 className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
               >
                 Book a Discovery Call
@@ -500,7 +500,7 @@ export default function AIAgentPage() {
           </p>
           <button
             data-tally-open="RG4QQ9"
-            data-tally-layout="modal"
+            data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg cursor-pointer"
           >
             Get Your AI Agent
