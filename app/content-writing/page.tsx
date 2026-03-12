@@ -57,15 +57,16 @@ export default function ContentWritingPage() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a
-              href="https://tally.so/r/RG4QQ9"
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
+            <button
+              data-tally-open="RG4QQ9"
+              data-tally-layout="modal"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
             >
               Get Started
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </button>
             <a
               href="#packages"
               className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white font-medium rounded-full transition-all"
@@ -148,12 +149,13 @@ export default function ContentWritingPage() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://tally.so/r/RG4QQ9"
-                  className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
+                <button
+                  data-tally-open="RG4QQ9"
+                  data-tally-layout="modal"
+                  className="block w-full text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer"
                 >
                   Get Started
-                </a>
+                </button>
               </div>
             </div>
 
@@ -179,12 +181,13 @@ export default function ContentWritingPage() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://tally.so/r/RG4QQ9"
-                  className="block text-center px-4 py-2.5 bg-forge-600 hover:bg-forge-500 text-white rounded-full text-sm font-medium transition-all"
+                <button
+                  data-tally-open="RG4QQ9"
+                  data-tally-layout="modal"
+                  className="block w-full text-center px-4 py-2.5 bg-forge-600 hover:bg-forge-500 text-white rounded-full text-sm font-medium transition-all cursor-pointer"
                 >
                   Get Started
-                </a>
+                </button>
               </div>
             </div>
 
@@ -208,12 +211,13 @@ export default function ContentWritingPage() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://tally.so/r/RG4QQ9"
-                  className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
+                <button
+                  data-tally-open="RG4QQ9"
+                  data-tally-layout="modal"
+                  className="block w-full text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer"
                 >
                   Get Started
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -480,15 +484,16 @@ export default function ContentWritingPage() {
           <p className="text-neutral-600 dark:text-neutral-400 mb-10 max-w-lg mx-auto">
             Tell us about your project. We will reply within 24 hours with a content plan tailored to your goals
           </p>
-          <a
-            href="https://tally.so/r/RG4QQ9"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg"
+          <button
+            data-tally-open="RG4QQ9"
+            data-tally-layout="modal"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg cursor-pointer"
           >
             Get a Content Plan
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </button>
         </div>
       </section>
 

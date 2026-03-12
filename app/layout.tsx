@@ -99,6 +99,7 @@ export default function RootLayout({
       <body>
         <div className="grain-overlay" />
         {children}
+        <script src="https://tally.so/widgets/embed.js" async />
       </body>
     </html>
   )
