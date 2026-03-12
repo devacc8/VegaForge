@@ -9,19 +9,19 @@ image: "/blog/claude-polymarket-trading-hero.webp"
 
 On March 10, 2026, an account called @RoundtableSpace posted a trading contest on X: two AI agents, each funded with $1,000, given 48 hours to trade on Polymarket. One powered by Anthropic's Claude. The other by OpenClaw. The result: Claude's agent returned **+1,322%** — turning $1,000 into $14,216. The OpenClaw agent was liquidated to zero. The post hit 1.2 million views in a day.
 
-A week earlier, another viral thread showed a Claude-based copy-trading agent — one that mirrored a profitable Polymarket trader's moves and learned when to deviate. Result: $1,000 to $5,823 in seven days.
+A week earlier, another viral thread showed a Claude-based copy-trading agent, one that mirrored a profitable Polymarket trader's moves and learned when to deviate. Result: $1,000 to $5,823 in seven days.
 
-These stories are catnip for crypto X. But behind the screenshots and engagement bait, something real is happening. A trader pseudonymously known as **ilovecircle** used Claude as a coding partner to build an automated Polymarket trading system. Over 60 days, it generated **$2.2 million in profit** with a 74% win rate across politics, sports, and crypto markets. That's not a viral stunt — it's a documented case study with on-chain data to back it up.
+These stories are catnip for crypto X. But behind the screenshots and engagement bait, something real is happening. A trader pseudonymously known as **ilovecircle** used Claude as a coding partner to build an automated Polymarket trading system. Over 60 days, it generated **$2.2 million in profit** with a 74% win rate across politics, sports, and crypto markets. That's not a viral stunt. It's a documented case study with on-chain data to back it up.
 
 LLMs aren't replacing traders. They're becoming the best tool traders have ever had.
 
 ## The Core Idea: LLMs as Probability Estimators
 
-An LLM isn't a crystal ball. It doesn't know the future. But it's trained on an enormous corpus of text about how the world works — historical events, statistical patterns, causal relationships, expert analysis. When you ask Claude "What's the probability that the Fed cuts rates in March 2026?" it doesn't guess randomly. It synthesizes everything it's absorbed about monetary policy, economic indicators, Fed communication patterns, and historical precedent.
+An LLM isn't a crystal ball. It doesn't know the future. But it's trained on an enormous corpus of text about how the world works: historical events, statistical patterns, causal relationships, expert analysis. When you ask Claude "What's the probability that the Fed cuts rates in March 2026?" it doesn't guess randomly. It synthesizes everything it's absorbed about monetary policy, economic indicators, Fed communication patterns, and historical precedent.
 
-The question isn't whether this synthesis is perfect. It's whether it's **better than the average Polymarket trader.** And in many markets, the bar is low. Only 7.6% of Polymarket wallets are profitable — the other 92.4% are trading on vibes, political tribalism, or whatever narrative is trending on X. Against that competition, a systematic approach — even an imperfect one — has an edge.
+The question isn't whether this synthesis is perfect. It's whether it's **better than the average Polymarket trader.** And in many markets, the bar is low. Only 7.6% of Polymarket wallets are profitable, and the other 92.4% are trading on vibes, political tribalism, or whatever narrative is trending on X. Against that competition, a systematic approach — even an imperfect one — has an edge.
 
-The research confirms it. A 2024 paper published in Science Advances tested an ensemble of 12 LLMs against 925 human forecasters over a 3-month tournament. The result: the LLM ensemble was **statistically indistinguishable from the human crowd**. GPT-4 and Claude 2 predictions improved by 17-28% when exposed to the median human prediction — and a combined human+LLM ensemble outperformed either group alone.
+The research confirms it. A 2024 paper published in Science Advances tested an ensemble of 12 LLMs against 925 human forecasters over a 3-month tournament. The result: the LLM ensemble was **statistically indistinguishable from the human crowd**. GPT-4 and Claude 2 predictions improved by 17-28% when exposed to the median human prediction, and a combined human+LLM ensemble outperformed either group alone.
 
 A separate evaluation on 464 Metaculus questions found that OpenAI's o3 model achieved a Brier score of **0.1352**, outperforming the human crowd baseline of 0.149. The models are already beating the average forecaster. They're closing in on superforecasters.
 
@@ -31,9 +31,9 @@ The ilovecircle case is worth studying because it's documented, on-chain verifia
 
 **The setup:** Claude served as a coding partner, not a standalone agent. It generated Python scripts that connected to the Polymarket API, handled authentication, parsed pricing data, and managed trade execution. Claude also debugged in real time and iteratively improved the execution logic.
 
-**The trading logic:** A two-signal comparison system. Signal one: the market price (a share at $0.60 implies 60% probability). Signal two: the AI model's own calculated probability from live data — news feeds, social media sentiment, on-chain activity, and whale account monitoring via a custom dashboard. When the model estimated 75% while the market showed 60%, the trade was positive expected value. This logic ran thousands of times across hundreds of markets.
+**The trading logic:** A two-signal comparison system. Signal one: the market price (a share at $0.60 implies 60% probability). Signal two: the AI model's own calculated probability from live data: news feeds, social media sentiment, on-chain activity, and whale account monitoring via a custom dashboard. When the model estimated 75% while the market showed 60%, the trade was positive expected value. This logic ran thousands of times across hundreds of markets.
 
-**The execution:** A neural network evaluated potential outcomes, dynamically adjusting strategies every few minutes. It recalculated P&L continuously to decide whether to maintain, increase, or close positions. The system wasn't static — it learned from its own trading history and adapted.
+**The execution:** A neural network evaluated potential outcomes, dynamically adjusting strategies every few minutes. It recalculated P&L continuously to decide whether to maintain, increase, or close positions. The system wasn't static. It learned from its own trading history and adapted.
 
 **The result:** $2.2 million in roughly 60 days, with a 74% accuracy rate across politics, sports, and crypto markets. The key insight: Claude wasn't making the predictions — it was building and refining the system that made them. The human provided the strategy. The LLM provided the engineering velocity.
 
@@ -43,12 +43,12 @@ After studying ilovecircle's approach and building my own system, here's the arc
 
 ### Components
 
-**Market scanner.** A script pulls active Polymarket markets via their API every 6 hours. Filters by: minimum volume (over $50K), time to resolution (7-90 days), and category. Polymarket publishes an official open-source framework for this — their [Polymarket/agents](https://github.com/Polymarket/agents) repo provides a Python toolkit with LangChain integration, Chroma vector DB, and the Gamma API for order execution.
+**Market scanner.** A script pulls active Polymarket markets via their API every 6 hours. Filters by: minimum volume (over $50K), time to resolution (7-90 days), and category. Polymarket publishes an official open-source framework for this. Their [Polymarket/agents](https://github.com/Polymarket/agents) repo provides a Python toolkit with LangChain integration, Chroma vector DB, and the Gamma API for order execution.
 
 **Research agent.** For each target market, a Claude-based agent runs a research pipeline:
 
 1. Pull the market question and current implied probability
-2. Search for relevant recent news (Brave Search API — free tier, 2,000 requests/month)
+2. Search for relevant recent news (Brave Search API, free tier, 2,000 requests/month)
 3. Pull domain-specific data (weather APIs, polling aggregates, on-chain analytics)
 4. Generate a structured analysis: base rate, evidence for/against, key uncertainties
 5. Produce a calibrated probability estimate
@@ -57,7 +57,7 @@ After studying ilovecircle's approach and building my own system, here's the arc
 
 **Risk manager.** Maximum 5% of bankroll per market, 30% total exposure, no more than 3 positions in correlated markets.
 
-**Executor.** Places trades via Polymarket's API on Polygon — fractions of a cent in gas. Positions in USDC.
+**Executor.** Places trades via Polymarket's API on Polygon, fractions of a cent in gas. Positions in USDC.
 
 **Monitor.** Daily P&L to Telegram. Alerts on significant moves against positions. Weekly summary with win rate and running total.
 
@@ -72,7 +72,7 @@ For a cost-effective production setup, the sweet spot is a two-tier approach: us
 | Claude Sonnet 4 | Best calibration on political/economic markets | $3.00 |
 | GPT-4o | Strong reasoning, tends toward overconfidence on narrative-driven questions | $2.50 |
 | Kimi K2.5 | Cost-effective, good on factual/data-heavy markets | $0.50 |
-| Ensemble (all three) | Most robust — reduces noise, improves calibration | ~$2.00 avg |
+| Ensemble (all three) | Most robust, reduces noise, improves calibration | ~$2.00 avg |
 
 ## The Prompt That Makes It Work
 
@@ -111,25 +111,25 @@ PROBABILITY: X%
 CONFIDENCE: HIGH/MEDIUM/LOW
 ```
 
-The "superforecaster" framing consistently improves calibration — a finding confirmed by the MIT study where a superforecasting prompt improved human+AI accuracy by **41%**. The instruction to not anchor to market price is critical — without it, the model produces estimates suspiciously close to the current market price, which defeats the entire purpose.
+The "superforecaster" framing consistently improves calibration, a finding confirmed by the MIT study where a superforecasting prompt improved human+AI accuracy by **41%**. The instruction to not anchor to market price is critical. Without it, the model produces estimates suspiciously close to the current market price, which defeats the entire purpose.
 
 ## The Kelly Criterion in Practice
 
 The Kelly criterion determines optimal bet size: `f = (bp - q) / b`, where p is your estimated probability, q is 1-p, and b is the odds. If the market says 60% and you estimate 75%, Kelly says bet roughly 10% of bankroll.
 
-A December 2024 paper specifically studying Kelly criterion on prediction markets found that naive application is prone to overbetting and eventual ruin — because traders systematically overestimate their edge. The recommendation: **fractional Kelly at 0.25x** (quarter Kelly).
+A December 2024 paper specifically studying Kelly criterion on prediction markets found that naive application is prone to overbetting and eventual ruin, because traders systematically overestimate their edge. The recommendation: **fractional Kelly at 0.25x** (quarter Kelly).
 
 I use quarter Kelly. This reduces expected returns by about 50% but cuts the probability of a catastrophic drawdown from 30% to under 2%. The discipline is the point: it automatically sizes bets proportional to edge. High-confidence, large-edge bets get more capital. Low-confidence, small-edge bets get a token amount.
 
 ## What Goes Wrong
 
-**Overconfidence on narrative-driven markets.** The model loves a good story. "Will Company X be acquired?" gets a high probability if there are lots of rumors — even when the base rate for acquisitions is low. I now apply a mandatory base-rate floor: the model's estimate can't deviate more than 3x from the historical base rate without flagging for manual review.
+**Overconfidence on narrative-driven markets.** The model loves a good story. "Will Company X be acquired?" gets a high probability if there are lots of rumors, even when the base rate for acquisitions is low. I now apply a mandatory base-rate floor: the model's estimate can't deviate more than 3x from the historical base rate without flagging for manual review.
 
 **Stale information.** The model's training data has a cutoff. If a key development happened after the cutoff and the news search doesn't surface it, the model trades on outdated information. I mitigate this by requiring the research agent to find at least 2 news articles from the past 72 hours before generating a probability.
 
 **Correlated losses.** In January, four markets involving the same macroeconomic theme (Fed policy) all went against me simultaneously. The correlation limit (max 3 positions in related markets) now prevents this level of concentration.
 
-**Resolution ambiguity.** Some Polymarket markets have vaguely worded resolution criteria. "Will X happen by end of Q1?" — does that mean March 31 at midnight UTC? Eastern time? When the official report is published? I now only trade markets with clearly defined resolution criteria.
+**Resolution ambiguity.** Some Polymarket markets have vaguely worded resolution criteria. "Will X happen by end of Q1?" Does that mean March 31 at midnight UTC? Eastern time? When the official report is published? I now only trade markets with clearly defined resolution criteria.
 
 ## The Tool Ecosystem
 
@@ -155,7 +155,7 @@ The official Polymarket/agents repo is the best starting point. It handles API a
 
 **Starting bankroll:** $1,000-5,000. Prediction markets are small enough that you're not competing against hedge funds. You're competing against crypto traders betting from their phone.
 
-**Development time:** A basic version (market scanner + LLM probability + manual betting) takes a weekend. Full automation (auto-execution, risk management, Telegram alerts) takes 2-3 weeks. Using Claude as a coding partner — the way ilovecircle did — cuts the development time significantly.
+**Development time:** A basic version (market scanner + LLM probability + manual betting) takes a weekend. Full automation (auto-execution, risk management, Telegram alerts) takes 2-3 weeks. Using Claude as a coding partner (the way ilovecircle did) cuts the development time significantly.
 
 **The real investment:** Calibration. Testing your prompt against historical markets, measuring Brier scores, adjusting the pipeline. This is where the edge comes from — not the code, not the model, but the quality of the probability estimation pipeline.
 
@@ -165,6 +165,6 @@ The prediction market space is evolving fast. Polymarket processed $21.5 billion
 
 The window of opportunity is real but finite. Arbitrage windows on Polymarket compressed from 12.3 seconds in 2024 to 2.7 seconds in 2025. The same compression will happen to judgmental edges as more LLM agents enter the market. But for now, on longer-term markets where the question requires real reasoning about complex events — politics, economics, science, climate — the mispricings are still there.
 
-I'm currently building my own version of this — a prediction agent that combines weather API data with LLM-powered forecasting, starting with paper trading and scaling into live bets. The ilovecircle approach (Claude as coding partner, not standalone oracle) is exactly the playbook I'm following. I'll be documenting the entire process on this blog — the architecture, the prompt iterations, and the real numbers.
+I'm currently building my own version of this: a prediction agent that combines weather API data with LLM-powered forecasting, starting with paper trading and scaling into live bets. The ilovecircle approach (Claude as coding partner, not standalone oracle) is exactly the playbook I'm following. I'll be documenting the entire process on this blog: the architecture, the prompt iterations, and the real numbers.
 
-The ilovecircle case proves the ceiling is high. The $1K contest proves the barrier to entry is low. The research proves the models are capable. The question isn't whether LLMs can trade prediction markets profitably. It's whether you'll build the agent — or keep scrolling past the opportunity.
+The ilovecircle case proves the ceiling is high. The $1K contest proves the barrier to entry is low. The research proves the models are capable. The question isn't whether LLMs can trade prediction markets profitably. It's whether you'll build the agent, or keep scrolling past the opportunity.

@@ -7,7 +7,7 @@ tags: ["ai-agents", "polymarket", "prediction-markets", "llm", "crypto"]
 image: "/blog/ai-agents-prediction-markets-hero.webp"
 ---
 
-In October 2024, a Polymarket trader known as Théo placed over $30 million in bets on the US presidential election — almost entirely on Trump. The trades were so large they moved the market. Pundits screamed manipulation. France's gambling authority launched an investigation. Turned out Théo was a former bank trader who had commissioned a custom YouGov poll using "neighbor question" methodology to detect the shy-Trump-voter effect. He sold virtually all his liquid assets to fund an $80 million position. When the dust settled, blockchain analysis by Chainalysis confirmed his net profit: **$78.7 million**.
+In October 2024, a Polymarket trader known as Théo placed over $30 million in bets on the US presidential election, almost entirely on Trump. The trades were so large they moved the market. Pundits screamed manipulation. France's gambling authority launched an investigation. Turned out Théo was a former bank trader who had commissioned a custom YouGov poll using "neighbor question" methodology to detect the shy-Trump-voter effect. He sold virtually all his liquid assets to fund an $80 million position. When the dust settled, blockchain analysis by Chainalysis confirmed his net profit: **$78.7 million**.
 
 Théo wasn't using an AI agent. But the playbook he ran — systematic analysis of polling data, identification of mispriced contracts, aggressive position sizing — is exactly what LLM-powered agents are starting to automate. And unlike Théo, they don't sleep, don't get emotional, and can monitor hundreds of markets simultaneously.
 
@@ -15,11 +15,11 @@ Prediction markets are becoming the first real-money proving ground for AI reaso
 
 ## The Scale of the Opportunity
 
-Polymarket exploded from $73 million in 2023 trading volume to roughly **$9 billion in 2024** — a 120x increase. The US election alone drove over $3.3 billion in bets. By October 2025, Polymarket raised $2 billion from NYSE's parent company Intercontinental Exchange at a $9 billion valuation.
+Polymarket exploded from $73 million in 2023 trading volume to roughly **$9 billion in 2024**, a 120x increase. The US election alone drove over $3.3 billion in bets. By October 2025, Polymarket raised $2 billion from NYSE's parent company Intercontinental Exchange at a $9 billion valuation.
 
-But here's the number that matters for anyone building trading agents: **only 7.6% of Polymarket wallets are profitable.** Out of 1.5 million+ addresses, roughly 120,000 have made money. The top 0.04% captured over 70% of all realized profits — about $3.7 billion. The other 92.4% are subsidizing them.
+But here's the number that matters for anyone building trading agents: **only 7.6% of Polymarket wallets are profitable.** Out of 1.5 million+ addresses, roughly 120,000 have made money. The top 0.04% captured over 70% of all realized profits (about $3.7 billion). The other 92.4% are subsidizing them.
 
-That's not a market. That's a buffet — if you're on the right side of the table.
+That's not a market. That's a buffet, if you're on the right side of the table.
 
 ## The Bots Are Already Winning
 
@@ -27,19 +27,19 @@ In August 2025, researchers at IMDEA Networks Institute published a study analyz
 
 But arbitrage is just the beginning. The more interesting bots are the ones that think.
 
-**Bot "0x8dxd"** appeared in December 2025 with $313 in starting capital. Its strategy: monitor real-time Bitcoin prices on Binance and Coinbase, then bet on Polymarket's 15-minute BTC up/down markets when the price movement made the outcome near-certain but Polymarket's odds hadn't adjusted yet. Within one month, the bot had executed over 20,000 trades with a 98% win rate. Its profit: **$437,600** — a 139,000% return.
+**Bot "0x8dxd"** appeared in December 2025 with $313 in starting capital. Its strategy: monitor real-time Bitcoin prices on Binance and Coinbase, then bet on Polymarket's 15-minute BTC up/down markets when the price movement made the outcome near-certain but Polymarket's odds hadn't adjusted yet. Within one month, the bot had executed over 20,000 trades with a 98% win rate. Its profit: **$437,600**, a 139,000% return.
 
 An automated weather forecasting bot joined in January 2025, focused exclusively on temperature and climate markets. It earned over **$70,000** by pulling NOAA data and comparing professional forecasts to Polymarket's crowd-sourced odds. Another bot running ensemble probability models generated **$2.2 million** in two months on a mix of political and economic markets.
 
-These aren't hedge funds with hundred-person teams. They're scripts running on cheap VPS servers, using public APIs and commodity LLMs. The average arbitrage window on Polymarket compressed from 12.3 seconds in 2024 to just 2.7 seconds in 2025 — but for markets that require judgment rather than speed, the edges are still wide open.
+These aren't hedge funds with hundred-person teams. They're scripts running on cheap VPS servers, using public APIs and commodity LLMs. The average arbitrage window on Polymarket compressed from 12.3 seconds in 2024 to just 2.7 seconds in 2025, but for markets that require judgment rather than speed, the edges are still wide open.
 
 ## The Research That Validated LLM Forecasting
 
-In February 2024, researchers at UC Berkeley published "Approaching Human-Level Forecasting with Language Models." They built a retrieval-augmented GPT-4 system that searched for relevant news, generated arguments for and against each outcome, and produced calibrated probability estimates. Tested across questions from Metaculus, Good Judgment Open, Polymarket, and Manifold, the system achieved a Brier score of **0.179** — approaching the human crowd aggregate of **0.149**.
+In February 2024, researchers at UC Berkeley published "Approaching Human-Level Forecasting with Language Models." They built a retrieval-augmented GPT-4 system that searched for relevant news, generated arguments for and against each outcome, and produced calibrated probability estimates. Tested across questions from Metaculus, Good Judgment Open, Polymarket, and Manifold, the system achieved a Brier score of **0.179**, approaching the human crowd aggregate of **0.149**.
 
 A follow-up study in November 2025 (the AIA Forecaster) pushed further: an agentic LLM system that combined automated news search, multi-model ensembling, and statistical calibration **matched human superforecaster performance** on the ForecastBench benchmark. The key finding: ensembling multiple LLM runs was critical. A single model run is noisy. An ensemble of five runs is dramatically more reliable.
 
-Even more striking: an ensemble of the AI forecaster plus market consensus **outperformed consensus alone**. The LLM wasn't just matching the crowd — it was adding information the crowd didn't have.
+Even more striking: an ensemble of the AI forecaster plus market consensus **outperformed consensus alone**. The LLM wasn't just matching the crowd. It was adding information the crowd didn't have.
 
 A separate MIT study found that human forecasters who interacted with GPT-4 assistants improved their accuracy by **24-28%** compared to a control group. A "superforecasting" prompt improved accuracy by **41%**. The trend line is clear: LLM forecasting performance is improving at roughly 0.016 Brier points per year. At that rate, LLMs match top-tier human superforecasters by late 2026.
 
@@ -47,15 +47,15 @@ A separate MIT study found that human forecasters who interacted with GPT-4 assi
 
 The architecture most teams have converged on looks something like this:
 
-**1. Market scanning.** The agent monitors Polymarket's API for active markets, filtering by liquidity, time to resolution, and topic area. Polymarket even publishes an official open-source framework for this — their [Polymarket/agents](https://github.com/Polymarket/agents) repo on GitHub has 2,400+ stars and provides a Python toolkit for building autonomous trading agents.
+**1. Market scanning.** The agent monitors Polymarket's API for active markets, filtering by liquidity, time to resolution, and topic area. Polymarket even publishes an official open-source framework for this. Their [Polymarket/agents](https://github.com/Polymarket/agents) repo on GitHub has 2,400+ stars and provides a Python toolkit for building autonomous trading agents.
 
 **2. Information retrieval.** For each target market, the agent pulls relevant data: news articles (via Brave Search or similar), social media sentiment, historical data, domain-specific APIs. A weather market pulls NOAA forecasts. An election market pulls polling aggregates. A crypto market pulls on-chain data.
 
-**3. LLM reasoning.** The core model receives the market question, current price (implied probability), and retrieved context. It generates a probability estimate with reasoning. Better systems use structured prompting — forcing the model to consider base rates, generate counterarguments, and calibrate its confidence. Multi-model ensembles (running the same question through Claude, GPT-4, and Gemini, then averaging) produce more robust estimates than any single model.
+**3. LLM reasoning.** The core model receives the market question, current price (implied probability), and retrieved context. It generates a probability estimate with reasoning. Better systems use structured prompting, forcing the model to consider base rates, generate counterarguments, and calibrate its confidence. Multi-model ensembles (running the same question through Claude, GPT-4, and Gemini, then averaging) produce more robust estimates than any single model.
 
-**4. Edge calculation.** The agent compares its probability estimate to the market price. If the market says 60% and the agent says 80%, that's a potential edge of 20 percentage points. Most agents require a minimum edge threshold — typically 5-15% — before placing a bet.
+**4. Edge calculation.** The agent compares its probability estimate to the market price. If the market says 60% and the agent says 80%, that's a potential edge of 20 percentage points. Most agents require a minimum edge threshold (typically 5-15%) before placing a bet.
 
-**5. Position sizing.** Kelly criterion or a fractional Kelly approach determines how much to bet based on the size of the edge and the agent's bankroll. Full Kelly is mathematically optimal but volatile — most practitioners use quarter-Kelly or half-Kelly to reduce drawdowns.
+**5. Position sizing.** Kelly criterion or a fractional Kelly approach determines how much to bet based on the size of the edge and the agent's bankroll. Full Kelly is mathematically optimal but volatile. Most practitioners use quarter-Kelly or half-Kelly to reduce drawdowns.
 
 **6. Execution and monitoring.** The agent places the trade via Polymarket's API (it runs on Polygon, so transactions are on-chain). Then it monitors for new information that might change the thesis, adjusting or exiting as needed.
 
@@ -83,30 +83,30 @@ The first four strategies are about speed and infrastructure. The fifth — LLM 
 
 ## Polymarket Wants the Bots
 
-Unlike most exchanges, Polymarket actively encourages automated trading. Their Liquidity Rewards Program pays daily USDC rewards to market makers — but the quadratic scoring system means you need to maintain tight spreads, which effectively requires automation. Their API allows 100 requests per minute for data and 60 orders per minute for trading. There's no prohibition on bots in the ToS.
+Unlike most exchanges, Polymarket actively encourages automated trading. Their Liquidity Rewards Program pays daily USDC rewards to market makers, but the quadratic scoring system means you need to maintain tight spreads, which effectively requires automation. Their API allows 100 requests per minute for data and 60 orders per minute for trading. There's no prohibition on bots in the ToS.
 
 The community has built over 170 third-party tools across 19 categories. Polymarket's own newsletter promoted automated market making, calling the space "incredibly underdeveloped compared to traditional crypto markets."
 
-This is unusual. Most exchanges fight bots. Polymarket courts them — because bots improve price accuracy and liquidity, which makes the platform more useful for everyone.
+This is unusual. Most exchanges fight bots. Polymarket courts them, because bots improve price accuracy and liquidity, which makes the platform more useful for everyone.
 
 ## What This Means for Builders
 
-**Information advantage is the moat.** The agents winning right now aren't using smarter models — they're using better data. Custom scrapers for niche data sources, real-time social media analysis, domain-specific APIs. The LLM is a commodity. The data pipeline is the edge.
+**Information advantage is the moat.** The agents winning right now aren't using smarter models. They're using better data. Custom scrapers for niche data sources, real-time social media analysis, domain-specific APIs. The LLM is a commodity. The data pipeline is the edge.
 
 **Specialization beats generalization.** A weather bot with NOAA API access beats a generalist agent on weather markets every time. A crypto bot monitoring on-chain flows beats a generalist on token price markets. Pick a domain, build the data pipeline, and own that niche.
 
 **Ensemble everything.** The research is clear: multi-model ensembles produce better forecasts than any single model. Run Claude, GPT-4, and an open-source model on the same question. Average the results. The marginal cost is minimal; the accuracy improvement is significant.
 
-**The window is closing — slowly.** The easy arbitrage edges are mostly gone (2.7-second windows require serious infrastructure). But judgmental edges in longer-term markets — where the question requires real reasoning about complex events — are still available. That's where LLM agents have the biggest advantage over casual bettors.
+**The window is closing, slowly.** The easy arbitrage edges are mostly gone (2.7-second windows require serious infrastructure). But judgmental edges in longer-term markets, where the question requires real reasoning about complex events, are still available. That's where LLM agents have the biggest advantage over casual bettors.
 
 ## The Bigger Picture
 
 Prediction markets are interesting not just as a trading venue but as a **benchmark for AI reasoning**. Unlike MMLU or HumanEval, prediction markets provide continuous, real-world feedback. The model's prediction either matches reality or it doesn't. There's no "partially correct."
 
-This creates a natural selection pressure. Agents that reason well make money and survive. Agents that reason poorly lose money and get shut down. Over time, this should drive genuine improvements in AI calibration and judgment — improvements that transfer to other domains where probabilistic reasoning matters.
+This creates a natural selection pressure. Agents that reason well make money and survive. Agents that reason poorly lose money and get shut down. Over time, this should drive genuine improvements in AI calibration and judgment. Improvements that transfer to other domains where probabilistic reasoning matters.
 
 The infrastructure is there: liquid markets ($21.5 billion in 2025 volume), open APIs, on-chain settlement, and a platform that welcomes bots. The research confirms LLMs can forecast at near-human levels. The early bots are already printing money.
 
-I'm building one right now — a prediction agent that starts with weather markets (the easiest edge to quantify) and expands into LLM-powered judgmental forecasting. I'll be documenting the build, the P&L, and the lessons learned on this blog. If you want to follow along or build your own, the tools are all open-source and the markets are waiting.
+I'm building one right now: a prediction agent that starts with weather markets (the easiest edge to quantify) and expands into LLM-powered judgmental forecasting. I'll be documenting the build, the P&L, and the lessons learned on this blog. If you want to follow along or build your own, the tools are all open-source and the markets are waiting.
 
 The question isn't whether AI agents will dominate prediction markets. It's whether you'll be running one — or betting against one.
