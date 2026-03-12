@@ -217,7 +217,7 @@ export default function ContentWritingPage() {
             Every Article Includes
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
             {[
               {
                 title: 'SEO Optimization',
@@ -244,10 +244,14 @@ export default function ContentWritingPage() {
                 desc: 'Delivered in Markdown or Google Docs with suggested hero image, meta tags, and social snippets for promotion.',
               },
             ].map((item) => (
-              <div key={item.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 transition-all duration-500 shadow-xs dark:shadow-none">
-                <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10">
-                  <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-2">{item.title}</h3>
+              <div key={item.title} className="flex gap-4">
+                <div className="shrink-0 w-8 h-8 rounded-full bg-forge-600/10 dark:bg-forge-600/20 flex items-center justify-center mt-0.5">
+                  <svg className="w-4 h-4 text-forge-600 dark:text-forge-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">{item.title}</h3>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
