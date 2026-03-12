@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Navigation } from '../components/Navigation'
 import { Footer } from '../components/Footer'
+import { TallyButton } from '../components/TallyButton'
 
 export const metadata: Metadata = {
   title: 'AI Chatbot for Your Business | VegaForge',
@@ -58,16 +59,12 @@ export default function AIChatbotPage() {
           </p>
 
           <div className="flex flex-wrap gap-3 md:gap-4">
-            <button
-              data-tally-open="RG4QQ9"
-              data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
-            >
+            <TallyButton className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer">
               Get in Touch
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </button>
+            </TallyButton>
             <a
               href="#how-it-works"
               className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white font-medium rounded-full transition-all"
@@ -371,16 +368,12 @@ export default function AIChatbotPage() {
                 ))}
               </div>
 
-              <button
-                data-tally-open="RG4QQ9"
-                data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-                className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer"
-              >
+              <TallyButton className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all cursor-pointer">
                 Let&apos;s Discuss Your Project
                 <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </button>
+              </TallyButton>
             </div>
           </div>
         </div>
@@ -444,16 +437,12 @@ export default function AIChatbotPage() {
           <p className="text-neutral-600 dark:text-neutral-400 mb-10 max-w-lg mx-auto">
             Tell us about your business and what you need. We will get back to you within 24 hours with a plan
           </p>
-          <button
-            data-tally-open="RG4QQ9"
-            data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg cursor-pointer"
-          >
+          <TallyButton className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg cursor-pointer">
             Get in Touch
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </button>
+          </TallyButton>
         </div>
       </section>
 

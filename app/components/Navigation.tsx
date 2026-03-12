@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { ThemeSwitcher } from './ThemeSwitcher'
+import { TallyButton } from './TallyButton'
 
 export function Navigation() {
   const pathname = usePathname()
@@ -90,13 +91,9 @@ export function Navigation() {
             </div>
 
             <ThemeSwitcher />
-            <button
-              data-tally-open="RG4QQ9"
-              data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-              className="text-sm px-4 py-2 border border-neutral-300 dark:border-forge-600/50 rounded-full text-neutral-700 dark:text-forge-400 hover:border-forge-500 dark:hover:border-forge-500 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer"
-            >
+            <TallyButton className="text-sm px-4 py-2 border border-neutral-300 dark:border-forge-600/50 rounded-full text-neutral-700 dark:text-forge-400 hover:border-forge-500 dark:hover:border-forge-500 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer">
               Contact
-            </button>
+            </TallyButton>
           </div>
 
           {/* Mobile: theme switcher + hamburger */}
@@ -158,13 +155,9 @@ export function Navigation() {
             <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
 
             {/* Contact */}
-            <button
-              data-tally-open="RG4QQ9"
-              data-tally-layout="modal" data-tally-width="500" data-tally-hide-title="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-              className="block w-full text-left px-4 py-3 rounded-xl text-base text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer"
-            >
+            <TallyButton className="block w-full text-left px-4 py-3 rounded-xl text-base text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer">
               Contact
-            </button>
+            </TallyButton>
           </div>
         </div>
       )}
