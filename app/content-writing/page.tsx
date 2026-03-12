@@ -58,7 +58,7 @@ export default function ContentWritingPage() {
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="mailto:devacc8@pm.me"
+              href="https://tally.so/r/RG4QQ9"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
             >
               Get Started
@@ -149,7 +149,7 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Single%20Article"
+                  href="https://tally.so/r/RG4QQ9"
                   className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   Get Started
@@ -180,7 +180,7 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Monthly%20Package"
+                  href="https://tally.so/r/RG4QQ9"
                   className="block text-center px-4 py-2.5 bg-forge-600 hover:bg-forge-500 text-white rounded-full text-sm font-medium transition-all"
                 >
                   Get Started
@@ -209,7 +209,7 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Monthly%20%2B%20Twitter%20Package"
+                  href="https://tally.so/r/RG4QQ9"
                   className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   Get Started
@@ -481,7 +481,7 @@ export default function ContentWritingPage() {
             Tell us about your project. We will reply within 24 hours with a content plan tailored to your goals
           </p>
           <a
-            href="mailto:devacc8@pm.me?subject=Content%20Writing%20Inquiry"
+            href="https://tally.so/r/RG4QQ9"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg"
           >
             Get a Content Plan

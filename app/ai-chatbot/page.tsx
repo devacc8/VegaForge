@@ -59,7 +59,7 @@ export default function AIChatbotPage() {
 
           <div className="flex flex-wrap gap-3 md:gap-4">
             <a
-              href="mailto:devacc8@pm.me"
+              href="https://tally.so/r/RG4QQ9"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
             >
               Get in Touch
@@ -371,7 +371,7 @@ export default function AIChatbotPage() {
               </div>
 
               <a
-                href="mailto:devacc8@pm.me"
+                href="https://tally.so/r/RG4QQ9"
                 className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
               >
                 Let&apos;s Discuss Your Project
@@ -443,7 +443,7 @@ export default function AIChatbotPage() {
             Tell us about your business and what you need. We will get back to you within 24 hours with a plan
           </p>
           <a
-            href="mailto:devacc8@pm.me"
+            href="https://tally.so/r/RG4QQ9"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg"
           >
             Get in Touch

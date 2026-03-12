@@ -59,7 +59,7 @@ export default function AIAgentPage() {
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="mailto:devacc8@pm.me"
+              href="https://tally.so/r/RG4QQ9"
               className="group inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
             >
               Get Your AI Agent
@@ -425,7 +425,7 @@ export default function AIAgentPage() {
               </div>
 
               <a
-                href="mailto:devacc8@pm.me"
+                href="https://tally.so/r/RG4QQ9"
                 className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all"
               >
                 Book a Discovery Call
@@ -497,7 +497,7 @@ export default function AIAgentPage() {
             Tell us about your business and social media goals. We will get back to you within 24 hours with a plan
           </p>
           <a
-            href="mailto:devacc8@pm.me"
+            href="https://tally.so/r/RG4QQ9"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-forge-600 hover:bg-forge-500 text-white font-medium rounded-full transition-all text-lg"
           >
             Get Your AI Agent
