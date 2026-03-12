@@ -209,6 +209,53 @@ export default function ContentWritingPage() {
         </div>
       </section>
 
+      {/* What You Get */}
+      <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-4">WHAT YOU GET</p>
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white mb-12">
+            Every Article Includes
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'SEO Optimization',
+                desc: 'Keyword research, meta descriptions, heading structure, and internal linking. Your content ranks, not just exists.',
+              },
+              {
+                title: 'Fact-Checking',
+                desc: 'Every claim verified against primary sources. Contract addresses, TVL numbers, dates, protocol mechanics. No hallucinations.',
+              },
+              {
+                title: 'Voice Matching',
+                desc: 'We study your existing content, tone, and audience. The article sounds like your team wrote it.',
+              },
+              {
+                title: '48h Turnaround',
+                desc: 'From brief to final draft in two business days. Need it faster? Priority delivery available on monthly plans.',
+              },
+              {
+                title: 'One Free Revision',
+                desc: 'Not happy with the direction? One round of revisions included at no extra cost. Our revision rate is under 15%.',
+              },
+              {
+                title: 'Ready to Publish',
+                desc: 'Delivered in Markdown or Google Docs with suggested hero image, meta tags, and social snippets for promotion.',
+              },
+            ].map((item) => (
+              <div key={item.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 transition-all duration-500 shadow-xs dark:shadow-none">
+                <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="px-6 md:px-12 lg:px-20 py-12 md:py-24">
         <div className="max-w-6xl mx-auto">
