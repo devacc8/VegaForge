@@ -53,7 +53,7 @@ export default function ContentWritingPage() {
             <span className="text-forge-600 dark:text-forge-500">Crypto Projects</span>
           </h1>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl mb-10">
-            Not AI slop. Not slow freelancers. A human editor with an AI research pipeline — producing crypto content faster than a full-time hire, at half the cost
+            Not AI slop. Not slow freelancers. A human editor with an AI research pipeline, producing crypto content faster than a full-time hire, starting at $250 per article
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -127,19 +127,20 @@ export default function ContentWritingPage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {/* Blog Starter */}
+            {/* Single Article */}
             <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
               <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
-                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Blog Starter</h3>
-                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$1,000<span className="text-base font-normal text-neutral-500">/mo</span></p>
+                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Single Article</h3>
+                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$250</p>
                 <div className="space-y-3 mb-6">
                   {[
-                    '4 blog posts/month (1,500-2,500 words)',
+                    '1 deep-dive article (1,500-2,500 words)',
                     'SEO-optimized with keywords',
                     'Crypto/Web3 domain expertise',
                     'Fact-checked and human-edited',
-                    '48h turnaround per article',
+                    '48h turnaround',
+                    '3-pack: $600 ($200/article)',
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
@@ -148,7 +149,7 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Blog%20Starter%20Package"
+                  href="mailto:devacc8@pm.me?subject=Single%20Article"
                   className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   Get Started
@@ -156,21 +157,21 @@ export default function ContentWritingPage() {
               </div>
             </div>
 
-            {/* Blog + Twitter — highlighted */}
+            {/* Monthly — highlighted */}
             <div className="group relative bg-forge-600/5 dark:bg-forge-600/10 border-2 border-forge-500/50 dark:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-forge-600 text-white text-xs font-medium rounded-full">
-                Most Popular
+                Best Value
               </div>
               <div className="relative z-10">
-                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Blog + Twitter</h3>
-                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$2,000<span className="text-base font-normal text-neutral-500">/mo</span></p>
+                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Monthly</h3>
+                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$1,000<span className="text-base font-normal text-neutral-500">/mo</span></p>
                 <div className="space-y-3 mb-6">
                   {[
-                    '4 blog posts/month (1,500-2,500 words)',
-                    '20 tweets/week + 4 threads/month',
+                    '6 blog posts/month (1,500-2,500 words)',
                     'Content calendar and strategy',
-                    'Voice matching to your brand',
-                    'Performance analytics',
+                    'SEO optimization and keywords',
+                    'Priority turnaround',
+                    'Additional articles at $150 each',
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
@@ -179,7 +180,7 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Blog%20%2B%20Twitter%20Package"
+                  href="mailto:devacc8@pm.me?subject=Monthly%20Package"
                   className="block text-center px-4 py-2.5 bg-forge-600 hover:bg-forge-500 text-white rounded-full text-sm font-medium transition-all"
                 >
                   Get Started
@@ -187,19 +188,19 @@ export default function ContentWritingPage() {
               </div>
             </div>
 
-            {/* Full Content */}
+            {/* Monthly + Twitter */}
             <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
               <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
-                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Full Content</h3>
-                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$3,000<span className="text-base font-normal text-neutral-500">/mo</span></p>
+                <h3 className="font-display font-semibold text-lg text-neutral-900 dark:text-white mb-1">Monthly + Twitter</h3>
+                <p className="font-display font-bold text-3xl text-forge-600 dark:text-forge-500 mb-4">$2,000<span className="text-base font-normal text-neutral-500">/mo</span></p>
                 <div className="space-y-3 mb-6">
                   {[
-                    'Everything in Blog + Twitter',
-                    'Daily Twitter management',
-                    'Documentation and READMEs',
-                    'Newsletter writing',
-                    'Dedicated content strategist',
+                    '8 blog posts/month (1,500-2,500 words)',
+                    'Twitter management (20 tweets/week)',
+                    '4 Twitter threads/month',
+                    'Voice matching to your brand',
+                    'Content calendar and analytics',
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
@@ -208,20 +209,13 @@ export default function ContentWritingPage() {
                   ))}
                 </div>
                 <a
-                  href="mailto:devacc8@pm.me?subject=Full%20Content%20Package"
+                  href="mailto:devacc8@pm.me?subject=Monthly%20%2B%20Twitter%20Package"
                   className="block text-center px-4 py-2.5 border border-neutral-300 dark:border-forge-600/50 hover:border-forge-500 dark:hover:border-forge-500 rounded-full text-sm text-neutral-700 dark:text-forge-400 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all"
                 >
                   Get Started
                 </a>
               </div>
             </div>
-          </div>
-
-          {/* One-off */}
-          <div className="mt-8 text-center">
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Need a single article? <a href="mailto:devacc8@pm.me?subject=One-off%20Article" className="text-forge-600 dark:text-forge-500 hover:text-forge-500 dark:hover:text-forge-400 transition-colors font-medium">One-off deep-dive articles from $350</a>
-            </p>
           </div>
         </div>
       </section>
@@ -294,7 +288,7 @@ export default function ContentWritingPage() {
               },
               {
                 title: 'Speed Without Sacrifice',
-                desc: '4 articles/month is baseline, scalable to 8+. AI handles research and drafting. Human ensures every piece sounds like you, not like a robot',
+                desc: '6 articles/month at baseline, scalable to 8+. AI handles research and drafting. Human ensures every piece sounds like you, not like a robot',
               },
             ].map((feature) => (
               <div key={feature.title} className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
@@ -377,13 +371,13 @@ export default function ContentWritingPage() {
                 </thead>
                 <tbody>
                   {[
-                    { label: 'Monthly cost', ft: '$4-8K', free: '$1.2-2K', us: '$1-3K' },
-                    { label: 'Articles/month', ft: '4-6', free: '3-4', us: '4-8+' },
+                    { label: 'Cost per article', ft: '$800-1.5K', free: '$300-500', us: '$150-250' },
+                    { label: 'Articles/month', ft: '4-6', free: '3-4', us: '6-8+' },
                     { label: 'Crypto expertise', ft: 'Varies', free: 'Rarely', us: 'Deep' },
                     { label: 'Consistency', ft: 'High', free: 'Low', us: 'High' },
                     { label: 'Turnaround', ft: '3-5 days', free: '5-10 days', us: '48 hours' },
-                    { label: 'Twitter content', ft: 'Extra cost', free: 'Separate hire', us: 'Included in plans' },
-                    { label: 'Scalability', ft: 'Hire more', free: 'Find more', us: 'Same team, more output' },
+                    { label: 'Twitter content', ft: 'Extra cost', free: 'Separate hire', us: 'Available in top tier' },
+                    { label: 'Commitment', ft: 'Full-time salary', free: 'Per project', us: 'No contracts, cancel anytime' },
                   ].map((row, i) => (
                     <tr key={row.label} className={i < 6 ? 'border-b border-neutral-100 dark:border-neutral-800/50' : ''}>
                       <td className="p-4 md:p-6 font-medium text-sm text-neutral-900 dark:text-white">{row.label}</td>
@@ -456,7 +450,7 @@ export default function ContentWritingPage() {
               },
               {
                 q: 'Minimum commitment?',
-                a: 'No long-term contracts. Monthly billing, cancel anytime. We recommend at least 2 months to see results from blog content and SEO.',
+                a: 'None. Start with a single article for $250 to see the quality. Monthly plans have no contracts — cancel anytime. We recommend at least 2 months to see results from blog content and SEO.',
               },
             ].map((item) => (
               <details key={item.q} className="group/faq bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl shadow-xs dark:shadow-none transition-all duration-300">
