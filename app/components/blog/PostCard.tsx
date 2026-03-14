@@ -12,22 +12,20 @@ export function PostCard({ post }: { post: PostMeta }) {
       <article className="relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl overflow-hidden transition-all duration-500 shadow-xs dark:shadow-none">
         <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="relative z-10 flex flex-col md:flex-row">
-          {/* Hero image */}
+        <div className="relative z-10 flex flex-row">
+          {/* Hero image — fits to card height, cropped to fill */}
           {post.image && (
-            <div className="md:w-2/5 shrink-0">
+            <div className="hidden md:block w-[200px] shrink-0">
               <img
                 src={post.image}
                 alt=""
-                width={560}
-                height={312}
-                className="w-full h-48 md:h-full object-cover"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
           )}
 
-          <div className={`p-6 md:p-8 ${post.image ? 'md:w-3/5' : 'w-full'}`}>
+          <div className="p-6 md:p-8 min-w-0 flex-1">
             {/* Category + reading time */}
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 uppercase">
