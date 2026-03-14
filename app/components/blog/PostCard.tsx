@@ -15,7 +15,7 @@ export function PostCard({ post }: { post: PostMeta }) {
         <div className="relative z-10 flex flex-row">
           {/* Hero image — fits to card height, cropped to fill */}
           {post.image && (
-            <div className="hidden md:block w-[200px] shrink-0">
+            <div className="hidden md:block w-[160px] shrink-0">
               <img
                 src={post.image}
                 alt=""
