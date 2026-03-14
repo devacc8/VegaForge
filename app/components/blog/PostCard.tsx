@@ -38,7 +38,7 @@ export function PostCard({ post }: { post: PostMeta }) {
             </div>
 
             {/* Title */}
-            <h2 className="font-display font-bold text-xl md:text-2xl text-neutral-900 dark:text-white mb-3 group-hover:text-forge-600 dark:group-hover:text-forge-500 transition-colors">
+            <h2 className="font-display font-bold text-lg md:text-xl text-neutral-900 dark:text-white mb-3 group-hover:text-forge-600 dark:group-hover:text-forge-500 transition-colors">
               {post.title}
             </h2>
 
