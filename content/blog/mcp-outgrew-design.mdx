@@ -1,0 +1,118 @@
+---
+title: "MCP Outgrew Its Own Design. Here's the Fix."
+description: "The Model Context Protocol hit scaling walls nobody expected. The 2026 roadmap shifts from 'build more servers' to 'make what exists scale.' Here's what changed and what it means for builders."
+date: "2026-03-19"
+category: "MCP & Frameworks"
+tags: ["mcp", "agents", "infrastructure", "linux-foundation"]
+image: "/blog/mcp-outgrew-design-hero.webp"
+---
+
+MCP was supposed to be the "USB-C for AI." One port to connect anything to any model. Fifteen months later, the protocol faces a problem nobody expected: too much success. Too many tools, too many connections, and a hard wall called the context window.
+
+The 2026 roadmap, published on March 9 by lead maintainer David Soria Parra, reveals a protocol growing up. The emphasis shifted from "build more servers" to "make what exists actually scale." That's a subtle but massive change. Here's what it means for builders.
+
+## What MCP Promised (And What Actually Happened)
+
+When Anthropic launched MCP in November 2024, the vision was elegant: solve the N×M integration problem. Every AI model connecting to every data source used custom code. MCP would be the universal translator. One standard, any tool, no more reinvention.
+
+The adoption curve exceeded expectations. OpenAI added MCP support in 2025. Google followed, integrating MCP into Gemini and releasing managed MCP servers for BigQuery, GCE, and GKE. In December 2025, Anthropic donated the protocol to the newly formed Agentic AI Foundation (AAIF) under the Linux Foundation, with OpenAI and Block as co-founders and AWS, Google, Microsoft, Cloudflare, and Bloomberg as Platinum members. MCP now has first-class client support in Claude, ChatGPT, Cursor, Gemini, Microsoft Copilot, and VS Code. This isn't a niche tool anymore. It's industry infrastructure.
+
+But adoption exposed problems the original design didn't anticipate.
+
+The token problem hit first. Load five MCP servers with 20-30 tools each, and your agent spends its first few thousand tokens just reading what it can do. Anyone running Claude Code with multiple MCP servers knows this firsthand: you end up manually curating which servers are active because the context burn is real. Cloudflare's Code Mode approach (which I covered in February) solved part of this through progressive disclosure, but it's a band-aid on a systemic issue.
+
+The scaling problem came next. MCP was designed for local servers. Remote servers exist, but stateful sessions fight with load balancers. Horizontal scaling requires workarounds. If you're running MCP in production at scale, you're engineering around the protocol rather than with it.
+
+Enterprise features are almost nonexistent. Audit trails, SSO-integrated auth, gateway behavior, configuration portability. These aren't optional for companies. They're table stakes. MCP had none of them.
+
+The 2026 roadmap addresses exactly these gaps. But the most interesting shift isn't technical. It's philosophical.
+
+## The Philosophical Shift: From Quantity to Delivery
+
+MCP's 2025 mindset was: every new data source needs an MCP server. More tools, more capability, more reach.
+
+The 2026 reality: context windows aren't growing as fast as API surfaces. Tool quantity hits hard limits. The protocol needs to focus less on expanding what's connected and more on delivering those connections efficiently.
+
+Three changes make this concrete:
+
+**Progressive disclosure becomes mandatory.** Loading all available tools upfront fails at scale. The roadmap explicitly calls this out. Future MCP server design should assume agents will discover and load tools on demand, not all at once.
+
+**Execution environments matter.** The Cloudflare Code Mode approach, where the server decides what to expose based on context, isn't a hack. It's the pattern the protocol is formalizing.
+
+**Enterprise features live as extensions.** Rather than bloating the core spec, enterprise needs will land as extension points. Keep the base protocol lean, let the ecosystem enrich on top. This mirrors how Linux evolved: small kernel, massive ecosystem.
+
+For builders, this changes the calculus. Don't just ask "what MCP server do I need?" Ask "how will my agent discover and load only what it needs?" That's the design question for 2026.
+
+## The 2026 Roadmap: Plain English
+
+### Transport Evolution and Scalability
+
+The current MCP spec uses two transports: stdio (local processes) and HTTP with SSE (server-sent events). Both work fine for single-server deployments. Both struggle at scale.
+
+Streamable HTTP exists now, enabling remote servers. But the protocol is stateful. Each connection maintains session context. Load balancers hate this. They route requests to different servers, and the session state lives on just one of them. Requests fail.
+
+The roadmap targets two solutions. First: stateless horizontal scaling. The session state moves from the server to the client, or gets embedded in the request itself. Second: standard metadata discovery via `.well-known` endpoints. Agents can discover available servers automatically rather than hardcoding connections.
+
+The key insight: MCP is formalizing patterns that early adopters already invented. If you've wrestled with remote MCP deployment, you're not alone. The protocol is catching up to your workarounds.
+
+### Agent Communication
+
+The Tasks primitive shipped as experimental in 2025 (SEP-1686). It gives agents a "call-now, fetch-later" pattern: invoke a subtask, check back for results when ready. The use case is powerful: decompose complex requests across specialized agents without blocking.
+
+Production use surfaced gaps. When does a task expire? What happens if the subtask fails? How do you handle partial results? The retry semantics are unclear. The timeout policies are undefined.
+
+The roadmap takes the same approach as before: ship experimental, gather feedback, iterate. The Tasks primitive will stabilize based on what real usage reveals. If you've used it in production, your feedback is directly shaping the spec.
+
+### Governance Maturation
+
+This is the unsexy but critical change. Currently, every Specification Enhancement Proposal (SEP) requires full Core Maintainer review. As the ecosystem grows, this creates a bottleneck. Good proposals stall. Contributors lose momentum.
+
+The solution: a contributor ladder with trusted Working Groups. Core Maintainers keep strategic oversight. WGs get autonomy to review and approve proposals in their domain. Governance delegates rather than centralizes.
+
+The risk: fragmentation. Different WGs could push specs in incompatible directions. The fix: Core Maintainers still own the overall architecture. WGs operate within boundaries.
+
+For the ecosystem, this matters. If you've submitted a SEP and waited months for review, your pain informed this change. The governance model aims to keep MCP unified while accelerating contribution.
+
+### Enterprise Readiness
+
+Least defined, most needed. The roadmap explicitly asks for community input here.
+
+Real problems exist. Enterprises need audit trails. They need to know who accessed what, when, and what changed. They need SSO-integrated authentication, using existing identity systems rather than new credentials. They need gateway behavior: a single entry point that routes requests to appropriate servers. They need configuration portability: deploy the same setup across environments.
+
+These aren't flashy. They don't make conference talks exciting. But they're blockers for production deployment.
+
+The roadmap's approach: land these as extensions rather than core spec changes. Keep the base protocol simple. Let vendors and community build enterprise layers on top.
+
+The question is whether the ecosystem will step up. Enterprise extensions require significant engineering. Who builds them? When? These are open questions the roadmap intentionally leaves unanswered, preferring community-driven solutions over top-down mandates.
+
+## What This Means for Developers
+
+If you're building MCP servers: focus on lean, discoverable tools. Don't expose everything. Assume the calling agent will explore and select rather than load all at once. Design for progressive disclosure from day one.
+
+If you're building agents: implement progressive disclosure patterns. Load tools on demand, not upfront. Track which tools you actually use and optimize for that. The token savings are substantial.
+
+If you're in enterprise: expect extensions, not core changes. The base protocol stays lean. You'll need to build or buy the enterprise layer yourself. Gateway, auth, audit. The community will likely produce options, but nothing ships out of the box.
+
+The big picture is this: MCP is choosing the Linux kernel model. Small core, rich ecosystem. It's a smart trade-off. The protocol stays flexible, the community fills needs. But it puts pressure on the ecosystem to actually build those pieces.
+
+## The Open Questions
+
+A few things remain unclear:
+
+Will SEPs outside the four priority areas get neglected? The roadmap focuses on transport, agent communication, governance, and enterprise. What about security, privacy, or multi-model coordination? The governance changes aim to help, but attention is finite.
+
+How will enterprise extensions differ from core functionality in practice? When does a feature belong in the base spec versus an extension? The boundary isn't clear, and it will likely remain fuzzy until real extensions emerge.
+
+Can the governance changes actually speed up contribution, or create new bottlenecks? Working Groups could become fiefdoms. They could also become echo chambers. The success of this model depends on who participates and how they collaborate.
+
+What's the timeline? The roadmap sets direction, not dates. Transport scalability might land in Q2. Enterprise extensions could take years. If you need something specific, contribute rather than wait.
+
+## The Bet
+
+MCP's bet on extension-based enterprise features is a pragmatic trade-off. Keep the core simple. Let the ecosystem enrich. But it puts the burden on the community to actually build those extensions.
+
+The protocol has momentum. Every major model provider adopted it. The AAIF hosts it under the Linux Foundation. Over 97 million monthly SDK downloads and 10,000 active servers show this isn't theoretical adoption. The core maintainers recognized the scaling problems and are addressing them.
+
+The question for 2026: will the ecosystem step up? Or will MCP remain a powerful but incomplete protocol, strong in theory but weak in production?
+
+The answer depends on builders like you. The roadmap creates space for contribution. What you build next fills it.
