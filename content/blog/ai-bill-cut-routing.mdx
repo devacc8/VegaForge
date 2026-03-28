@@ -1,0 +1,90 @@
+---
+title: "I Cut My AI Bill 70% With Three Lines of Logic"
+description: "From $200/month on Claude API to $20/month on MiniMax. The real story of finding the right model for a production AI agent, plus routing strategies for those stuck on per-token pricing."
+date: "2026-03-28"
+category: "Solo Dev"
+tags: ["ai-costs", "model-routing", "solo-dev", "minimax"]
+image: "/blog/ai-bill-routing-hero.webp"
+---
+
+My AI agent costs $20 a month to run. Six months ago, the same workload cost $200+. That's not because I optimized prompts or wrote clever caching logic. It's because I stopped assuming expensive models were necessary.
+
+Here's the full story of how I went from Claude Max subscription to API calls to finding a model that does everything for a flat monthly fee. And for those of you stuck paying per-token, the routing strategies that can cut your bill by half or more.
+
+## Phase One: The Subscription Shortcut ($100/month, Then $0)
+
+When I started building Aria, my AI social media agent, I ran everything through Claude Code on a Claude Max subscription at $100/month. It worked beautifully. Claude handled tweet drafts, content research, feed analysis, blog writing. The quality was excellent and the cost was fixed.
+
+Then Anthropic updated their Terms of Service. Subscription plans could no longer be used to power AI agents or automated systems. Fair enough. Their pricing model assumes human-in-the-loop usage, not a bot making hundreds of calls per day. Aria was exactly the use case they wanted to exclude.
+
+Overnight, my $100/month agent became a $0/month agent. I needed a new plan.
+
+## Phase Two: API Calls and Bill Shock ($200+/month)
+
+The obvious move was switching to API pricing. Claude Sonnet at $3 per million input tokens. Not cheap, but manageable for a solo project. Or so I thought.
+
+The problem with per-token pricing is that usage is unpredictable. Aria doesn't just write tweets. She reads feeds, researches topics, writes drafts, edits them, checks facts, formats content. A single morning session could burn through 50,000 tokens on research alone before writing a word.
+
+My first full month on API pricing came to over $200. Some days Aria would hit an edge case, trigger a chain of reasoning, and consume 10x the normal token budget. A retry after a failed API call doubled the spend. Cost scaling was nonlinear and unpredictable.
+
+For a solo developer running a side project, $200/month on AI is not sustainable. I needed to find cheaper models that could handle Aria's workload without destroying quality.
+
+## Phase Three: The Model Hunt
+
+I started testing alternatives. The criteria were simple: handle long-form content writing, follow complex instructions, maintain consistent voice, and cost significantly less than Claude API.
+
+**Kimi K2.5 via OpenRouter** was the first serious contender. Moonshotai's model at roughly $0.45 per million tokens. A massive price drop from Claude's $3. The quality was surprisingly good for content tasks. Kimi handled tweet drafts, research summaries, and blog outlines competently. Not Claude-level reasoning, but 80% of the quality at 15% of the price.
+
+I ran Aria on Kimi K2.5 for several weeks. Monthly cost dropped to around $40-60. A huge improvement, but still variable. Some weeks were $10, others $20, depending on how much content Aria produced.
+
+**Then I found MiniMax.** MiniMax M2.5 offered something the others didn't: a subscription model. Roughly $20/month for a generous usage allowance. Not per-token billing. Not variable costs. A flat monthly fee that covered Aria's entire workload.
+
+The quality surprised me. MiniMax M2.5 handled everything I threw at it. Tweet drafts, long-form articles, content research, feed analysis, instruction following. For Aria's use case, the output quality matched what I was getting from far more expensive models.
+
+## The Current Setup: $20/Month for Everything
+
+Today Aria runs on MiniMax M2.5 as the primary model with Kimi K2.5 as a fallback. In practice, the fallback almost never triggers. MiniMax handles 95%+ of all requests.
+
+MiniMax recently released version 2.7, which improved reasoning and instruction following even further. The subscription price stayed the same. My agent got smarter without costing more. That's the advantage of subscription pricing: improvements are free.
+
+The total monthly cost breakdown:
+
+| Component | Cost |
+|-----------|------|
+| MiniMax M2.5 subscription | ~$20 |
+| Kimi K2.5 fallback (OpenRouter) | ~$1-2 |
+| TwitterAPI.io (feed collection) | $5 |
+| Contabo VPS (server) | $6.36 |
+| **Total** | **~$33** |
+
+That's the full cost of running a production AI agent that monitors social feeds, writes content, manages a blog promotion schedule, and reports to me daily via Telegram. Compare that to the $200+ I was spending on Claude API, or the $500+ it would cost on GPT-4o pricing.
+
+## When You Can't Use a Subscription: Model Routing
+
+Not everyone can switch to a subscription model. If your workload exceeds subscription limits, if you need specific model capabilities, or if you're running enterprise infrastructure, you're stuck with per-token pricing. That's where model routing matters.
+
+The concept is simple: don't send every prompt to your most expensive model. Route simple tasks to cheap models and complex tasks to expensive ones.
+
+**Cascade routing** sends a prompt to the cheapest model first. If the output fails a quality threshold, escalate to the next model. Stanford's FrugalGPT demonstrated up to 98% cost reduction using this approach while matching GPT-4 accuracy. The trade-off is latency: complex tasks require multiple API calls.
+
+**Classification-based routing** uses a lightweight classifier to predict which model each task needs. RouteLLM from LMSYS achieved 85% cost reduction on MT Bench while maintaining 95% of GPT-4's performance. On other benchmarks the savings were lower (35-45% on MMLU and GSM8K), but still significant.
+
+**Rule-based routing** is the simplest approach and works well for solo developers. Three rules cover most cases:
+
+1. If the prompt is under 500 tokens and involves simple formatting or extraction: route to the cheapest model
+2. If the prompt involves code generation or complex analysis: route to the flagship model
+3. Everything else: route to a mid-tier model
+
+AWS Bedrock now offers Intelligent Prompt Routing as a managed service, automatically selecting the cheapest model that meets your quality bar. Their testing showed 30% average savings, with up to 63% on RAG workloads. If you're already on AWS, it's the lowest-effort option.
+
+## The Real Lesson: Question the Default
+
+The model pricing landscape in 2026 spans a 100x range. Premium reasoning models like o1 and Claude Opus charge $5-15 per million input tokens. Flagship models like GPT-4o and Sonnet 4.6 run $2.50-3. Efficient models like GPT-4o-mini and Gemini Flash charge $0.15-0.60. And subscription models like MiniMax offer flat-rate pricing that sidesteps the per-token game entirely.
+
+Most developers pick one model and never question it. They send every prompt to GPT-4o or Claude Sonnet because it's safe. That's like driving everywhere in a Ferrari when a Honda gets you there.
+
+My journey from $200/month to $20/month wasn't about clever engineering. It was about challenging the assumption that I needed expensive models. I didn't. MiniMax M2.5 handles my production workload at a fraction of the cost. The quality difference for my use case is negligible.
+
+Before you build a routing system, ask a simpler question: do you actually need the expensive model? Test a cheaper alternative on your real workload. You might find that 90% of your tasks don't need frontier capabilities. The remaining 10% can use the expensive model on demand.
+
+The goal isn't to optimize spending on AI. It's to stop overspending on capability you don't use.
