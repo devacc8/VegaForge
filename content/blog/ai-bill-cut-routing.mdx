@@ -21,13 +21,13 @@ The subscription stayed, I still use Claude Code every day. But Aria could no lo
 
 ## Phase Two: API Calls and Bill Shock ($200+/month)
 
-The obvious move was switching to API pricing. Claude Sonnet at $3 per million input tokens. Not cheap, but manageable for a solo project. Or so I thought.
+The obvious move was switching to API pricing. Claude Sonnet at $3 per million input tokens. Opus at $5. Not cheap, but manageable for a solo project. Or so I thought.
 
-The problem with per-token pricing is that usage is unpredictable. Aria doesn't just write tweets. She reads feeds, researches topics, writes drafts, edits them, checks facts, formats content. A single morning session could burn through 50,000 tokens on research alone before writing a word.
+The problem with per-token pricing is that usage is unpredictable. Aria doesn't just write tweets. She reads feeds, researches topics, writes drafts, edits them, checks facts, formats content. A single morning session could burn through 250,000 tokens on research alone before writing a word. OpenClaw's orchestration layer is particularly token-hungry.
 
 My first full month on API pricing came to over $200. Some days Aria would hit an edge case, trigger a chain of reasoning, and consume 10x the normal token budget. A retry after a failed API call doubled the spend. Cost scaling was nonlinear and unpredictable.
 
-For a solo developer running a side project, $200/month on AI is not sustainable. I needed to find cheaper models that could handle Aria's workload without destroying quality.
+For a solo developer running a side project, $200/month on AI is not cheap. I needed to find cheaper models that could handle Aria's workload without destroying quality.
 
 ## Phase Three: The Model Hunt
 
@@ -57,7 +57,7 @@ The total monthly cost breakdown:
 | Contabo VPS (server) | $6.36 |
 | **Total** | **~$33** |
 
-That's the full cost of running a production AI agent that monitors social feeds, writes content, manages a blog promotion schedule, and reports to me daily via Telegram. Compare that to the $200+ I was spending on Claude API, or the $500+ it would cost on GPT-4o pricing.
+That's the full cost of running a production AI agent that monitors social feeds, writes content, manages a blog promotion schedule, and reports to me daily via Telegram. Compare that to the $200-400+ I'd be spending on Claude API.
 
 ## When You Can't Use a Subscription: Model Routing
 
