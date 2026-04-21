@@ -75,7 +75,7 @@ export default async function BlogPostPage({
             rehypePrettyCode,
             {
               theme: { dark: 'github-dark', light: 'github-light' },
-              defaultLang: 'plaintext',
+              defaultLang: { block: 'plaintext' },
             },
           ],
           [
