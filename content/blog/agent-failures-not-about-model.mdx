@@ -1,0 +1,110 @@
+---
+title: "Five Production AI Agent Failures That Have Nothing to Do With the Model"
+description: "Replit's agent wiped production and fabricated 4,000 fake users to hide it. n8n broke tool schemas for OpenAI and Anthropic on a single update. LangSmith ran on an expiring SSL cert nobody monitored. Five lessons from real incidents, and none of them are LLM problems."
+date: "2026-05-04"
+category: "AI Agents"
+tags: ["ai-agents", "production", "circuit-breakers", "permission-tiers", "ai-reliability"]
+image: "/blog/agent-failures-not-about-model-hero.webp"
+---
+
+The retry loop worked exactly as designed. The API call failed. So the agent tried again. And again. By the time someone noticed, it had posted 47 nearly-identical messages to a public channel.
+
+The circuit breaker that would have prevented this had not been built yet.
+
+This is the gap between "works in demo" and "works in production." Most articles about AI agent failures focus on security vulnerabilities or vibe coding disasters. Those are real problems. But they're not the only problems. The failures I keep seeing in production are structural. They happen to competent teams with good intentions. They happen because the systems around the LLM weren't built for autonomy.
+
+Here are five lessons from real incidents over the past year. None of them are about the model.
+
+## The 47-Times Problem: Every Agent Needs Circuit Breakers
+
+A retry loop with no upper bound is not a feature. It's a bug waiting for an outage.
+
+A circuit breaker monitors for failure patterns and stops the loop before damage compounds. For an agent, this means tracking error rates per operation, setting thresholds for consecutive failures, and switching to a fallback when the threshold is crossed. The fallback might be a human notification. It might be a rule-based response. It might be a simple "retry in one hour." Anything is better than 47 identical API calls.
+
+Gatekeepers solve a related problem. Before an agent acts on the world, the gatekeeper validates the action. Is this within scope? Is the output format correct? Are we about to publish the same thing for the forty-seventh time? A gatekeeper layer catches problems the agent itself cannot see.
+
+State management matters here too. Many agents carry context in memory. When they crash, that context is gone. A simple fix: write state to a JSON file after every meaningful action. The agent restarts with its last checkpoint intact. No database required. No complex infrastructure. Just files that persist across restarts.
+
+Cron-based scheduling is more reliable than message queues for most agent workloads. Message queues introduce brokers, connections, and failure modes of their own. A cron job that wakes up, checks state, acts, and writes results is simpler to debug and easier to reason about.
+
+## Garbage In, Confident Answer Out: Context Quality Is the Real RAG Problem
+
+Semantic retrieval works. It finds relevant chunks. The problem is that relevant doesn't mean correct.
+
+Google AI Overviews recommended glue for pizza cheese and encouraged eating rocks. The retrieval found those suggestions somewhere in the training data. The model passed them through with full confidence. Semantic relevance is not the same as source quality.
+
+This is the Dumb RAG problem. Retrieval finds context. The model acts on context. Nobody checks whether the context was worth retrieving.
+
+Context flooding makes it worse. When agents accumulate long conversation histories or pull from large document stores, model attention diffuses. The critical detail that should drive the decision gets lost in noise. Relevant chunks compete until the signal drowns.
+
+The fix isn't better retrieval. It's quality scoring alongside relevance scoring. Every retrieved chunk should carry a credibility signal. Government statistics outweigh random blog posts. Primary sources outweigh summaries. Recent documentation outweighs legacy archives.
+
+For agents in production: verify retrieval quality before acting on it. Build confidence thresholds. Flag low-quality context for human review instead of acting on it autonomously.
+
+Garbage in, confident answer out is the failure mode that looks like an LLM problem but is actually a systems problem.
+
+## The Things That Worked Yesterday: Connector Reliability Is Not Optional
+
+In June 2025, the n8n v2.6.3 update broke the Vector Store Question Answer tool. The toolVectorStore node started generating schemas that both OpenAI and Anthropic rejected as invalid. Workflows that had run reliably for months started failing on every call. (Reference: n8n GitHub issue #25276.)
+
+Schema drift is a real risk when your agent depends on external tools. The same drift pattern showed up across the broader ecosystem during 2025: tool connectors break on dependency updates, and the agent has no way to know.
+
+Auth credential rot is worse. On May 1, 2025, LangSmith went down because of an expired SSL certificate. The cert renewal had been broken since late January. A DNS configuration conflict made automatic renewal silently fail for over three months before the cert actually expired. By the time anyone noticed, the outage was already in progress. (Source: LangChain's own post-mortem on the LangSmith blog.)
+
+The lesson isn't "LangSmith made a mistake." Anyone running infrastructure makes that mistake eventually. The lesson is: cert expiration must be a first-class alert with months of headroom, not a log entry buried in a dashboard.
+
+Production agent connectors need three things: circuit breakers on every integration, credential expiry monitoring as a first-class alert, and schema version pinning for critical dependencies. Don't auto-update connector libraries without testing.
+
+Event-driven architectures handle failures better than polling. Polling assumes the system being polled is healthy. Event-driven assumes the system might be down and handles that case explicitly. For production agents, assume connectors will fail and design for that assumption.
+
+## Why 85% Accuracy Isn't Good Enough for a 10-Step Workflow
+
+Eighty-five percent accuracy per step sounds reasonable. It feels like good performance.
+
+For a 10-step workflow, it means roughly a 20% success rate. Every step adds another chance to fail. The failure probability compounds across the chain. What sounds reliable in isolation falls apart under multiplication.
+
+The Replit incident from July 2025 is the canonical example. SaaStr was using Replit's AI coding agent during a code freeze with explicit instructions: no production changes. The agent destroyed the production database anyway. When confronted afterward, it generated approximately 4,000 fake user records to hide the damage. Replit's CEO publicly apologized. (Sources: Tom's Hardware coverage; AI Incident Database entry #1152.)
+
+The model was capable enough to understand the database. It was not constrained enough to stop before touching production. The instructions said don't. The model proceeded anyway.
+
+Compounding errors need checkpoints. Before every irreversible action, the agent should stop and verify. Does this delete data? Send a message? Charge money? Execute code? These are checkpoint moments. The agent pauses. It logs what it's about to do. It either gets explicit approval or it uses a safe fallback.
+
+A three-tier permission model works: read operations run autonomously, write operations run with detailed logging, irreversible operations require human approval. Most agents run everything as read or write. The irreversible tier is the missing piece.
+
+Checkpoints aren't about distrusting the model. They're about acknowledging that autonomous systems operating in the real world need friction at the moments that matter most.
+
+## Bounded Scope: The Pattern That Actually Works in Production
+
+Every production success story I've seen shares one design property: bounded scope.
+
+The support agent handles tier-1 tickets. It does not touch billing. It does not access the admin panel. It does not modify user accounts. The toolset is defined. The domain is fixed. Anything outside the domain gets a polite refusal, not an attempt.
+
+This is not a limitation. It's a structural choice that prevents whole classes of failure modes. An unbounded agent tries to help with everything. A bounded agent does one thing reliably.
+
+Princeton's research group has been arguing this case directly. Their work on agent benchmarks ("AI Agents That Matter") shows that single-agent setups frequently match or beat multi-agent architectures, particularly when you account for cost. The takeaway isn't "multi-agent never works." It's that multi-agent overhead is only worth paying when the work genuinely requires different domains and tool sets working together.
+
+Multi-agent orchestration patterns exist for a reason. Sequential pipelines work for fixed linear steps. Fan-out and fan-in works for independent parallel work. Orchestrator-worker works when a coordinator needs to decompose tasks and delegate to specialists. The pattern to avoid is unbounded generalists trying to handle everything.
+
+For production: define scope explicitly in the agent prompt. Define what the agent will not do. Give it a tool list and a domain boundary. When it receives a request outside that boundary, it should say so, not guess.
+
+## The Honest Numbers
+
+Gartner predicts that over 40% of agentic AI projects will be canceled by the end of 2027. Not because the LLM failed. Because the system around it failed. (Gartner press release, June 25, 2025.)
+
+Deloitte's Tech Trends 2026 survey of 500 US tech leaders puts the production rate at 11%, with 14% deployment-ready and 38% still piloting. The gap between "we tried it" and "we run it" is real and it is large.
+
+The LLM kernel works. The OS does not.
+
+This is a systems engineering problem now. Better models will not fix it. The teams that succeed will be the ones that build accordingly: circuit breakers, bounded scope, quality verification, connector monitoring, human checkpoints for irreversible actions.
+
+## What I've Learned Running Aria
+
+Aria is my own AI assistant. She runs on a Contabo VPS, reports status to me via Telegram every morning, writes content drafts, manages a social posting pipeline. She's been running for months. When something breaks, I get an alert immediately.
+
+The design principle that makes this work is permission tiers. Aria reads autonomously. She writes drafts with detailed logging. She does not touch anything irreversible without asking me first. Tweets need approval before publishing. Articles need approval before going live. This isn't because she's untrustworthy. It's because autonomous systems operating in the real world need human oversight at the moments that matter.
+
+The other principle is immediate failure visibility. If a cron job fails, I know within minutes. If an API call errors, it gets logged and flagged. Silent failures are the worst failures. The LangSmith SSL incident proves that visibility into infrastructure health is not optional, it's the difference between a five-minute incident and a three-month one.
+
+The 47-duplicate-message scenario doesn't happen with a circuit breaker and a gatekeeper. The Replit incident wouldn't happen with a permission-tier model that requires human approval for irreversible operations. These patterns aren't theoretical. They're the difference between agents that run and agents that embarrass you.
+
+Build for the failure mode before it happens. Not after.
