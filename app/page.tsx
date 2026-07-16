@@ -78,7 +78,7 @@ export default function Home() {
                   The old model (PM designs, developer codes) no longer works. AI accelerated development dramatically, but created a new problem: teams need people who understand both <em className="text-neutral-800 dark:text-neutral-200 not-italic">what</em> to build and <em className="text-neutral-800 dark:text-neutral-200 not-italic">how</em>.
                 </p>
                 <p>
-                  I combine both skills. 7 years in development, 5 in Solidity and web3. Worked in startups where there's no luxury of separating roles. Took product management courses. Won Ethereum hackathons.
+                  I combine both skills. 7 years in development, 5 in web3 across EVM and Solana. Worked in startups where there's no luxury of separating roles. Took product management courses. Won Ethereum hackathons.
                 </p>
                 <p>
                   Latest project: <a href="https://basepaint.market" target="_blank" rel="noopener noreferrer" className="text-forge-600 dark:text-forge-500 hover:text-forge-500 dark:hover:text-forge-400 transition-colors">basepaint.market</a>. I noticed BasePaint collectors had nowhere to sell complete year collections (365 NFTs). OpenSea and Blur don't support atomic bundle trades. I designed the solution, wrote the smart contract, backend, frontend, conducted an audit, launched to mainnet. Solo.

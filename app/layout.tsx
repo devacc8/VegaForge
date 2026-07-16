@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'VegaForge — Product-Minded Fullstack Developer | Web3 & Solidity',
-  description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Solidity and Web3. Building products end-to-end: smart contracts, backend, frontend.',
-  keywords: ['developer', 'solidity', 'react', 'next.js', 'web3', 'blockchain', 'product', 'fullstack', 'smart contracts'],
+  title: 'VegaForge — Product-Minded Fullstack Developer | Web3, EVM & Solana',
+  description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Web3 across EVM and Solana. Building products end-to-end: smart contracts, backend, frontend.',
+  keywords: ['developer', 'solidity', 'rust', 'solana', 'anchor', 'react', 'next.js', 'web3', 'blockchain', 'product', 'fullstack', 'smart contracts'],
   authors: [{ name: 'Alex Vega' }],
   metadataBase: new URL('https://vegaforge.dev'),
   alternates: {
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'VegaForge — Product-Minded Fullstack Developer | Web3 & Solidity',
-    description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Solidity and Web3. Building products end-to-end.',
+    title: 'VegaForge — Product-Minded Fullstack Developer | Web3, EVM & Solana',
+    description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Web3 across EVM and Solana. Building products end-to-end.',
     url: 'https://vegaforge.dev',
     siteName: 'VegaForge',
     locale: 'en_US',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'VegaForge — Product-Minded Fullstack Developer',
-    description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Solidity and Web3.',
+    description: 'Fullstack developer with product thinking. 7+ years in development, 5+ in Web3 across EVM and Solana.',
     creator: '@vvegalex',
     images: ['/og-image.png'],
   },
@@ -72,12 +72,12 @@ const jsonLd = {
       name: 'Alex Vega',
       url: 'https://vegaforge.dev',
       jobTitle: 'Fullstack Developer',
-      description: 'Product-minded fullstack developer with 7+ years in development, 5+ in Solidity and Web3.',
+      description: 'Product-minded fullstack developer with 7+ years in development, 5+ in Web3 across EVM and Solana.',
       sameAs: [
         'https://x.com/vvegalex',
         'https://github.com/devacc8',
       ],
-      knowsAbout: ['Solidity', 'React', 'Next.js', 'Web3', 'Blockchain', 'Smart Contracts', 'DeFi'],
+      knowsAbout: ['Solidity', 'Rust', 'Solana', 'Anchor', 'React', 'Next.js', 'Web3', 'Blockchain', 'Smart Contracts', 'DeFi'],
     },
   ],
 }
