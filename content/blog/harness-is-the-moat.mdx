@@ -1,0 +1,114 @@
+---
+title: "The Model Is the Commodity. The Harness Is the Moat."
+description: "Everyone rents the same model from the same API, so the model isn't your advantage. The moat is the harness around it: deterministic CLI tools, curated context, state, and guardrails you build yourself. Why prompt engineering was the shortest-lived job in tech, and why a third of my project is harness the model never wrote for me."
+date: "2026-07-29"
+category: "AI Harness"
+tags: ["harness-engineering", "context-engineering", "ai-agents", "determinism", "ai-tools"]
+image: "/blog/harness-is-the-moat-hero.webp"
+---
+
+I recently came across an [article by Eyad Khrais (@eyad_khrais)](https://x.com/eyad_khrais/status/2069552027382980882) on harness engineering. It's a good explanation. The model is the brain of an agent. The harness is the body. You call the brain through an API. The body you have to build yourself.
+
+All true. But the body isn't the whole picture. A body on its own does nothing. The value is in the tools it wields. It's the hands that pick up the right tool and do the work correctly.
+
+Over the past year I've felt this on my own project. And my conclusion is harder than "give the body some hands."
+
+## The model is the same for everyone
+
+Everyone calls the same API. Your advantage isn't in the model. It's in the context and the tools around it. That's the moat.
+
+The most valuable part of the harness is the deterministic tools built for your project. CLI commands, essentially. Anything that repeats should become a command. Not a prompt the agent reassembles from scratch every time.
+
+I keep this rule right in the project manifest. If you do something a second time by hand through the AI, move it into the CLI.
+
+## The prompt got thin
+
+Here's the uncomfortable conclusion. Prompt engineering turned out to be the shortest-lived job in tech.
+
+Not because the prompt doesn't matter. The leverage moved. The shift even has a name. In the summer of 2025, Tobi Lütke and [Andrej Karpathy](https://x.com/karpathy/status/1937902205765607626) cemented the term "context engineering." [Gartner](https://www.gartner.com/en/articles/context-engineering) put it bluntly: context engineering is in, prompt engineering is out.
+
+Karpathy's analogy is simple. The model is a CPU. The context window is RAM. The whole job is what you load into it. The old skill was phrasing a request cleverly. Now the prompt is thin. What has to be thick is the context and the harness built for your project.
+
+Given the right context, the model reaches for the right CLI command on its own. And gets a predictable result. Without context, it improvises. That's where the randomness starts.
+
+On my own project I barely touch the prompt anymore. All the work went into context and tools.
+
+## Context isn't thick, it's curated
+
+Here's the trap. "Thick context" doesn't mean loading everything you have.
+
+Chroma ran 18 models on long inputs. Quality drops as the context grows. Long before the window is full. They called it "context rot." A 200k window can start drifting at 50k.
+
+So the harness's job isn't "give the model everything." It's ["give it exactly what this step needs."](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) Sometimes that's just a list of what exists. The model picks what it needs for the situation. Process the output, choose the next step.
+
+## Determinism vs hallucination
+
+Here's a typical breakage I run into often. You ask the agent to pull some data. The first time it grabs the right fields. The second time it drops half of them and pulls in extras. The answer is a little different every time.
+
+The model produces a wrong call with exactly the same confidence as a right one. To the model it's just text. And even when you get a correct result, you don't know whether to trust it. Re-running the check can return a new number.
+
+It hurts most with financial data. My project is built around it. A big database, constant work with numbers. Without a harness, it's a field of errors. A simple "calculate the profit" gives a different answer every time. With a harness it's always the same one. And accurate. Assuming the code is correct, of course.
+
+The research says the same thing, just drier. A constraint in the prompt stays probabilistic. "Try not to repeat yourself" is a rule the model will break. A constraint in code is definite. `if id in used` can't be bypassed. That's why counting, sorting, and rule-checking [get moved out of the model and into code](https://arxiv.org/pdf/2508.02721). An LLM fails even simple arithmetic inside a long task. The conclusion is simple. The less the model computes itself, the less chance it has to lie.
+
+The CLI is exactly this move: work taken out of the model's head and put into code. The correct query is written once. The model doesn't reassemble the logic on the fly. It orchestrates proven tools.
+
+## It costs a third of the project
+
+It doesn't come free. On my project the harness took about a third of the total complexity. A third the model didn't write for me.
+
+Is it worth it? More than worth it. The harness raises the accuracy of the whole system. Proven tools take over the deterministic work. The model leans on its own reasoning less in the places where a mistake is expensive.
+
+And there are domains where a mistake is truly expensive. Finance. Medicine. Law. You can't ship "the model probably got the math right" to production there. Would you trust that with your own money? I wouldn't. A full project harness there isn't a luxury. It's the condition for shipping at all.
+
+## When to build a tool, and when not to
+
+How do you know it's time? A simple rule. The third time you do it by hand through the AI, it's a command.
+
+A good tool doesn't look like an API for a developer. It looks like a tool for an agent. I arrived at these rules on my own, the hard way. Then I saw that [Anthropic](https://www.anthropic.com/engineering/writing-tools-for-agents) described the exact same thing:
+
+- **Narrow.** One job. Clear inputs and outputs.
+- **Deterministic.** The same input gives the same output.
+- **Legible to the model.** A clear name, description, and example. The response doesn't flood the context (Claude Code truncates a tool's response at 25k tokens).
+- **Grouped.** Shared prefixes (`db_get`, `db_write`) so the model doesn't get lost among similar ones.
+- **Guarded.** Validation before execution. Limits, permissions. Anything dangerous goes to a human.
+
+They have a good formula. Put as much effort into the interface for the agent as you put into the interface for a human. And the key line: an agent is only as good as its tools.
+
+And the reverse. Not everything that moves deserves a CLI. A one-off task won't pay back the tool. Otherwise you drown in commands nobody calls. Every so often I do a cleanup and cut the excess. The AI helps with this itself. It's great at telling you what's rarely used and what could be improved.
+
+## Won't smarter models just eat this?
+
+Fair question. And there's a strong objection. Richard Sutton, ["The Bitter Lesson":](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) hand-built structure always gets washed away by scale in the end. The model gets smarter and does on its own what you used to hard-wire by hand. It's reasonable to assume the harness won't be needed one day either.
+
+It's a serious objection, and I won't wave it away. Manus rewrote its scaffolding four times as the models grew. Some of the work really does depreciate over time.
+
+But not all of it. Coordination, state, error recovery, access control. These [aren't reasoning problems](https://medium.com/@epappas/the-agent-harness-is-the-architecture-and-your-model-is-not-the-bottleneck-5ae5fd067bb2) the model will "figure out." They're infrastructure. Something has to hold them, and that something is the harness.
+
+Plus models are uneven. The economist Joshua Gans [called it](https://www.econlib.org/econlog/learning-the-bitter-lesson-in-2026/) "jagged intelligence." A great result on one request, confidently wrong on the next. Scale doesn't cure that. Which means in expensive domains you still wrap the model in checks and tools. You can't trust the benchmark when money is on the line.
+
+So yes. Part of the harness will melt away as models grow. But determinism, state, and project context will stay. This isn't a crutch for a weak model. It's simply how reliable systems get built.
+
+And one more benefit, purely practical. A harness is automation. Gather the data, process it, hand it to the model ready to use. That saves tokens and speeds things up. Yes, the model could do it itself. But why wait and pay more when the automation is nearly free?
+
+## What stays with the model, what goes to the harness
+
+A simple split I use.
+
+![Model vs harness: what stays with the model (language, judgment, ambiguity, planning from a fuzzy task) versus what you build into the harness (computation, rules, state, memory, actions in the world, anything that must be identical every time). The model proposes; the harness verifies and executes.](/blog/harness-is-the-moat-diagram.webp)
+
+The model: language, judgment, ambiguity, a plan out of a fuzzy task.
+
+The harness: computation, rules, state, memory, actions in the world. Anything that has to be identical every time.
+
+The model proposes. The harness verifies and executes. If something has to be right, it doesn't go through the model's free reasoning.
+
+## Where this is heading
+
+Models are becoming interchangeable. Swapping one for another mid-task is already real. And once the model is swappable, the advantage drains into what surrounds it. Into the body. The hands. The tools. The memory and context.
+
+The "prompt engineer" role is fading. What remains is the person who builds the project harness, the memory, and the context. And the more accuracy matters, the larger the share of the project this work takes.
+
+That's my bet. I invest in the hands, not in chasing the perfect model.
+
+The brain you can rent from anyone. The hands you'll have to build yourself.
