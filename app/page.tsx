@@ -174,7 +174,7 @@ export default function Home() {
               {/* Stats grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 py-6 border-y border-neutral-200 dark:border-neutral-800">
                 <div>
-                  <p className="font-display font-bold text-2xl text-neutral-900 dark:text-white">2,342</p>
+                  <p className="font-display font-bold text-2xl text-neutral-900 dark:text-white">3,767</p>
                   <p className="text-xs text-neutral-500">Automated Tests</p>
                 </div>
                 <div>
@@ -546,7 +546,7 @@ export default function Home() {
               </h3>
               <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
-                  AI generates code, but doesn't understand context. Who verifies the smart contract has no reentrancy vulnerabilities? Who chooses the right pattern (escrow vs approval-based)? Who writes 2,342 tests including fuzz tests for edge cases?
+                  AI generates code, but doesn't understand context. Who verifies the smart contract has no reentrancy vulnerabilities? Who chooses the right pattern (escrow vs approval-based)? Who writes 3,767 tests including fuzz tests for edge cases?
                 </p>
                 <p>
                   AI is a tool. You need someone who knows <em className="text-neutral-800 dark:text-neutral-200 not-italic">what</em> to check and <em className="text-neutral-800 dark:text-neutral-200 not-italic">why</em>.
