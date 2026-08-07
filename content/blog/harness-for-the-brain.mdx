@@ -1,0 +1,112 @@
+---
+title: "A Harness for the Brain: Why Atomic Habits Is a Book About Agent Engineering"
+description: "An agent is a model plus a harness, and after a year of building scaffolding around a probabilistic system, I caught myself describing my own brain. Atomic Habits is not a book about motivation. It is a manual on engineering the harness around human intelligence, written a decade before the term reached AI."
+date: "2026-08-07"
+category: "AI Harness"
+tags: ["harness-engineering", "agent-engineering", "atomic-habits", "habits", "productivity"]
+image: "/blog/harness-for-the-brain-hero.webp"
+---
+
+## 1. The harness, briefly
+
+By 2026, most people working closely with AI have landed on the same conclusion: chasing a better model has mostly stopped paying off. What you build around it does. An agent is a model plus a harness. The model proposes the next action and is probabilistic by nature; the harness is everything around it: the tool registry, context management, execution loops, schema validation, permissions, logs, mandatory stopping points. You do not train the model, you take it as it comes, so all of your actual work is the harness.
+
+I wrote about [this in more detail earlier](https://vegaforge.dev/blog/harness-is-the-moat).
+
+I am not saying this from the sidelines. I have a project in finance, analysis and forecasting, and there the harness is not a support layer but the foundation. Thirty, sometimes forty percent of the total effort goes not into functionality but into the scaffolding around it: commands, checks, audits, logs, the places where the system is required to stop and show itself. For the first year this felt like overhead. I see it differently now. The scaffolding is the project. What I used to call the real work does not reproduce twice in a row without it.
+
+The point of a harness is not to make the model smarter. The point is to reduce variance. Every piece of the harness moves one decision out of the probabilistic domain and into the deterministic one. A linter does not ask the agent to keep the style intact, it stops the commit. A tool schema does not remind the model about a required field, it rejects the call. A checklist in an instruction file does not motivate, it supplies the next step at exactly the moment the context has already drifted. A good harness turns "usually does it" into "does it every time".
+
+The same angle is worth applying to MCP, because this is where I keep seeing a substitution. MCP solves access: one protocol for mail, calendar, database, files. That is convenient. But a connected server does not reduce variance on its own, it increases it. Now you have twenty tools, and at every step the model probabilistically decides which one to reach for, with what arguments, and when to stop.
+
+Bare MCP is not a harness. It is an expansion of the action space. The harness begins where that space gets its boundaries: which tools are visible at the current step and which are hidden; what is validated before the call rather than after; what requires human confirmation; what the call budget is and what happens when it runs out; what gets logged in a way that later lets you find where things actually came apart.
+
+Birgitta Böckeler of Thoughtworks offers a useful split. There is the inner harness, the one your vendor handed you (an SDK, an agent runtime, a tool like Cursor), and the outer harness, the one you assemble on top: instruction files, MCP servers, your own skills. And a second, even more useful split: guides, which steer the agent before it acts, and sensors, which observe the result afterward and let it correct itself. Either can be computational (a test, a linter, a hard check) or inferential (an LLM as judge). Hold on to that pair, guides and sensors. In a minute it will be needed for something other than agents.
+
+## 2. The turn
+
+But I am not writing this to reason about harnesses one more time. I am writing it for an unexpected parallel that seems more correct to me the longer I think about it.
+
+When you spend enough time designing scaffolding, your optics change. You stop thinking in terms of "the model should pay closer attention" and start thinking in terms of "where is the point at which this comes apart, and what can I put there so the decision does not have to be made at execution time". That turns into a fairly stable habit of mind, and at some point I caught myself looking at my own day through it.
+
+All that time I had been building scaffolding around a probabilistic system that gets lazy, forgets, and cuts corners. Then I noticed I was describing myself.
+
+Our brain is a probabilistic machine too, and its failure modes are suspiciously familiar.
+
+It conserves energy. Around two percent of body mass and around twenty percent of consumption. The default mode is not to think. What we call laziness is largely just optimization for cost.
+
+It loses context. Working memory holds a handful of items. Anything not written down washes out exactly the way the contents of a context window wash out.
+
+It cuts corners. Heuristics instead of calculation. Fast and usually fine, but with a consistent bias.
+
+It misreports results. We honestly remember that we "sort of figured it out", even though nothing was verified. Confidence and accuracy are only loosely related in us.
+
+And the main thing: none of this is fixed by willpower. In exactly the same way that "please be more careful" in a prompt does not work. That is not an engineering solution, that is hope. What works is the same thing that works with agents: move the decision out of your head and into the environment, so that the right action does not require a decision.
+
+What made this uncomfortable is that I had been doing half of these things intuitively for years. I just did not count them as engineering. I counted them as discipline, and when they failed I got angry at myself instead of fixing the scheme.
+
+## 3. Atomic Habits as a manual on scaffolding
+
+I read Atomic Habits long before I started building agent systems, and I remembered it as a pleasant book about self-discipline. Rereading it after a year of harness work is a completely different experience. It is not a book about motivation. James Clear wrote a manual on engineering the scaffolding around human intelligence about a decade before the term showed up in AI. He just called it habits.
+
+His four laws, once you strip away the pop-psychology delivery, are four engineering techniques.
+
+![Atomic Habits techniques mapped to their agent-harness equivalents: make it obvious becomes a trigger, make it attractive and satisfying becomes reward shaping and a sensor, make it easy becomes one command instead of six steps, habit stacking becomes a pipeline, never miss twice becomes a recovery policy, identity over goals becomes the system prompt. Move the decision out of your head and into the environment.](/blog/harness-for-the-brain-diagram.webp)
+
+**Make it obvious.** This is the trigger. In an agent harness it is the hook that fires on an event and supplies the right context. For a human it is an object placed in plain sight.
+
+For me this became a working principle a long time ago: whatever I intend to do gets physically placed in view and within quick reach. Not as a reminder, but as a cocked trigger that fires without conscious involvement. There is similar logic in Japanese daruma dolls: when you set a goal you fill in one eye, and you fill in the second only after the goal is reached. The whole time, an unfinished face sits there and reminds you of itself precisely by being unfinished. The carrier of the goal has been moved out of your head and into the room.
+
+The formalized version of the same technique is the implementation intention: a plan of the form "if situation Y, then I do X". The technique has been tested many times. Gollwitzer and Sheeran pooled 94 studies and the result is consistent: people who wrote down an if-then in advance followed through noticeably more often than people who simply decided they "should". The reason is the same one that makes it work in code. At the moment it matters, the decision has already been made, and it does not have to be made again.
+
+**Make it attractive and satisfying.** This is reward shaping and observability. A mark in a habit tracker does not force anything, it makes the result visible. Which makes it exactly the sensor from part one, the same thing as a metrics dashboard for an agent.
+
+**Make it easy.** This is lowering the cost of invocation. The two-minute rule shrinks a task to the size where the entry barrier sits below the threshold of resistance. In a harness, the same thing: one terminal command instead of six manual steps. Not because six steps are hard, but because every step is a separate point of failure.
+
+**Habit stacking** ("after X I do Y") is a pipeline. A chain where the result of one step is the trigger for the next, with no room for a decision in between.
+
+**Never miss twice** is a recovery policy. Not flawless execution, but a bound on the length of a failure. The empirical record is on Clear's side here: in Lally's data, missing a single day barely affected the habit formation curve.
+
+**Identity over goals** ("I do not want to run a marathon, I am a runner") is the system prompt. Not a task, but a frame from which the individual decisions get derived.
+
+The mapping is fairly precise. Guides and sensors, computational and inferential, all of it is there.
+
+## 4. Where the analogy breaks
+
+And here I want to slow myself down, because it is easy to run off into a beautiful but useless metaphor. The analogy breaks in at least three places, and all three matter.
+
+First. You write scaffolding for an agent in an evening and it works on the first run. A habit deploys slowly and unreliably. In Lally's study the median time to automaticity was 66 days, with a range from 18 to 254. And the inconvenient part: over twelve weeks, roughly half the participants reached automaticity. Half did not. Deploying scaffolding into a brain is a long process with a high failure rate, and it should be planned accordingly.
+
+Second. Scaffolding does not transfer. You cannot copy someone else's set of habits the way you copy their agent instruction file. Or rather you can copy it, but it will behave differently in you.
+
+Third, and to me the most substantial. Building scaffolding is more pleasant than working.
+
+This is the flip side of those thirty percent from the beginning of the article. In the same system I built fifty-odd analytics commands, dozens of audits, thousands of tests. Every one of those things was needed. And at some point the whole construction became a way of not looking at the one question that decides the fate of the project: does the strategy have an edge at all.
+
+Infrastructure has an unpleasant property. It can always be slightly better. There is always one more test, one more command, one more check. And each one feels like productivity, because it leaves behind a measurable artifact, unlike work on the substance, where there may be no artifact for weeks. Personal systems work exactly the same way. The person who has spent three months cycling through task managers instead of doing the thing is not lazy. He is building scaffolding. The scaffolding just became the goal.
+
+From the inside, a foundation and a hiding place look identical. Both feel like productive work. The only way to tell them apart is to ask whether this particular piece of scaffolding removes variance from the real work, or no longer does.
+
+## 5. What to do with this
+
+The practical frame is simple. Take something you are supposed to do regularly but do not, and instead of a conversation about motivation, ask three engineering questions.
+
+Where is the trigger. Not "when I remember", but a specific event in the environment or a preceding action. If there is no trigger, you are relying on a system that conserves energy. It will not remember.
+
+Where is the sensor. What makes the result visible without effort. If you cannot answer within five seconds whether you did it last week, there is no sensor.
+
+What does the first step cost. If it is more than two minutes, cut it. Not because you are weak, but because every second of resistance is a point at which a probabilistic system can pick a different path.
+
+And a limiter on top. If building the system took more time than the system has saved, you are no longer building scaffolding. You are procrastinating with good taste.
+
+## 6. In closing
+
+Two things determine the quality of the work: the system itself, and what is built around it.
+
+With agents this is obvious, because the model is not yours. You do not train it, you take it as it comes, and so all of your work is the scaffolding.
+
+With ourselves we somehow do the opposite. We try to improve the system itself: become more disciplined, more focused, smarter. That is the most expensive and least reliable part.
+
+The scaffolding is cheaper. An object in plain sight, an if-then on paper, a checklist on the wall, one command instead of six steps.
+
+We will not start working flawlessly. But we can make ourselves fail less often.
