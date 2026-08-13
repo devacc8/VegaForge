@@ -1,0 +1,86 @@
+---
+title: "The Claude I Stopped Understanding"
+description: "Anthropic began watermarking everything Claude writes, and at the same moment Opus 5 became physically hard to read. Here is what actually broke, why the watermark theory falls apart, why the boring explanation is worse for Anthropic, and why I am moving my work to open Chinese models."
+date: "2026-08-13"
+category: "AI Models"
+tags: ["claude", "anthropic", "watermarking", "llm-quality", "open-weights"]
+image: "/blog/claude-i-stopped-understanding-hero.webp"
+---
+
+## The short version
+
+By now everyone has heard about it and talked it over: Anthropic announced that a watermark is being embedded into everything Claude writes. Since August 2, an invisible mark goes into every text Claude produces, and it does not live at the level of invisible characters that any third-party editor strips out, or in metadata sitting next to the file. It is a statistical signal inside the words themselves. Something like that survives copying, pasting, and even a fair amount of editing. The only way to kill it is a serious rewrite.
+
+The mechanism was not disclosed. No parameters, no detector, no technical documentation. There is a statement from the company, and even in it they partially admit that the mark affects the meaning, quality, and style of the text.
+
+Meanwhile Opus 5, the flagship, the best model on the benchmarks, has become something you physically struggle to work with. Everybody noticed. And it is possible that these two events are connected.
+
+## What exactly broke
+
+Plenty of people complain about the length: the excess phrasing, the details, the asides, the unnecessary elaboration. But the real problem is that its answers stopped adding up to meaning.
+
+You read the summary after a completed task and you cannot tell what got done and what did not. The words are there. Nothing is clear. Claude started reaching for rare vocabulary, loud phrasings that carry nothing but empty weight, turns of phrase that do not belong, drama in every sentence. It feels like talking to someone straining to display intelligence and missing the mark every time.
+
+And that is not the end of it. You ask it to explain more simply and you get something worse. Not shorter and not clearer, but denser and more tangled. It takes real effort to dig through the word spaghetti, and no instructions, no special prompts, no entries in CLAUDE.md make a difference. To get one thing straight you now need five iterations or more, where one used to be enough.
+
+Nothing changed on my end. Same subject I have been working in for a long time, and I certainly did not get dumber over the course of a week. Only two things changed: a new model, Opus 5, and an algorithm layered on top of it that weaves a pattern out of words so that a checker can identify AI-generated text.
+
+## The hierarchy of the breakage
+
+The degradation is not spread evenly across the products. Claude Code is the worst. The desktop and mobile apps are noticeably better. Same model underneath.
+
+With code as such, Opus 5 does fine. It finds bugs, it spots vulnerabilities, it writes working code. Though even here plenty of people have serious complaints: Claude Code starts doing more than it was asked, and if you do not stop it, it can make a mess. But it is obvious that the ability to explain and to hold a normal discussion is broken completely.
+
+One thing is worth noting here. In an [earlier article](https://vegaforge.dev/blog/harness-is-the-moat) I wrote that the quality of an agent's work is determined not by the model but by the harness around it. The gap between Claude Code and the mobile app on identical weights is exactly that case. So part of the blame may sit with the Claude Code CLI itself.
+
+But at the same time, the statistical cipher woven out of words may be far more noticeable precisely when you are working with code. It comes down to proportion. In the chat app, text is nearly the entire context. In Claude Code, two paragraphs of input and ten paragraphs of summary drown in a hundred kilobytes of diffs, tracebacks, function names, and logs. The share of actual prose against the code approaches zero.
+
+When ninety-nine percent of the context is code, the prose gets pulled in the same direction. Hence the density with no air in it, the terminology in place of explanation, the absence of pauses. And feedback does not help here. Anyone who has run a long session in Claude Code has seen it: the further you go, the more technical and dry the answers get, until parsing them costs more than doing the work yourself.
+
+## The hypothesis
+
+Here I will lay out my version. It may well be only partly right, and I would be glad to hear criticism and your own observations. The watermark gets embedded into the answer by making the model pick something other than the most probable word. That only works where there is a choice to make. In code there is almost none: the next token is dictated by syntax, and the signal has nowhere to sit. In free prose there is plenty of choice.
+
+Which leads to a natural assumption: the more freedom and room there is in the output, the less noticeable the mark becomes. In the app it is a conversation stretched across many words, so the marks have places to settle into. In a long article such a mark may be barely detectable at all. But in Claude Code output there is very little free text, only summaries and comments, and those are exactly what reads like nonsense. Which is precisely why the watermark module reshapes the model's answers into semi-gibberish.
+
+The symptom matches what the mechanism should produce. Rare vocabulary. Odd constructions. There is research showing that the perturbation introduced by a watermark leads to suboptimal token choices and factual errors that standard quality metrics fail to catch. Which is to say, "technically readable but the meaning does not assemble" is exactly the class of defect those checks do not see.
+
+And the announcement dates prove nothing here. Anthropic says marking began on August 2, while Opus 5 shipped on July 24. But anyone who has ever rolled out a feature knows how it goes: months of development first, then a partial deployment, then the announcement. The date on the blog is the date of the press release, not the date the switch was flipped. There is no reason to take a company at its word on a question where it has an interest. All the more so when the company has already misled people with its statements about its product not being used for military purposes.
+
+## The counterargument
+
+On the other hand, a lot of these symptoms also point at a post-training mistake, that is, at how the model was fine-tuned. Which for Anthropic is the worse outcome of the two.
+
+The mark works blind. It has neither memory nor aim. But the breakage runs along very specific lines: more words, less meaning. That looks like a learned preference, a model taught that a longer answer beats a short one.
+
+Then there is the voice. The mark is local and does not remember context. It can slip in an odd word, but it cannot hold a recognizable style across an entire answer. And it is held, paragraph after paragraph. That kind of consistency at the level of a whole response comes only from post-training. Though a hybrid layer is also conceivable here, one that accounts for the need to place a watermark and additionally polishes the text to accommodate it.
+
+So it is entirely possible that Anthropic badly miscalculated at the fine-tuning stage. The model was tuned toward output that is expansive, confident, and "full", and in Claude Code that is amplified further by the harness and the long context. But all of this makes the situation worse rather than better: a feature can simply be rolled back, while fixing training mistakes is slow and expensive. And as a rule, some of them migrate into the next model. That is how the decay in Claude's meaningful answers and the growth in their length have been running since version 4.5. The only thing going up was the benchmark scores.
+
+## Why it is easier to move to a Chinese model
+
+Opus has gotten bad enough that the cost of understanding its answers went up several times over. Every summary has to be parsed. Every output has to be reread. A tool people buy to save effort started consuming it instead. That cancels the entire point of the purchase.
+
+A direct instruction about the form of an answer does not get followed. That is a loss of controllability, not a matter of taste. Meanwhile the regression gets acknowledged reluctantly and in fragments. Quality assessments are published by outside researchers. Anthropic, for its part, keeps issuing press releases with benchmarks on which everything looks wonderful. The watermark was shipped with no documentation, no parameters, and no detector, along with a promise that it does not affect quality. It is already clear that this did not work out.
+
+But we, the users, have a choice, and it is an obvious one. What is strange is that Anthropic is doing everything it can to pretend the choice does not exist. In an attempt at a grand gesture they even cut and locked the price on Sonnet, presenting it as the long-awaited gift. As if not noticing that nobody needs it anymore.
+
+Kimi K3 runs level with Opus 5 and Fable on the independent Artificial Analysis index, holds first place on the Frontend Code Arena ahead of Claude, and costs a fraction as much per task. And it is an open model that anyone can run. You are not obliged to push inference through Chinese servers either. You can buy tokens from American providers built around privacy that keep no logs.
+
+Anthropic behaves like a company holding hostages. As though the choice were between its own models and the only open question were the size of the discount. That world is gone. It ended somewhere in the spring. And the release of Deepseek Flash, followed by yesterday's Deepseek Pro with metrics running level with Fable, drove the last nail into those empty hopes.
+
+## My plans for the coming month
+
+Do not renew the Claude subscription, and try to get by on Kimi and Deepseek. I was prepared to do this even before the new Deepseek Pro was announced. Now it is easier still.
+
+Planning, analysis, and audit move to Kimi and Deepseek. These two complement each other well: they can review after one another, argue, and catch the errors the other missed. Both can explain themselves, both spend fewer tokens inside their harnesses, and both deliver the same quality as Opus 5.
+
+Implementing the plans stays with Deepseek Flash, and partly with Kimi K3 where more reliability is needed. Moonshot's subscription limits are slightly tighter, so some of the heavier tasks will go to Deepseek Pro when necessary.
+
+And one more argument, which over the past few months has become the main one for me. Open weights mean verifiability. When a model is closed, the question of what changed in this release is settled by trusting the vendor. When the weights are sitting there, you can answer it yourself. After the watermark story, where the mechanism goes unexplained, that argument stopped being theoretical.
+
+## Instead of a conclusion
+
+I am not claiming that the watermark single-handedly broke Claude. The cause is most likely a series of factors and mistakes. And Anthropic's stance against open source played its own part.
+
+But by and large it no longer matters. We have an excellent alternative that delivers the same quality for less money. And for us, the developers, that is what counts.
