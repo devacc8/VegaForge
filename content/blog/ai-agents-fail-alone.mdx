@@ -7,7 +7,7 @@ tags: ["ai-agents", "production", "infrastructure", "cost-optimization"]
 image: "/blog/ai-agents-fail-alone-hero.webp"
 ---
 
-Companies are rushing to deploy AI agents into their workflows. Classic example: an AI sales agent independently promised a customer a 50% discount that nobody authorized. A clear failure by the agent developers, even though it worked perfectly in demo last week.
+Companies are rushing to deploy AI agents into their workflows. Classic example: an AI sales agent independently promised a customer a 50% discount that nobody authorized. [A clear failure by the agent developers](/blog/agent-failures-not-about-model), even though it worked perfectly in demo last week.
 
 The world is split: some say agents are ready for production, others say it doesn't work and never will. Enthusiasts show impressive demos. Clean data, correct APIs, no surprises. But production is a different beast. An MIT report found that 95% of generative AI pilots fail to achieve expected results. The models aren't dumb. The infrastructure around them isn't ready.
 
@@ -23,7 +23,7 @@ Manveer Chawla, co-founder of AI agent company Zenith, published research on Com
 2. **Brittle Connectors**: API integrations that work in testing but break in production
 3. **The Polling Tax**: architectural decisions that waste 95% of API calls through constant polling
 
-These aren't model problems. They're integration layer problems. The LLM is the kernel, but there's no operating system around it.
+These aren't model problems. They're integration layer problems. The LLM is the kernel, but [there's no operating system around it](/blog/harness-is-the-moat).
 
 What works in practice are explicit guardrails. Quality gates where an editor agent rejects drafts before they reach humans. "DO NOT" constraints in prompts that prevent unauthorized actions. Locking mechanisms when parallel agents work on the same data. These are the kinds of guardrails that separate working production systems from impressive demos.
 

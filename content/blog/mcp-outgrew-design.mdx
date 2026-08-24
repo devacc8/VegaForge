@@ -19,7 +19,7 @@ The adoption curve exceeded expectations. OpenAI added MCP support in 2025. Goog
 
 But adoption exposed problems the original design didn't anticipate.
 
-The token problem hit first. Load five MCP servers with 20-30 tools each, and your agent spends its first few thousand tokens just reading what it can do. Anyone running Claude Code with multiple MCP servers knows this firsthand: you end up manually curating which servers are active because the context burn is real. Cloudflare's Code Mode approach (which I covered in February) solved part of this through progressive disclosure, but it's a band-aid on a systemic issue.
+The token problem hit first. Load five MCP servers with 20-30 tools each, and your agent spends its first few thousand tokens just reading what it can do. Anyone running Claude Code with multiple MCP servers knows this firsthand: you end up manually curating which servers are active because the context burn is real. [Cloudflare's Code Mode approach](/blog/cloudflare-code-mode) (which I covered in February) solved part of this through progressive disclosure, but it's a band-aid on a systemic issue.
 
 The scaling problem came next. MCP was designed for local servers. Remote servers exist, but stateful sessions fight with load balancers. Horizontal scaling requires workarounds. If you're running MCP in production at scale, you're engineering around the protocol rather than with it.
 

@@ -29,7 +29,7 @@ But arbitrage is just the beginning. The more interesting bots are the ones that
 
 **Bot "0x8dxd"** appeared in December 2025 with $313 in starting capital. Its strategy: monitor real-time Bitcoin prices on Binance and Coinbase, then bet on Polymarket's 15-minute BTC up/down markets when the price movement made the outcome near-certain but Polymarket's odds hadn't adjusted yet. Within one month, the bot had executed over 20,000 trades with a 98% win rate. Its profit: **$437,600**, a 139,000% return.
 
-An automated weather forecasting bot joined in January 2025, focused exclusively on temperature and climate markets. It earned over **$70,000** by pulling NOAA data and comparing professional forecasts to Polymarket's crowd-sourced odds. Another bot running ensemble probability models generated **$2.2 million** in two months on a mix of political and economic markets.
+An automated weather forecasting bot joined in January 2025, focused exclusively on temperature and climate markets. It earned over **$70,000** by pulling NOAA data and comparing professional forecasts to Polymarket's crowd-sourced odds. [Another bot running ensemble probability models](/blog/claude-polymarket-trading) generated **$2.2 million** in two months on a mix of political and economic markets.
 
 These aren't hedge funds with hundred-person teams. They're scripts running on cheap VPS servers, using public APIs and commodity LLMs. The average arbitrage window on Polymarket compressed from 12.3 seconds in 2024 to just 2.7 seconds in 2025, but for markets that require judgment rather than speed, the edges are still wide open.
 
@@ -93,7 +93,7 @@ This is unusual. Most exchanges fight bots. Polymarket courts them, because bots
 
 **Information advantage is the moat.** The agents winning right now aren't using smarter models. They're using better data. Custom scrapers for niche data sources, real-time social media analysis, domain-specific APIs. The LLM is a commodity. The data pipeline is the edge.
 
-**Specialization beats generalization.** A weather bot with NOAA API access beats a generalist agent on weather markets every time. A crypto bot monitoring on-chain flows beats a generalist on token price markets. Pick a domain, build the data pipeline, and own that niche.
+**Specialization beats generalization.** [A weather bot with NOAA API access](/blog/weather-bots-polymarket) beats a generalist agent on weather markets every time. A crypto bot monitoring on-chain flows beats a generalist on token price markets. Pick a domain, build the data pipeline, and own that niche.
 
 **Ensemble everything.** The research is clear: multi-model ensembles produce better forecasts than any single model. Run Claude, GPT-4, and an open-source model on the same question. Average the results. The marginal cost is minimal; the accuracy improvement is significant.
 
