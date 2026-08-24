@@ -54,6 +54,33 @@ export function getAllPosts(): PostMeta[] {
   )
 }
 
+// Related posts, chosen automatically: shared tags carry the most weight,
+// same category adds a little, ties break toward the newer post. If too few
+// posts overlap, the block is topped up with the most recent ones so it is
+// never empty and never needs per-article upkeep.
+export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
+  const all = getAllPosts()
+  const current = all.find((p) => p.slug === slug)
+  if (!current) return []
+
+  const currentTags = new Set(current.tags)
+
+  const scored = all
+    .filter((p) => p.slug !== slug)
+    .map((post) => {
+      const sharedTags = post.tags.filter((t) => currentTags.has(t)).length
+      const sameCategory = post.category === current.category ? 1 : 0
+      const score = sharedTags * 3 + sameCategory
+      return { post, score }
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score
+      return new Date(b.post.date).getTime() - new Date(a.post.date).getTime()
+    })
+
+  return scored.slice(0, limit).map((s) => s.post)
+}
+
 export function getPostBySlug(slug: string) {
   if (!slug || /[/\\]|\.\./.test(slug)) return null
 

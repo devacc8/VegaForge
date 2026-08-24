@@ -5,10 +5,11 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
-import { getAllPosts, getPostBySlug } from '@/lib/blog'
+import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog'
 import { mdxComponents } from '../../components/mdx/MDXComponents'
 import { Navigation } from '../../components/Navigation'
 import { Footer } from '../../components/Footer'
+import { RelatedPosts } from '../../components/blog/RelatedPosts'
 
 export const dynamicParams = false
 
@@ -62,6 +63,7 @@ export default async function BlogPostPage({
   if (!post) notFound()
 
   const { meta, content } = post
+  const relatedPosts = getRelatedPosts(slug, 3)
 
   const { content: mdxContent } = await compileMDX({
     source: content,
@@ -219,6 +221,9 @@ export default async function BlogPostPage({
           <div>
             {mdxContent}
           </div>
+
+          {/* Related reading */}
+          <RelatedPosts posts={relatedPosts} />
 
           {/* Footer divider */}
           <div className="h-px bg-neutral-200 dark:bg-neutral-800 mt-12 mb-8" />
