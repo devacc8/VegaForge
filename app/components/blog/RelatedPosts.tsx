@@ -1,6 +1,6 @@
 import type { PostMeta } from '@/lib/blog'
 
-// Image-first "Related reading" grid at the foot of an article. Each card leads
+// Image-first "More from the forge" grid at the foot of an article. Each card leads
 // with the hero image (the thing that actually earns a click), then category,
 // reading time, and title. Three across on desktop, stacking on mobile.
 export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
@@ -12,7 +12,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
         id="related-heading"
         className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 uppercase mb-6"
       >
-        Related reading
+        More from the forge
       </h2>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
