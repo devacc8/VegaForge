@@ -102,6 +102,11 @@ export default function RootLayout({
         <div className="grain-overlay" />
         {children}
         <script src="https://tally.so/widgets/embed.js" async />
+        <script
+          src="https://analytics.vegaforge.dev/script.js"
+          data-website-id="0ca1af6e-fc0c-4e05-8945-f14bcf4425d7"
+          defer
+        />
         <Analytics />
         <SpeedInsights />
       </body>
