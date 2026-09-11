@@ -87,7 +87,7 @@ export default function AIChatbotPage() {
             {[
               {
                 title: 'E-Commerce',
-                desc: 'Answer product questions, track orders, handle returns — all from your actual catalog data, not generic responses',
+                desc: 'Answer product questions, track orders, handle returns, all from your actual catalog data, not generic responses',
               },
               {
                 title: 'SaaS Companies',
@@ -205,7 +205,7 @@ export default function AIChatbotPage() {
               },
               {
                 title: 'Multi-Channel Deployment',
-                desc: 'One bot, one knowledge base — available on Telegram, WhatsApp, your website, email, and Instagram. Consistent answers everywhere',
+                desc: 'One bot, one knowledge base: available on Telegram, WhatsApp, your website, email, and Instagram. Consistent answers everywhere',
               },
               {
                 title: 'No Vendor Lock-in',
@@ -213,7 +213,7 @@ export default function AIChatbotPage() {
               },
               {
                 title: 'No Recurring Embedding Costs',
-                desc: 'Document processing happens locally. Add new content to your knowledge base anytime — no API calls needed for embedding updates',
+                desc: 'Document processing happens locally. Add new content to your knowledge base anytime. No API calls needed for embedding updates',
               },
               {
                 title: 'Human Handoff',
@@ -244,9 +244,9 @@ export default function AIChatbotPage() {
             <div className="relative z-10 space-y-6">
               {[
                 { time: '2:30 AM', event: 'Customer in a different timezone asks about shipping. Bot answers instantly with your actual shipping policy' },
-                { time: '9:00 AM', event: 'Morning rush — 15 simultaneous questions about product specs, order status, returns. Bot handles all of them' },
+                { time: '9:00 AM', event: 'Morning rush: 15 simultaneous questions about product specs, order status, returns. Bot handles all of them' },
                 { time: '11:30 AM', event: 'Complex technical question the bot cannot answer confidently. Collects customer email and escalates to your team' },
-                { time: '3:00 PM', event: 'New product FAQ added to the knowledge base. Bot starts using it immediately — no restart needed' },
+                { time: '3:00 PM', event: 'New product FAQ added to the knowledge base. Bot starts using it immediately. No restart needed' },
                 { time: '6:00 PM', event: 'Daily summary: 47 conversations, 89% resolved without human help, 5 leads collected, 2 escalations' },
               ].map((item) => (
                 <div key={item.time} className="flex items-start gap-4 md:gap-6">
@@ -391,15 +391,15 @@ export default function AIChatbotPage() {
             {[
               {
                 q: 'How does the bot learn about my business?',
-                a: 'You share your documents — PDFs, FAQs, product info, website content. We process them into a vector database with semantic search. The bot retrieves relevant information before answering, so every response is based on your actual data, not generic AI knowledge.',
+                a: 'You share your documents: PDFs, FAQs, product info, website content. We process them into a vector database with semantic search. The bot retrieves relevant information before answering, so every response is based on your actual data, not generic AI knowledge.',
               },
               {
                 q: 'What AI models do you use?',
-                a: 'Claude, GPT, and other models via OpenRouter. Smart routing picks the best model for each question — fast and cheap for simple queries, powerful for complex ones. This typically reduces API costs by 40-60%.',
+                a: 'Claude, GPT, and other models via OpenRouter. Smart routing picks the best model for each question: fast and cheap for simple queries, powerful for complex ones. This typically reduces API costs by 40-60%.',
               },
               {
                 q: 'Can I update the knowledge base myself?',
-                a: 'Yes. We provide a simple process to add new documents anytime. The bot learns from new content immediately — no code changes needed.',
+                a: 'Yes. We provide a simple process to add new documents anytime. The bot learns from new content immediately. No code changes needed.',
               },
               {
                 q: 'What if the bot cannot answer a question?',
@@ -407,7 +407,7 @@ export default function AIChatbotPage() {
               },
               {
                 q: 'Do I own the bot and infrastructure?',
-                a: 'Yes, 100%. Everything is deployed on your infrastructure. You get full source code, documentation, and independence. No monthly platform fees — only standard API costs for the AI models you use.',
+                a: 'Yes, 100%. Everything is deployed on your infrastructure. You get full source code, documentation, and independence. No monthly platform fees, only standard API costs for the AI models you use.',
               },
             ].map((item) => (
               <details key={item.q} className="group/faq bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl shadow-xs dark:shadow-none transition-all duration-300">

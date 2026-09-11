@@ -55,7 +55,7 @@ export default function AIAgentPage() {
             <span className="text-forge-600 dark:text-forge-500">Your Social Media</span>
           </h1>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl mb-10">
-            Like an AI team member that never sleeps and always asks for your OK first. Monitors your niche, generates content, engages with your audience — nothing goes live without your approval in Telegram
+            Like an AI team member that never sleeps and always asks for your OK first. Monitors your niche, generates content, engages with your audience. Nothing goes live without your approval in Telegram
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -87,7 +87,7 @@ export default function AIAgentPage() {
             {[
               {
                 title: 'Founders & Solopreneurs',
-                desc: 'Build personal brand on autopilot. AI drafts content in your voice — you approve over coffee',
+                desc: 'Build personal brand on autopilot. AI drafts content in your voice. You approve over coffee',
               },
               {
                 title: 'Marketing Agencies',
@@ -222,7 +222,7 @@ export default function AIAgentPage() {
             {[
               {
                 title: 'Human-in-the-Loop',
-                desc: 'Nothing goes public without your approval. Every draft goes to your Telegram first — approve, edit, or reject with a single tap. You stay in full control',
+                desc: 'Nothing goes public without your approval. Every draft goes to your Telegram first: approve, edit, or reject with a single tap. You stay in full control',
               },
               {
                 title: 'Smart Model Routing',
@@ -230,7 +230,7 @@ export default function AIAgentPage() {
               },
               {
                 title: 'Knowledge Base (RAG)',
-                desc: 'Your agent knows your brand, products, and voice. Local embeddings with hybrid search — no recurring API costs for document processing',
+                desc: 'Your agent knows your brand, products, and voice. Local embeddings with hybrid search: no recurring API costs for document processing',
               },
               {
                 title: 'Scheduled Autonomy',
@@ -340,15 +340,15 @@ export default function AIAgentPage() {
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Simple tasks</span> (short replies, greetings) — fast open-source models like DeepSeek, Kimi K2.5, MiniMax</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Simple tasks</span> (short replies, greetings): fast open-source models like DeepSeek, Kimi K2.5, MiniMax</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Complex tasks</span> (research synthesis, long-form content) — Claude, GPT-4o for maximum quality</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Complex tasks</span> (research synthesis, long-form content): Claude, GPT-4o for maximum quality</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-forge-600 dark:bg-forge-500 shrink-0 mt-1.5" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Result</span> — significant cost savings without sacrificing quality where it matters</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300"><span className="font-medium">Result</span>: significant cost savings without sacrificing quality where it matters</span>
                   </div>
                 </div>
               </div>
@@ -449,7 +449,7 @@ export default function AIAgentPage() {
               },
               {
                 q: 'How much does it cost to run after setup?',
-                a: 'A basic VPS is $7-20/month. AI model API costs depend on usage — typically $20-50/month for moderate activity. Smart model routing keeps this low by using cheaper models for simple tasks.',
+                a: 'A basic VPS is $7-20/month. AI model API costs depend on usage, typically $20-50/month for moderate activity. Smart model routing keeps this low by using cheaper models for simple tasks.',
               },
               {
                 q: 'Can I change the agent\'s behavior myself?',

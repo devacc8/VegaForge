@@ -152,7 +152,7 @@ export default function ContentWritingPage() {
               </div>
             </div>
 
-            {/* Monthly — highlighted */}
+            {/* Monthly, highlighted */}
             <div className="group relative bg-forge-600/5 dark:bg-forge-600/10 border-2 border-forge-500/50 dark:border-forge-600/50 rounded-2xl p-6 md:p-8 transition-all duration-500 shadow-xs dark:shadow-none">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-forge-600 text-white text-xs font-medium rounded-full">
                 Best Value
@@ -273,7 +273,7 @@ export default function ContentWritingPage() {
               {
                 step: '01',
                 title: 'Research',
-                desc: 'AI agent monitors your niche 24/7 — trending topics, competitor moves, community discussions',
+                desc: 'AI agent monitors your niche 24/7: trending topics, competitor moves, community discussions',
               },
               {
                 step: '02',
@@ -320,11 +320,11 @@ export default function ContentWritingPage() {
               },
               {
                 title: 'Human Editor, Not a Prompt',
-                desc: 'Every article is reviewed and shaped by a human editor with crypto domain expertise. AI accelerates research and first drafts — the human owns the final product',
+                desc: 'Every article is reviewed and shaped by a human editor with crypto domain expertise. AI accelerates research and first drafts. The human owns the final product',
               },
               {
                 title: 'Proof of Work',
-                desc: 'Browse our blog — real articles published weekly. Judge the quality yourself before committing',
+                desc: 'Browse our blog: real articles published weekly. Judge the quality yourself before committing',
               },
               {
                 title: 'Speed Without Sacrifice',
@@ -470,7 +470,7 @@ export default function ContentWritingPage() {
             {[
               {
                 q: 'Is this just AI-generated content?',
-                a: 'No. Every article is written and edited by a human with deep crypto expertise. AI is our research and drafting tool — it speeds up the process, but the human editor makes every editorial decision: voice, structure, fact-checking, and strategy. The result reads like a person wrote it, because a person did.',
+                a: 'No. Every article is written and edited by a human with deep crypto expertise. AI is our research and drafting tool. It speeds up the process, but the human editor makes every editorial decision: voice, structure, fact-checking, and strategy. The result reads like a person wrote it, because a person did.',
               },
               {
                 q: 'Do you write in our brand voice?',
@@ -478,7 +478,7 @@ export default function ContentWritingPage() {
               },
               {
                 q: 'What if we need revisions?',
-                a: 'Every article includes one round of revisions at no extra cost. We aim to get it right on the first delivery — our revision rate is under 15%.',
+                a: 'Every article includes one round of revisions at no extra cost. We aim to get it right on the first delivery. Our revision rate is under 15%.',
               },
               {
                 q: 'Can you write technical content?',
@@ -490,7 +490,7 @@ export default function ContentWritingPage() {
               },
               {
                 q: 'Minimum commitment?',
-                a: 'None. Start with a single article for $250 to see the quality. Monthly plans have no contracts — cancel anytime. We recommend at least 2 months to see results from blog content and SEO.',
+                a: 'None. Start with a single article for $250 to see the quality. Monthly plans have no contracts. Cancel anytime. We recommend at least 2 months to see results from blog content and SEO.',
               },
             ].map((item) => (
               <details key={item.q} className="group/faq bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl shadow-xs dark:shadow-none transition-all duration-300">
