@@ -127,8 +127,8 @@ export const projects: Project[] = [
     group: 'extensions',
     stats: [
       { value: '50KB', label: 'Lightweight' },
-      { value: '5', label: 'API Integrations', accent: true },
-      { value: '3', label: 'Fallback APIs' },
+      { value: '6', label: 'API Integrations', accent: true },
+      { value: '2', label: 'Fallback Chains' },
       { value: 'MIT', label: 'Open Source' },
     ],
     tech: ['JavaScript', 'Chrome APIs', 'Manifest V3', 'CoinGecko', 'Owlracle', 'mempool.space'],
