@@ -96,7 +96,7 @@ export const projects: Project[] = [
       { value: '200', label: 'Unit Tests' },
       { value: 'MIT', label: 'Open Source' },
     ],
-    tech: ['TypeScript', 'Manifest V3', 'Chrome APIs', 'Declarative Net Request', 'No Tracking'],
+    tech: ['JavaScript', 'Manifest V3', 'Chrome APIs', 'Declarative Net Request', 'No Tracking'],
     links: [
       { label: 'Install Extension', href: 'https://chromewebstore.google.com/detail/curfew/obnikdokealeimpbhfbjhpdmfcgbgcje', chrome: true },
       { label: 'GitHub', href: 'https://github.com/devacc8/curfew-extension' },
