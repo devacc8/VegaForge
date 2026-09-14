@@ -7,14 +7,12 @@ import { TallyButton } from './TallyButton'
 
 export function Navigation() {
   const pathname = usePathname()
-  const isHome = pathname === '/'
+  const isWork = pathname === '/work'
   const isServicePage = pathname === '/ai-chatbot' || pathname === '/ai-agent' || pathname === '/content-writing'
   const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
-  const workHref = isHome ? '#work' : '/#work'
 
   // Close everything on route change
   useEffect(() => {
@@ -46,7 +44,7 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <a href={workHref} className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors link-underline">
+            <a href="/work" className={`text-sm transition-colors link-underline ${isWork ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}>
               Work
             </a>
 
