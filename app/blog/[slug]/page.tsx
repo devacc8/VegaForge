@@ -222,9 +222,11 @@ export default async function BlogPostPage({
             {mdxContent}
           </div>
 
-          {/* Baseline reader CTA. Suppressed on articles that carry a targeted one. */}
+          {/* Baseline reader CTA, written as a postscript. Suppressed on articles that
+              carry a targeted one. */}
           {meta.cta && (
             <p className="mt-12 text-sm text-neutral-500 dark:text-neutral-500">
+              <strong className="font-medium text-neutral-600 dark:text-neutral-400">P.S.</strong>{' '}
               Working on something in AI or crypto and want a second opinion?{' '}
               <a
                 href="https://x.com/vvegalex"
