@@ -183,10 +183,10 @@ export default function Home() {
               </h3>
               <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
-                  AI generates code, but doesn't understand context. Who verifies the smart contract has no reentrancy vulnerabilities? Who chooses the right pattern (escrow vs approval-based)? Who writes 3,767 tests including fuzz tests for edge cases?
+                  AI removed the cost of typing. It did not remove the cost of deciding. It doesn't know what to build, what to leave out, or which tradeoff is worth taking, and it will happily produce a working version of the wrong thing.
                 </p>
                 <p>
-                  AI is a tool. You need someone who knows <em className="text-neutral-800 dark:text-neutral-200 not-italic">what</em> to check and <em className="text-neutral-800 dark:text-neutral-200 not-italic">why</em>.
+                  So the job moved up a level: hold the goal, cut the scope, pick the pattern (escrow vs approval-based listings), know what to verify and <em className="text-neutral-800 dark:text-neutral-200 not-italic">why</em>, and keep pushing after the third dead end. That is the part I do, with AI as the fastest tool I have ever had.
                 </p>
               </div>
             </div>
@@ -228,23 +228,6 @@ export default function Home() {
                     On OpenSea/Blur you can't sell 365 NFTs in one transaction. Why? No atomic bundle transfers. Solution: a smart contract with approval-based listings (not escrow: less gas, safer). Result: the first specialized marketplace for BasePaint collections.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Q4 */}
-            <div className="group relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl p-8 md:p-10 shadow-xs dark:shadow-none transition-all duration-500">
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <h3 className="relative z-10 font-display font-semibold text-xl text-neutral-900 dark:text-white mb-4">
-                "Isn't this just vibe coding?"
-              </h3>
-              <div className="relative z-10 space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                <p>
-                  Not quite. Vibe coding means fully delegating to AI without understanding what's being built. My approach is different: I architect the system, define constraints, review every decision. AI accelerates execution, but direction comes from 8+ years of experience.
-                </p>
-                <p>
-                  The result is faster delivery with higher quality than a traditional team, not despite the human involvement, but <em className="text-neutral-800 dark:text-neutral-200 not-italic">because</em> of it.
-                </p>
               </div>
             </div>
           </div>

@@ -13,6 +13,8 @@ export interface PostMeta {
   tags: string[]
   image: string
   readingTime: number
+  /** Baseline reader CTA in the article template. Articles with their own CTA set it false. */
+  cta: boolean
 }
 
 function calculateReadingTime(content: string): number {
@@ -34,6 +36,7 @@ function parseMeta(slug: string, data: Record<string, unknown>, content: string)
     tags: Array.isArray(data.tags) ? data.tags.filter((t): t is string => typeof t === 'string') : [],
     image: typeof data.image === 'string' ? data.image : '',
     readingTime: calculateReadingTime(content),
+    cta: data.cta !== false,
   }
 }
 

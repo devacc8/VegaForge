@@ -222,6 +222,22 @@ export default async function BlogPostPage({
             {mdxContent}
           </div>
 
+          {/* Baseline reader CTA. Suppressed on articles that carry a targeted one. */}
+          {meta.cta && (
+            <p className="mt-12 text-sm text-neutral-500 dark:text-neutral-500">
+              Working on something in AI or crypto and want a second opinion?{' '}
+              <a
+                href="https://x.com/vvegalex"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-forge-600 dark:text-forge-500 hover:text-forge-500 dark:hover:text-forge-400 underline underline-offset-2 decoration-forge-500/30 hover:decoration-forge-500 transition-colors"
+              >
+                DM me on X
+              </a>
+              .
+            </p>
+          )}
+
           {/* Related reading */}
           <RelatedPosts posts={relatedPosts} />
 

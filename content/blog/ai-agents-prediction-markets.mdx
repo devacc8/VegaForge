@@ -5,6 +5,7 @@ date: "2026-03-11"
 category: "AI & Crypto"
 tags: ["ai-agents", "polymarket", "prediction-markets", "llm", "crypto"]
 image: "/blog/ai-agents-prediction-markets-hero.webp"
+cta: false
 ---
 
 In October 2024, a Polymarket trader known as Théo placed over $30 million in bets on the US presidential election, almost entirely on Trump. The trades were so large they moved the market. Pundits screamed manipulation. France's gambling authority launched an investigation. Turned out Théo was a former bank trader who had commissioned a custom YouGov poll using "neighbor question" methodology to detect the shy-Trump-voter effect. He sold virtually all his liquid assets to fund an $80 million position. When the dust settled, blockchain analysis by Chainalysis confirmed his net profit: **$78.7 million**.
@@ -107,6 +108,10 @@ This creates a natural selection pressure. Agents that reason well make money an
 
 The infrastructure is there: liquid markets ($21.5 billion in 2025 volume), open APIs, on-chain settlement, and a platform that welcomes bots. The research confirms LLMs can forecast at near-human levels. The early bots are already printing money.
 
+One warning before you start: this is not a build-once product. I work on several Polymarket-related projects, and the version that worked six months ago is never the version that works today. Edges compress, venues change their fees and their APIs, resolution rules get rewritten after a dispute, and a pipeline that quietly stopped matching reality will keep trading anyway. Budget for maintenance the way you budget for the first build, or the edge you found will expire without telling you.
+
 I'm building one right now: a prediction agent that starts with weather markets (the easiest edge to quantify) and expands into LLM-powered judgmental forecasting. I'll be documenting the build, the P&L, and the lessons learned on this blog. If you want to follow along or build your own, the tools are all open-source and the markets are waiting.
 
 The question isn't whether AI agents will dominate prediction markets. It's whether you'll be running one — or betting against one.
+
+**If you are building in prediction markets,** I have spent the last year shipping agents against Polymarket and I am glad to share what held up, what broke, and what I would not build again. DM me on [X](https://x.com/vvegalex) and tell me what you are working on.
