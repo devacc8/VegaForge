@@ -85,6 +85,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vegaforge.dev/blog/ai-agents-learned-to-sleep</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/ai-agents-fail-alone</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/ai-bill-cut-routing</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/mcp-outgrew-design</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vegaforge.dev/blog/vibe-coding-vs-engineering</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -93,42 +117,6 @@
   <url>
     <loc>https://vegaforge.dev/blog/claude-code-vs-cursor</loc>
     <lastmod>2026-03-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/gpt-5-4-good-enough</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/browser-agents-production</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/openclaw-agents-rogue</loc>
-    <lastmod>2026-03-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/ai-agent-pricing</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/vibe-coding-security</loc>
-    <lastmod>2026-02-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://vegaforge.dev/blog/cloudflare-code-mode</loc>
-    <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -151,20 +139,38 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vegaforge.dev/blog/mcp-outgrew-design</loc>
-    <lastmod>2026-03-19</lastmod>
+    <loc>https://vegaforge.dev/blog/gpt-5-4-good-enough</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vegaforge.dev/blog/ai-agents-fail-alone</loc>
-    <lastmod>2026-03-28</lastmod>
+    <loc>https://vegaforge.dev/blog/browser-agents-production</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vegaforge.dev/blog/ai-bill-cut-routing</loc>
-    <lastmod>2026-03-28</lastmod>
+    <loc>https://vegaforge.dev/blog/openclaw-agents-rogue</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/cloudflare-code-mode</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/vibe-coding-security</loc>
+    <lastmod>2026-02-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vegaforge.dev/blog/ai-agent-pricing</loc>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
