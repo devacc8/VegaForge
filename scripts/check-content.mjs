@@ -27,7 +27,10 @@ const sitemapPath = path.join(root, 'public', 'sitemap.xml')
 
 /** file -> why its dashes are allowed to stay */
 const QUOTED_DASH = new Map([
-  ['vibe-coding-security.mdx', 'the em dash sits inside the quotation from Karpathy'],
+  [
+    'vibe-coding-security.mdx',
+    'the em dash sits inside the quotation from Karpathy, left as an exception on purpose (Alex, 2026-09-17): the quotation is not ours to repunctuate',
+  ],
 ])
 
 const lastmod = new Map()
