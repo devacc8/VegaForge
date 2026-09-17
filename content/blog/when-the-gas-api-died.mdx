@@ -1,0 +1,70 @@
+---
+title: "How Deloitte absorbed Blocknative's team and almost killed my extension"
+description: "Blocknative's gas API died when Deloitte absorbed the team, and my extension was reading it. Replacing a dead data source turned out to be the easy half: the rule I trusted most on Bitcoin, the 1 sat/vB relay floor, had already moved in someone else's release notes."
+date: "2026-09-17"
+category: "Solo Dev"
+tags: ["solo-dev", "browser-extension", "bitcoin", "ethereum", "free-software"]
+image: "/blog/when-the-gas-api-died-hero.webp"
+cta: false
+---
+
+---
+
+On June 19, 2026, Blocknative shut down the API that showed transaction costs on Ethereum. Deloitte bought the company, and it was an acquisition for the team: the product, the API and Gas Network were not worth carrying forward. [The Block](https://www.theblock.co/post/401912/deloitte-absorbs-blocknative-team-as-crypto-infra-firm-winds-down-apis-and-gas-network) and a few crypto newsletters wrote about it, but the people who really noticed were the ones with `api.blocknative.com` hardcoded in their code.
+
+This one hit close to home. I have been building and maintaining the [CoinPeek](https://chromewebstore.google.com/detail/coinpeek/konlmcdlofpoegdkbjocdfojejmfkfbo) extension for several years now. It sits in the browser toolbar, where it shows the BTC price and gas costs on two networks, and converts currencies in the same popup.
+
+## What happened
+
+Nobody was buying Blocknative for the product. Deloitte announced the deal on May 20, 2026, and it was a team hire: the people moved over to work on Web3 for Deloitte's clients. Gas Network and the API were wound down gradually and stopped working on June 19. Everyone pulling data through that API got `null`.
+
+The worst part of this kind of breakage is how it looks from the outside. The domain is alive. DNS resolves. TCP connects. Then the TLS handshake fails: the server drops the connection without sending back a single byte of its certificate.
+
+In code that is just an exception on the response. In the logs it looks like a network problem, as if the user's internet had dropped.
+
+<details>
+<summary>For those who care about the code</summary>
+
+`curl` says `OpenSSL SSL_connect: SSL_ERROR_SYSCALL`. `openssl` reports `write:errno=104` and "SSL handshake has read 0 bytes". No HTTP status at all. No 404, no 410, no 503 that would tell you the service is gone.
+
+</details>
+
+## What to replace it with
+
+I started looking for a new data source right away. The alternative was to drop the gas display and lose half the functionality. Paid data is not hard to find, but CoinPeek is a free, open source app ([devacc8/coinpeek](https://github.com/devacc8/coinpeek)): there is no monetization, it collects no data, and nobody uses it for dark marketing. The only way to keep going was to find another free provider. I found [Owlracle](https://owlracle.info/) and its `api.owlracle.info/v4/eth/gas`.
+
+There was no way to do this without compromises. The old provider returned a price together with a confidence factor: three lines meant three levels of risk. Owlracle works differently. It sends a list of speeds, each with its own acceptance probability and its own price. So instead of taking the extremes, I match each line to the speed whose probability is closest to a target: 0.35 for low, 0.6 for average, 0.9 for fast. I leave the top tier with probability 1.0 alone on purpose: that is the price of a transaction that cannot fail, and it is several times higher than what people actually pay. The gap shows most in peak hours, when the network is busy.
+
+In case that one goes down too, there is a fallback. Briefly, without the technical detail: it is a public JSON-RPC node. It returns a single price in wei, as a hex string. That has to be parsed, converted to gwei and split into three lines with 1.15 and 1.4 multipliers.
+
+The multipliers are soft on purpose. The node returns a spot price, not a forecast, and it is a fallback, not an oracle. There is no point pretending it has a precision it does not have.
+
+Both sources return the same object with the same three keys. The shape of the data does not depend on who answered. That is exactly what the previous version got wrong: fallback values arrived under different keys, landed in the wrong lines and turned into a dash instead of a number.
+
+If nobody answers at all, Ethereum gets a dash. That is deliberate. Gas has ranged from 20 gwei in 2022 down to 0.06 gwei in 2026, and any hardcoded number would be off by orders of magnitude. An empty line is more honest.
+
+## Bitcoin and the 1 sat/vB floor
+
+Bitcoin had a version of the same illness, only from the other end. There were always three sources (mempool.space, blockchain.info, blockchair), but when all of them failed the function returned `null` and the line turned into a dash. Now a failure returns the built-in 1, 2 and 3 sat/vB.
+
+That also surfaced the quiet mempool story. In calm hours blockchain.info returns a normal fee of 0.1 to 0.5 sat/vB. The old code discarded a value like that, not because anyone meant to, but as a side effect of a check against zero: the intent was never written down, and the next person to open that code would not have understood why the source was skipped. Now the rule lives in one place, in the `MIN_RELAY_FEE_SAT_VB` constant. Any source that returns less is dropped entirely, and the next one is used.
+
+This is where it gets interesting. Where did the 1 come from in the first place? It turned out to be out of date. [Bitcoin Core 30.0](https://bitcoincore.org/en/releases/30.0/), released on October 10, 2025, lowered the default minimum relay fee from 1 sat/vB to 0.1 sat/vB and dropped `-blockmintxfee` to 0.001 sat/vB along with it. A transaction cheaper than 1 sat/vB can now reach a miner instead of being dropped by the first node. In a quiet mempool the whole queue really does sit at 0.1 sat/vB.
+
+The second bug was sitting right next to it, and it was worse. Every fee in the code went through `Math.round`, because satoshis are whole numbers. But sat/vB is a ratio, and a fractional one: `Math.round(0.1)` is zero. Even with the right floor the extension would have thrown away an honest 0.1 as a zero. Rounding to whole numbers worked as long as the market stayed above one, and it broke silently, because zero looked like an ordinary source failure.
+
+I fixed both. The floor is now 0.1, with a comment saying it is node policy, not consensus. Values below 1 sat/vB keep two decimal places, and so do the multipliers computed from them. I covered it with tests so the same pair of bugs does not have to be found twice.
+
+Which brings me to the idea of one correct number. There is no such thing any more. 0.1 is not the truth, it is the current Bitcoin Core default, and it holds only until the next release. A transaction at that fee will not reach every node, and it is not guaranteed to make it into a block until enough miners adopt the new policy.
+
+I like it as an illustration of what this article is about. I thought I had found the solid part of the system: not somebody else's service, but a rule of the network itself. It turned out that this one moves too. And it changes in a release note that nobody is going to send you.
+
+## Instead of a conclusion
+
+The Blocknative story is not about Deloitte, and it is not about failure. It is the normal life of a free product built on other people's free services. You do not pay for them with money, you pay with attention: you watch other people's releases, read their changelogs and keep in mind that any of them can shut down, raise prices or change the rules. An indie developer has to come back to this again and again, because what you built once stops working on its own.
+
+One consequence follows. If you give a product away for free, you can only guarantee it while the whole chain is free. One paid service inside, and either you pay for it out of your own pocket or the product dies. That is not a complaint, it is a constraint, and it is worth keeping in mind before you build anything.
+
+It also means free data lives exactly until somebody decides it is not worth it. My hobby project is just one of many small projects. And the real question is not whether the next free service will shut down, but whether I will manage to find a replacement when it does.
+
+**P.S.** CoinPeek is in the Chrome Web Store and the source is on GitHub. Version 1.1.4 with the fixes above is live now. Ratings are how extensions get found, so a rating helps if it earns one. And if a fee number ever looks wrong, tell me which one: that is the feedback I act on.
