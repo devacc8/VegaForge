@@ -5,6 +5,7 @@ date: "2026-02-26"
 category: "MCP & Frameworks"
 tags: ["mcp", "cloudflare", "agents", "token-optimization"]
 image: "/blog/cloudflare-code-mode-hero.webp"
+cta: false
 ---
 
 The Cloudflare API has over 2,500 endpoints. Load them all into a model's context window through standard Model Context Protocol (MCP), and you hit 1.17 million tokens. That exceeds the context window of every production LLM today — even Claude's 200K and Gemini's 1M fall short when you account for the space needed for actual reasoning. Cloudflare's answer is Code Mode: a technique that collapses the same API surface into roughly 1,000 tokens. This is not an incremental optimization. It rewrites the rules for how agents interact with external tools.
@@ -128,3 +129,5 @@ The end state: agents that orchestrate across dozens of services without context
 If the pattern holds, Code Mode becomes the default for any MCP server with more than a few dozen endpoints. Traditional tool calling survives for simple surfaces and quick integrations, but anything with complex orchestration requirements migrates to code-based interaction. The line between "agent" and "program" blurs — agents write programs, sandboxes execute them, only results come back for high-level decisions.
 
 The MCP ecosystem is barely a year old and already [hitting scaling walls that nobody anticipated](/blog/mcp-outgrew-design). Code Mode is the first credible answer. The teams that adopt it early get access to API surfaces that remain impractical for everyone else — and in a landscape where integration breadth determines agent capability, that is a real advantage.
+
+**P.S.** If you are wiring MCP into an agent and the tool surface is getting out of hand, I have been building around these limits: fewer tools, code instead of schemas, and the sandbox rules that make it safe. If your tool surface needs that treatment, DM me on [X](https://x.com/vvegalex) and tell me what you are building.

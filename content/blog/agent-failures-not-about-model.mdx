@@ -5,6 +5,7 @@ date: "2026-05-04"
 category: "AI Agents"
 tags: ["ai-agents", "production", "circuit-breakers", "permission-tiers", "ai-reliability"]
 image: "/blog/agent-failures-not-about-model-hero.webp"
+cta: false
 ---
 
 The retry loop worked exactly as designed. The API call failed. So the agent tried again. And again. By the time someone noticed, it had posted 47 nearly-identical messages to a public channel.
@@ -108,3 +109,5 @@ The other principle is immediate failure visibility. If a cron job fails, I know
 The 47-duplicate-message scenario doesn't happen with a circuit breaker and a gatekeeper. The Replit incident wouldn't happen with a permission-tier model that requires human approval for irreversible operations. These patterns aren't theoretical. They're the difference between agents that run and agents that embarrass you.
 
 Build for the failure mode before it happens. Not after.
+
+**P.S.** If you are running agents in production, I have been building the harness around them: permission tiers, circuit breakers, monitoring, the parts that decide how bad a bad tool call gets to be. If you need that layer on yours, DM me on [X](https://x.com/vvegalex) and tell me what you are working on.

@@ -5,6 +5,7 @@ date: "2026-02-24"
 category: "AI Dev Tools"
 tags: ["vibe-coding", "security", "ai-agents", "claude-code"]
 image: "/blog/vibe-coding-security-hero.webp"
+cta: false
 ---
 
 Six out of ten AI-generated solutions pass functional tests. One out of ten is secure. That ratio, from a [University of Virginia study](https://arxiv.org/html/2512.03262v1) of 200 real-world feature requests, defines vibe coding in 2026.
@@ -108,3 +109,5 @@ The market opportunity is obvious. Every vibe coding platform needs an integrate
 Until that tooling exists, the defense is human judgment. That's the approach I take with my own projects — vibes for the UI, line-by-line review for anything touching auth or data. Not on every line — on the lines that matter. Auth flows, data access patterns, payment logic, admin endpoints. The rest can be vibes. But the security-critical paths need someone who asks "should this be allowed?" before clicking deploy.
 
 Boris Cherny, creator of Claude Code, recently [predicted](https://www.businessinsider.com/anthropic-claude-code-founder-ai-impacts-software-engineer-role-2026-2) that the "software engineer" title is going away. He might be right about the title. But the skill — understanding what code should and shouldn't do — that's not going away. It's becoming the only thing that matters.
+
+**P.S.** If most of your codebase was written by a generator, that is the review I do: what it left open, what the tests never touched, and what has to change before it ships. If your codebase needs that review, DM me on [X](https://x.com/vvegalex) and tell me what you are shipping.
