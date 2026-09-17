@@ -8,7 +8,7 @@ image: "/blog/claude-polymarket-trading-hero.webp"
 cta: false
 ---
 
-On March 10, 2026, an account called @RoundtableSpace posted a trading contest on X: two AI agents, each funded with $1,000, given 48 hours to trade on Polymarket. One powered by Anthropic's Claude. The other by OpenClaw. The result: Claude's agent returned **+1,322%** — turning $1,000 into $14,216. The OpenClaw agent was liquidated to zero. The post hit 1.2 million views in a day.
+On March 10, 2026, an account called @RoundtableSpace posted a trading contest on X: two AI agents, each funded with $1,000, given 48 hours to trade on Polymarket. One powered by Anthropic's Claude. The other by OpenClaw. The result: Claude's agent returned **+1,322%**, turning $1,000 into $14,216. The OpenClaw agent was liquidated to zero. The post hit 1.2 million views in a day.
 
 A week earlier, another viral thread showed a Claude-based copy-trading agent, one that mirrored a profitable Polymarket trader's moves and learned when to deviate. Result: $1,000 to $5,823 in seven days.
 
@@ -20,7 +20,7 @@ LLMs aren't replacing traders. They're becoming the best tool traders have ever 
 
 An LLM isn't a crystal ball. It doesn't know the future. But it's trained on an enormous corpus of text about how the world works: historical events, statistical patterns, causal relationships, expert analysis. When you ask Claude "What's the probability that the Fed cuts rates in March 2026?" it doesn't guess randomly. It synthesizes everything it's absorbed about monetary policy, economic indicators, Fed communication patterns, and historical precedent.
 
-The question isn't whether this synthesis is perfect. It's whether it's **better than the average Polymarket trader.** And in many markets, the bar is low. Only 7.6% of Polymarket wallets are profitable, and the other 92.4% are trading on vibes, political tribalism, or whatever narrative is trending on X. Against that competition, a systematic approach — even an imperfect one — has an edge.
+The question isn't whether this synthesis is perfect. It's whether it's **better than the average Polymarket trader.** And in many markets, the bar is low. Only 7.6% of Polymarket wallets are profitable, and the other 92.4% are trading on vibes, political tribalism, or whatever narrative is trending on X. Against that competition, a systematic approach, even an imperfect one, has an edge.
 
 The research confirms it. A 2024 paper published in Science Advances tested an ensemble of 12 LLMs against 925 human forecasters over a 3-month tournament. The result: the LLM ensemble was **statistically indistinguishable from the human crowd**. GPT-4 and Claude 2 predictions improved by 17-28% when exposed to the median human prediction, and a combined human+LLM ensemble outperformed either group alone.
 
@@ -36,7 +36,7 @@ The ilovecircle case is worth studying because it's documented, on-chain verifia
 
 **The execution:** A neural network evaluated potential outcomes, dynamically adjusting strategies every few minutes. It recalculated P&L continuously to decide whether to maintain, increase, or close positions. The system wasn't static. It learned from its own trading history and adapted.
 
-**The result:** $2.2 million in roughly 60 days, with a 74% accuracy rate across politics, sports, and crypto markets. The key insight: Claude wasn't making the predictions — it was building and refining the system that made them. The human provided the strategy. The LLM provided the engineering velocity.
+**The result:** $2.2 million in roughly 60 days, with a 74% accuracy rate across politics, sports, and crypto markets. The key insight: Claude wasn't making the predictions: it was building and refining the system that made them. The human provided the strategy. The LLM provided the engineering velocity.
 
 ## The Architecture That Works
 
@@ -80,7 +80,7 @@ For a cost-effective production setup, the sweet spot is a two-tier approach: us
 After testing dozens of variations, here's the structure that produces the best calibration:
 
 ```
-You are a superforecaster — one of the top 2% of predictors in
+You are a superforecaster, one of the top 2% of predictors in
 competitive forecasting tournaments. You are calibrated: when you
 say 70%, events happen 70% of the time.
 
@@ -158,13 +158,13 @@ The official Polymarket/agents repo is the best starting point. It handles API a
 
 **Development time:** A basic version (market scanner + LLM probability + manual betting) takes a weekend. Full automation (auto-execution, risk management, Telegram alerts) takes 2-3 weeks. Using Claude as a coding partner (the way ilovecircle did) cuts the development time significantly.
 
-**The real investment:** Calibration. Testing your prompt against historical markets, measuring Brier scores, adjusting the pipeline. This is where the edge comes from — not the code, not the model, but the quality of the probability estimation pipeline.
+**The real investment:** Calibration. Testing your prompt against historical markets, measuring Brier scores, adjusting the pipeline. This is where the edge comes from: not the code, not the model, but the quality of the probability estimation pipeline.
 
 ## What's Next
 
 The prediction market space is evolving fast. Polymarket processed $21.5 billion in volume in 2025. Combined with Kalshi, the prediction market duopoly hit $40 billion. The liquidity is there. The tools are open-source. The academic research confirms LLMs can forecast at near-human levels.
 
-The window of opportunity is real but finite. Arbitrage windows on Polymarket compressed from 12.3 seconds in 2024 to 2.7 seconds in 2025. The same compression will happen to judgmental edges as [more LLM agents enter the market](/blog/ai-agents-prediction-markets). But for now, on longer-term markets where the question requires real reasoning about complex events — politics, economics, science, climate — the mispricings are still there.
+The window of opportunity is real but finite. Arbitrage windows on Polymarket compressed from 12.3 seconds in 2024 to 2.7 seconds in 2025. The same compression will happen to judgmental edges as [more LLM agents enter the market](/blog/ai-agents-prediction-markets). But for now, on longer-term markets where the question requires real reasoning about complex events (politics, economics, science, climate), the mispricings are still there.
 
 This is the part I keep relearning myself: prediction markets are not a build-once product. I work on several Polymarket-related projects, and every one of them has been rewritten around a venue change, a new resolution rule, a shifted fee, or an edge that simply stopped existing. If your plan assumes the market you studied is the market you will still be trading in six months, the plan is wrong. The first build is the cheap part.
 
