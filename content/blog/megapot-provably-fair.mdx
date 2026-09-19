@@ -8,9 +8,9 @@ image: "/blog/megapot-provably-fair-hero.webp"
 cta: false
 ---
 
-I pulled the source of the deployed MegaPot contract and replayed draw 178 myself. Settlement landed in block 51480730, transaction `0xd6274c...328df`, and the seed sits in the `EntropyFulfilled` event: `0x94473962f0534e137e168d06c56a72e52a72706a41df91e6fcd12d7a1cd52b63`.
+The short answer is yes, it is fair and verifiable. The oracle behind the numbers is Pyth Network Entropy v2, and anyone can recompute a draw from the published seed.
 
-I ran that seed through `keccak256` and `FisherYatesRejection.draw` in my own script and got exactly what the chain recorded: 11, 21, 13, 6, 4 plus bonusball 3. The draw is fair in the sense that the result is determined by the published seed and by nothing else.
+I checked it on draw 178. I pulled the source of the deployed contract, took the seed from the `EntropyFulfilled` event of transaction `0xd6274c...328df` in block 51480730, ran it through `keccak256` and `FisherYatesRejection.draw` in my own script, and got exactly what the chain records: 11, 21, 13, 6, 4 plus bonusball 3. Matching the published seed is what verifiable fairness means.
 
 ## What a ticket is made of
 
@@ -113,41 +113,7 @@ Keeping those two things apart matters, because they get mixed up all the time. 
 
 ## Geography
 
-MegaPot's geoblock covers most of the world. The published list of prohibited jurisdictions runs to more than thirty countries:
-
-- Afghanistan
-- Australia
-- Austria
-- Belarus
-- Burkina Faso
-- Burundi
-- Cambodia
-- Canada
-- Comoros
-- Cuba
-- Democratic Republic of the Congo
-- France
-- Germany
-- Guinea-Bissau
-- Haiti
-- Iran
-- Iraq
-- Jamaica
-- Libya
-- Mali
-- Myanmar
-- Netherlands
-- North Korea
-- Russia
-- Senegal
-- Somalia
-- South Sudan
-- Spain
-- Syria
-- Ukraine
-- United Kingdom
-- United States
-- Venezuela
+MegaPot's geoblock covers most of the world. The published list of prohibited jurisdictions runs to more than thirty countries: Afghanistan, Australia, Austria, Belarus, Burkina Faso, Burundi, Cambodia, Canada, Comoros, Cuba, Democratic Republic of the Congo, France, Germany, Guinea-Bissau, Haiti, Iran, Iraq, Jamaica, Libya, Mali, Myanmar, Netherlands, North Korea, Russia, Senegal, Somalia, South Sudan, Spain, Syria, Ukraine, United Kingdom, United States and Venezuela.
 
 **P.S.** If MegaPot interests you and you are thinking of trying it, here is my referral link:
 
