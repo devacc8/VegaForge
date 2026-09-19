@@ -1,0 +1,135 @@
+---
+title: "The Coin That Buys Its Own Lottery Tickets: How LottoCoin Won 236,000 Dollars"
+description: "LottoCoin is a token whose trading fees buy MegaPot tickets and whose winnings burn its own supply. It hit a 236,000 dollar jackpot once, and the lifetime numbers look like a winner until that one drawing comes out. What the loop really sells is the burn story."
+date: "2026-09-19"
+category: "AI & Crypto"
+tags: ["crypto", "memecoin", "lottery", "base", "tokenomics"]
+image: "/blog/megapot-syndicates-and-lottocoin-hero.webp"
+cta: false
+---
+
+There is a coin on Base that buys lottery tickets instead of you. \$LOTTO takes the fees from its own trades, sends them to MegaPot, calls itself a referrer and buys back its own token with the winnings. In round 173 it took a jackpot of \$236,685.73.
+
+The idea is not new. Everyone understands a syndicate: more tickets, more numbers covered, better odds, and splitting the cost five ways is cheaper. It looks like a way to beat a lottery that returns less than a dollar for every dollar.
+
+I looked at both: I read the contracts and worked out what happens to the money. The simple part first, without the math.
+
+## A syndicate does not change the average
+
+The main point fits in one sentence. Whatever share of the tickets you hold, the average return stays the same.
+
+Buy more combinations and you pay more. The prize grows with the stake. A syndicate does not improve the deal. It only makes the outcome smoother. The spread changes, not the average.
+
+It is not about an unlucky pool size. The pool is funded from the same sales: every direct dollar puts 82.5 cents into the pool, every dollar through a referral link adds 72.5 cents. So the pool always holds less money than was staked on tickets in that round. A large syndicate does not detach the pool from sales; it is what creates those sales.
+
+Put simply, the prize fund is just a slice of those same ticket sales. A syndicate does not bring new money into the game. It only moves it between participants. Which is why the more tickets you hold, the more you pay for the same average return.
+
+That leaves one way to come out ahead: hit the accumulated jackpot while you hold a large share of the draw. No amount of coverage replaces it.
+
+<details>
+<summary>The full calculation, if you want to check it</summary>
+
+Let the syndicate hold a share f of all combinations in the draw. Then it holds the same share f at every payout tier, from the guaranteed minimum to the jackpot.
+
+The expected win is f times the return ratio times the pool. The cost is f times T, where T is all the money staked on tickets in that round.
+
+f appears on both sides and cancels out. Profit is possible under exactly one condition:
+
+```
+prizeRatio * pool > T
+pool / T > 1 / 0.775 = 1.29032
+```
+
+The number 0.775 is the return ratio from the MegaPot documentation. Realized payouts give about \$0.79 per dollar, so the real threshold is even higher. The pool is funded from the same sales, so pool / T is 0.825 or less, and 1.29032 is never reached at any syndicate size: f has already cancelled out.
+
+Coverage changes the spread, not the average. The expected value is linear in the number of tickets, and so is the variance: `E[S_N] = N * E[X]`, `Var(S_N) = N * Var(X)`.
+
+| Tickets | Expected value | SD | SD to expected value | P(profit) |
+|---:|---:|---:|---:|---:|
+| 1 | \$0.79 | \$196.18 | 24 764% | 49.96% |
+| 100 | \$79.39 | \$1 961.80 | 2 476% | 49.58% |
+| 10 000 | \$7 938.64 | \$19 618.00 | 248% | 45.78% |
+| 100 000 | \$79 386.44 | \$62 038.90 | 78.3% | 36.88% |
+| 1 425 060 (the whole board) | \$1 131 304.46 | \$0.00 | 0% | 0% |
+
+The last column is the normal approximation, and for a single ticket it lies: the distribution is so skewed that the average for one attempt means nothing. The whole board costs \$1,425,060 and returns \$1,131,304.46, a loss of \$293,755.54.
+
+</details>
+
+If you buy up all 1,425,060 combinations, the spread drops to zero and the loss becomes guaranteed. A syndicate does exactly that: it turns randomness into a smaller, predictable version of the same loss.
+
+## When the jackpot is split
+
+One more detail works against large coverage. A tier prize is split among all winning tickets in that tier, duplicates included.
+
+For the jackpot there is one winning combination. The first ticket with it takes the whole tier prize, and every further identical ticket splits the same fund. Co-winners dilute each other's shares, not the fund: the fund depends on sales, not on the number of winners.
+
+At current volumes it means almost nothing. Round 178 sold 8,088 tickets, and the expected number of jackpot winners there is 0.0057. A co-winner is an event that does not happen in practice. At MegaPot's projected volume of about 1.37 million tickets per draw, the expected number of winners is already 0.96, and the jackpot would be split regularly. The top tier return then falls by roughly half, while the fund stays the same.
+
+## What pool operators do
+
+The protocol itself has no syndicate, no pool, no ticket splitting function. That is not an opinion. It is the absence of such a function in the contract. Anything offering a syndicate is an add-on.
+
+I read one such add-on. PennyPot, contract `0x68C2F365DA5D55CC4CdbD4fE3A3a10EE56d0846A`, slogan "1 cent buys 1% of a ticket". The contract buys tickets itself, sells them in a hundred shares and names itself as the referrer on every purchase. Shares and winnings live in the contract's internal ledger, not in the player's wallet, and the owner takes the accumulated fees. It is a custodial design, and I found no audit report for it. The owner can pause the product and take the reserve, and tickets bought through the add-on lose the right to the guaranteed prize.
+
+Several more storefronts sit alongside: Lotpot, balkanlotto.com, megapot.build, PotWars, Blink.cash. There is no bulk discount on tickets. A ticket costs \$1.00 at any volume, and the only price cut is the referral rebate. The pattern is the same everywhere: they make money on the fee and the referral percentage, not on the lottery. That fee is their margin: they buy tickets through themselves, get part of it back and live on the difference, not on winnings.
+
+## LottoCoin: how the machine works
+
+\$LOTTO on Base, contract `0x908b1D6b6C12bfDFCaaeB658b365CE39c21e679c`. The token promises holders nothing, and the project site says so outright: no payouts, no rewards, no claim on anything.
+
+Next to it is a burn engine, contract `0x57E21dEc890826bA80A07713249459cA21B840e0`, deployed on September 11, 2026. The owner renounced the rights, so even the team cannot touch the burn reserve.
+
+The loop works like this. Every \$LOTTO trade sends USDC straight to the engine. Once a day the whole budget goes to MegaPot tickets. Every ticket names the engine as its own referrer, and part of the fee comes back. Winnings plus the rebate land in the reserve, which buys \$LOTTO from sellers along a price ladder and sends the tokens to a dead address. Holders get nothing: the buyback shrinks the circulating supply. The loop feeds on trading volume: no trades, no money for tickets.
+
+It is also not a burn in the usual sense. The tokens go to a dead address, while the total supply stays the same. So even on paper a holder gets neither a win nor a share of the reserve.
+
+## LottoCoin: the numbers
+
+Round 173, drawn on September 13, 2026. My research showed that the tier 11 jackpot was \$236,685.73, that there was one winning ticket, and that the engine held it. \$213,017.16 reached the engine, and another \$23,668.57 came back as its own referral share of the win. In that round the engine took 17,732 tickets out of 21,180, or 83.7%.
+
+From September 11 to 19, 2026 the engine spent \$101,865 on tickets (more than a hundred thousand tickets). It received \$270,919.11 in winnings and \$40,288.62 in referral fees, \$311,207.73 in total. The result: **+\$209,342.73** before gas. Without that single jackpot the same period gives about **-\$27,343**.
+
+The engine's share by round:
+
+| Draw | Date | Total tickets | Engine share |
+|---:|---|---:|---:|
+| 172 | 12.09.2026 | 9 625 | 59.5% |
+| 173 | 13.09.2026 | 21 180 | 83.7% |
+| 174 | 14.09.2026 | 68 769 | 88.0% |
+| 175 | 15.09.2026 | 24 190 | 53.3% |
+| 176 | 16.09.2026 | 11 825 | 24.0% |
+| 177 | 17.09.2026 | 10 194 | about 11% |
+| 178 | 18.09.2026 | 8 088 | 12.6% |
+
+The numbers speak for themselves. The engine dominated the rounds while it hunted the accumulated jackpot: 59.5%, 83.7%, 88.0%. In round 174 it spent \$60,550 and got back \$33,434, so a round without the jackpot is a loss. After the hit its share dropped sharply: 53.3%, 24.0%, about 11%, 12.6%. The machine did not get smarter. It stopped buying up the pool.
+
+## The other side: the economics of the house
+
+You can side with the house instead of the player: backers fund the prize pool and take a cut of every ticket. My research showed that side is in bad shape too. Over 99 drawn rounds from 80 to 178, sales came to \$426,053, backer revenue \$383,972, which is \$0.9012 per ticket, and player payouts \$501,151. The payout ratio is 117.6%, and the backers' net result is **-\$117,179**. Round 173 on its own gives **-\$230,710**, more than all the rest of the accumulated gain.
+
+This is not a free lunch: it is underwriting lottery payouts with your own capital. Seven rounds out of 178 were unprofitable, and one large jackpot wipes out what took months to accumulate.
+
+## So can you win here?
+
+The short answer: on average, no. Tiers below the jackpot return less than you put in, so day after day the game slowly loses money. That is not a side effect. It is the mathematics of a lottery. Every dollar spent on a ticket returns about 79 cents. The difference between sales and payouts takes the rest, and syndicate size does not remove it.
+
+The only thing that can make a period profitable is hitting the accumulated jackpot in a round where you hold a large share of the tickets. That is exactly what happened in round 173, and the whole LottoCoin gain rests on it alone.
+
+So a syndicate is a bet on the jackpot with a negative expected value. It does not make the bet profitable. It makes it cheaper per person and calmer in spread. That is the difference between losing a lot at once and losing a little predictably, not between a loss and a profit.
+
+There is no separate bet on someone hitting the jackpot either. The only way to bet on it yourself is to buy tickets.
+
+## What LottoCoin actually sells
+
+The project's idea is clear: make money from big wins and pour trading volume into the coin. Trade fees turn into tickets, tickets sometimes turn into a jackpot, and the winnings return to the market through a buyback.
+
+What does a holder get? Nothing. No payouts, no share of the reserve, no claim on anything. The token does not promise it either, and says so outright.
+
+So buying \$LOTTO buys a story, not a cash flow. The token sells a narrative of burning: somewhere a lottery is being played, and the coin's supply shrinks because of it. As long as people believe that, the token has a reason for demand. Everything else rests on round 173 and on someone believing in it after that.
+
+**P.S.** If you are going to play, I have a referral link:
+
+https://megapot.io/r/9JV79U
+
+I would appreciate it if you use it.

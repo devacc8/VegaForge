@@ -1,0 +1,156 @@
+---
+title: "Is the MegaPot Lottery Fair? I Replayed Draw 178 From Its Own Seed"
+description: "MegaPot publishes the random seed behind every draw and settles it on Base. I pulled the deployed contract, replayed draw 178 from its own seed and got the same five numbers in the same order. The draw is verifiably honest, which is a different question from whether the bet is any good."
+date: "2026-09-19"
+category: "AI & Crypto"
+tags: ["crypto", "lottery", "randomness", "base", "pyth"]
+image: "/blog/megapot-provably-fair-hero.webp"
+cta: false
+---
+
+I pulled the source of the deployed MegaPot contract and replayed draw 178 myself. Settlement landed in block 51480730, transaction `0xd6274c...328df`, and the seed sits in the `EntropyFulfilled` event: `0x94473962f0534e137e168d06c56a72e52a72706a41df91e6fcd12d7a1cd52b63`.
+
+I ran that seed through `keccak256` and `FisherYatesRejection.draw` in my own script and got exactly what the chain recorded: 11, 21, 13, 6, 4 plus bonusball 3. The draw is fair in the sense that the result is determined by the published seed and by nothing else.
+
+## What a ticket is made of
+
+A ticket costs \$1.00 in USDC and is issued as an ERC-721. Inside are six numbers: five regular ones from 1 to 30 and one bonusball from 1 to B. B is not a constant, and that is the first thing worth understanding.
+
+The bonusball range is recalculated for every draw. Here is the formula:
+
+```
+combosPerBonusball = C(30, 5) = 142 506
+minNumberTickets   = prizePool / ((1 - lpEdgeTarget) * ticketPrice)
+bonusballMax       = max(bonusballMin, ceil(minNumberTickets / combosPerBonusball))
+```
+
+In plain terms: the protocol looks at the prize pool, divides it by the amount that actually reaches it from each ticket sold, and gets the expected number of tickets sold. Then it divides that number by the count of five-number combinations (142,506) and rounds up. The result is the factor by which the bonusball range has to widen so that one ticket sold maps to roughly one combination on the whole board.
+
+You can check this against the numbers from the settlement of draw 178. The `NewDrawingInitialized` event in that transaction shows a pool of 1,131,260.736218 USDC (the event records the state at closing, which opens the next draw), a ticket price of 1,000,000 in six-digit units, regular numbers from 1 to 30, and a bonusball from 1 to 10. Divide the pool by 0.825 (that is how much of every direct dollar reaches the prize pool at an `lpEdgeTarget` of 17.5%) and you get 1,371,225 expected tickets. Divide by 142,506 and round up: 10. It matches what is recorded.
+
+One detail here is easy to miss. B is the width of the bonusball range, not the number of combinations on the board. The board grows with B: for draw 178 that is 142,506 times 10, or 1,425,060 combinations. The probability denominator grows with the board, which is exactly why a big pool on its own does not make a ticket a better bet.
+
+The board is also stored differently from what you would expect. The winning combination is not an array of five numbers but a single packed integer: each of the five values takes 6 bits (30 options fit into 6 bits with room to spare). Getting the numbers back means unpacking that bit vector. I unpacked it, and the values matched the public ones.
+
+## How a draw lives
+
+Draws run once a day, with a target time of 17:00 UTC. But a timer is not what closes sales.
+
+There is no time check in `buyTickets`. There is none in the other places that sell tickets either. A draw stays on sale until somebody calls `runJackpot()`. That call takes a lock and goes off to fetch entropy, and the settlement comes back as a callback from Pyth. The function is payable and anyone can call it: you pay the Pyth fee and the draw gets settled.
+
+The fee is not symbolic. In draw 178 the `JackpotRunRequested` event recorded 50,000,000,000,000 wei, or 0.00005 ETH. The contract refunds the excess to the sender, but you have to bring the sum with you.
+
+Two things follow from this. First: a draw can sit open past 17:00 until somebody pays for entropy. Second: there is no hard boundary between the moment sales end and the moment settlement happens. In draw 178 the entropy request went out in block 51480728, transaction `0x1900a5...47f34`, and settlement landed in block 51480730, transaction `0xd6274c...328df`.
+
+That is not a bug. It is how a protocol works when settlement is triggered from outside and the caller pays for it. But it is a real operational detail that the site never mentions, and it is worth keeping in mind when you count your odds against the clock.
+
+## Where the randomness comes from
+
+The source is Pyth Network Entropy v2, with `ScaledEntropyProvider` sitting between it and the lottery contract. Pyth returns a single `bytes32 randomNumber`, and two independent sets of numbers have to come out of it: the five regular ones and the bonusball.
+
+The provider does it like this. For each request it computes its own seed from the index `i`:
+
+```
+seed_i = keccak256(abi.encode(randomNumber, i))
+```
+
+The first index gives the seed for the five regular numbers, the second for the bonusball. Then `FisherYatesRejection.draw` shuffles a set of numbers (an array from the minimum to the maximum) with the Fisher-Yates algorithm and takes the required count from the front.
+
+Why overcomplicate it? Modulo bias. Take `rand % N` where N does not divide the `uint256` range exactly, and the remainder is not evenly distributed: some numbers come up slightly more often. In a lottery, where the difference in probability between one number and another is the entire product, that skew has to be removed rather than smoothed over. So before the remainder is taken, the value is checked against a limit:
+
+```
+rand = keccak256(abi.encode(seed, nonce))
+limit = (MAX_UINT / (i + 1)) * (i + 1)
+if (rand >= limit) { nonce++; continue; }
+rand = rand % (i + 1)
+```
+
+Anything that lands in the tail is discarded and the next value is taken. That is where the word rejection in the library name comes from. My replay of draw 178 needed no rejections: both requests hit a value below the limit, 29 shuffle steps plus 9.
+
+Now, about that `i` index. It is not decoration. It is the fix for a specific Code4rena audit finding, M-05: the bonusball could coincide with one of the regular numbers. If both requests run on the same seed and the ranges match (and B does grow as far as 30), the shuffle produces the same permutation on both calls, so the bonusball repeats one of the drawn numbers deterministically. Different seeds for different indices remove the link: the two requests no longer correlate.
+
+## How to check it yourself
+
+Nothing secret is needed to check this. Three things are enough: the Pyth seed, the settlement transaction and the block.
+
+The seed is published only at settlement. That is the key property: until `entropyCallback` writes the result, nobody knows the numbers, including whoever called `runJackpot()`. So there is no way to pick them in advance. It shows up in the `EntropyFulfilled` event, in the same transaction where the lottery has already settled the winners.
+
+Then it is arithmetic. Take `keccak256(abi.encode(seed, 0))`, run it through `FisherYatesRejection.draw(1, 30, 5, seed_0)` and you get five numbers in the order they were drawn. Same with the second index and the bonusball range. If your numbers match the `JackpotSettled` event, the draw is fair in the sense that the result is determined by the published seed and by nothing else.
+
+My replay produced exactly what sits on chain: 11, 21, 13, 6, 4 and 3. I checked against the source of the deployed contract, not against the description on the site.
+
+Any tool will do. Python with a keccak library, `cast` from Foundry, a Node script: the algorithm is pure arithmetic over the seed, no secrets and no private keys. The one thing to get right is assembling `keccak256(abi.encode(seed, nonce))` exactly the way Solidity does it: two 32-byte numbers, no packing. Hash it any other way and the result will not match, and that is a mistake in your check, not in the lottery.
+
+## Two things the site does not tell you
+
+First: the sales window. It is closed not by time but by the `runJackpot()` call. Until somebody pays for entropy, tickets keep being accepted. Formally this does not affect fairness, since the seed still appears only after the close. It does affect how you read the phrase "a draw at 17:00 UTC".
+
+Second: the dynamic B. The bigger the pool, the wider the bonusball range and the more combinations on the board. That is done so a draw never ends up in a state where the jackpot has become too rare compared with the number of tickets sold. The side effect is that a "big jackpot" here does not mean "better odds per ticket", because the odds normalize along with the pool.
+
+Neither point is an accusation. Both are parts of the mechanics that only stand out if you read the contract.
+
+## What is genuinely not clean here
+
+A fair blockchain does not mean a clean history, and that is better said plainly.
+
+The Code4rena audit ran from November 3 to 13, 2025: 16 contracts, 1,709 lines. The result was three HIGH findings and eight MEDIUM. Among them H-01, theft of ticket NFTs through `JackpotBridgeManager`, and H-03, exceeding the LP pool limit during settlement of a draw. That second finding is the same class as the state of the pool right now: it sits above its own ceiling.
+
+The Zellic audit in October 2025 produced one Critical, and it was about manipulating the randomness. As far as I can tell from the code, that hole was closed, and the per-index seed independence grew out of it. But "closed" is a statement about the code, not a guarantee about the future.
+
+There is one more thing worth keeping in mind. Three teams wrote the reports, Zellic, Code4rena and RiskCherry, which is more good than bad: different eyes look at different pieces. But Code4rena says in its own conclusion that with limited time more complex bugs almost certainly remain, and recommends another audit plus more serious stateful tests before significant money goes into the protocol. That is not my interpretation but the auditor's conclusion, and it stands no matter how elegant the draw verification looks.
+
+And separately, the documentation disagrees with the chain about how much the house takes. The docs say around 77.5% comes back as prizes and 12.5% goes to the backer, while on chain `lpEdgeTarget` is 17.5%. The numbers do not add up to 100% on any reading. I will not claim to know which version is right: both were published by the project itself.
+
+## A fair draw does not mean a good bet
+
+Here is the main point, and it is simple.
+
+The randomness here is verifiable. A deterministic algorithm plus a seed published only at settlement means the result cannot be bent by the operator, the player or any third party. If you read the code the way I did, you get a reproducible fact rather than a promise.
+
+None of that has anything to do with whether the bet is worth making. A fair draw guarantees you will not be cheated. It does not guarantee you will win. The expected value here is negative, on the order of 21%, and it does not change with how fairly the balls are shuffled. Detailed tables and an EV breakdown are a separate piece.
+
+Keeping those two things apart matters, because they get mixed up all the time. "We are fair" and "you will profit here" are two different claims, and the first is checked in code while the second is not.
+
+## Geography
+
+MegaPot's geoblock covers most of the world. The published list of prohibited jurisdictions runs to more than thirty countries:
+
+- Afghanistan
+- Australia
+- Austria
+- Belarus
+- Burkina Faso
+- Burundi
+- Cambodia
+- Canada
+- Comoros
+- Cuba
+- Democratic Republic of the Congo
+- France
+- Germany
+- Guinea-Bissau
+- Haiti
+- Iran
+- Iraq
+- Jamaica
+- Libya
+- Mali
+- Myanmar
+- Netherlands
+- North Korea
+- Russia
+- Senegal
+- Somalia
+- South Sudan
+- Spain
+- Syria
+- Ukraine
+- United Kingdom
+- United States
+- Venezuela
+
+**P.S.** If MegaPot interests you and you are thinking of trying it, here is my referral link:
+
+https://megapot.io/r/9JV79U
+
+I would appreciate it if you use it.
