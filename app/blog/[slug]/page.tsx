@@ -218,7 +218,7 @@ export default async function BlogPostPage({
           )}
 
           {/* Article body */}
-          <div>
+          <div className="article-body">
             {mdxContent}
           </div>
 
