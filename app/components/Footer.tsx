@@ -10,25 +10,33 @@ export function Footer() {
           </span>
           <span className="text-neutral-400 dark:text-neutral-600 text-sm">&copy; 2026</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <a
-            href="https://x.com/vvegalex"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow on X (Twitter)"
-            className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            href="mailto:alex@vegaforge.dev"
+            className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
           >
-            <XIcon />
+            alex@vegaforge.dev
           </a>
-          <a
-            href="https://github.com/devacc8"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View GitHub profile"
-            className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-          >
-            <GitHubIcon />
-          </a>
+          <div className="flex items-center gap-6">
+            <a
+              href="https://x.com/vvegalex"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow on X (Twitter)"
+              className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            >
+              <XIcon />
+            </a>
+            <a
+              href="https://github.com/devacc8"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View GitHub profile"
+              className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            >
+              <GitHubIcon />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
