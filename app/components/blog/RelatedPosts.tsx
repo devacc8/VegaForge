@@ -10,12 +10,12 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
     <section aria-labelledby="related-heading" className="mt-16">
       <h2
         id="related-heading"
-        className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 uppercase mb-6"
+        className="mb-6 font-mono text-[10px] uppercase tracking-[.06em] text-forge-500"
       >
         More from the forge
       </h2>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <a
             key={post.slug}
@@ -23,9 +23,9 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
             className="group block"
             aria-label={`Read: ${post.title}`}
           >
-            <article className="relative h-full flex flex-col bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-xl overflow-hidden transition-all duration-500 shadow-xs dark:shadow-none hover:shadow-md">
+            <article className="relative flex h-full flex-col overflow-hidden border border-[var(--border-color)] bg-white transition-colors hover:border-forge-500">
               {/* Hero image — the click magnet */}
-              <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+              <div className="relative aspect-video overflow-hidden border-b border-[var(--border-color)] bg-[var(--bg-secondary)]">
                 {post.image ? (
                   <img
                     src={post.image}
@@ -42,7 +42,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
 
               <div className="flex flex-col flex-1 p-5">
                 <div className="flex items-center gap-2 mb-2.5">
-                  <span className="font-mono text-[10px] tracking-widest text-forge-600 dark:text-forge-500 uppercase">
+                  <span className="font-mono text-[9px] uppercase tracking-[.06em] text-forge-500">
                     {post.category}
                   </span>
                   <span className="text-neutral-300 dark:text-neutral-700">/</span>
@@ -51,7 +51,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
                   </span>
                 </div>
 
-                <h3 className="font-display font-bold text-base text-neutral-900 dark:text-white leading-snug group-hover:text-forge-600 dark:group-hover:text-forge-500 transition-colors line-clamp-3">
+                <h3 className="font-display text-base font-medium leading-snug tracking-[-.02em] text-[var(--text-primary)] transition-colors group-hover:text-forge-500 line-clamp-3">
                   {post.title}
                 </h3>
               </div>

@@ -1,162 +1,97 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useRef } from 'react'
-import { ThemeSwitcher } from './ThemeSwitcher'
+import { useState, useEffect } from 'react'
 import { TallyButton } from './TallyButton'
+
+const links = [
+  { href: '/work', label: 'Work' },
+  { href: '/ai-agents', label: 'AI Agents' },
+  { href: '/blog', label: 'Blog' },
+]
 
 export function Navigation() {
   const pathname = usePathname()
-  const isWork = pathname === '/work'
-  const isServicePage = pathname === '/ai-chatbot' || pathname === '/ai-agent' || pathname === '/content-writing'
-  const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
-  const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Close everything on route change
   useEffect(() => {
-    setServicesOpen(false)
     setMobileOpen(false)
   }, [pathname])
 
-  // Close desktop dropdown on click outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setServicesOpen(false)
-      }
-    }
-    if (servicesOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [servicesOpen])
-
-
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 lg:px-20 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800/50 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <a href="/" className="font-display font-bold text-xl tracking-tight text-neutral-900 dark:text-white">
+      <header className="sticky top-0 z-50 border-b border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-md">
+        <div className="mx-auto flex h-[62px] w-full max-w-[1280px] items-center justify-between gap-6 px-5 md:px-8">
+          <a href="/" className="font-display text-xl font-bold tracking-[-0.055em] text-[var(--text-primary)]">
             Vega<span className="text-forge-500">Forge</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            <a href="/work" className={`text-sm transition-colors link-underline ${isWork ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}>
-              Work
-            </a>
-
-            <a href="/blog" className={`text-sm transition-colors link-underline ${isBlog ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}>
-              Blog
-            </a>
-
-            {/* Services Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setServicesOpen(!servicesOpen)}
-                className={`text-sm transition-colors link-underline inline-flex items-center gap-1 cursor-pointer ${isServicePage ? 'text-forge-600 dark:text-forge-500' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'}`}
-              >
-                Services
-                <svg className={`w-3 h-3 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {servicesOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg dark:shadow-neutral-950/50 overflow-hidden">
-                  <a
-                    href="/ai-chatbot"
-                    className={`block px-4 py-3 text-sm transition-colors ${pathname === '/ai-chatbot' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/5' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-white'}`}
-                  >
-                    AI Chatbot
-                  </a>
-                  <a
-                    href="/ai-agent"
-                    className={`block px-4 py-3 text-sm transition-colors ${pathname === '/ai-agent' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/5' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-white'}`}
-                  >
-                    AI Agent
-                  </a>
-                  <a
-                    href="/content-writing"
-                    className={`block px-4 py-3 text-sm transition-colors ${pathname === '/content-writing' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/5' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:text-neutral-900 dark:hover:text-white'}`}
-                  >
-                    Content Writing
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <ThemeSwitcher />
-            <TallyButton className="text-sm px-4 py-2 border border-neutral-300 dark:border-forge-600/50 rounded-full text-neutral-700 dark:text-forge-400 hover:border-forge-500 dark:hover:border-forge-500 hover:text-forge-600 dark:hover:text-forge-300 hover:bg-forge-500/5 dark:hover:bg-forge-500/10 transition-all cursor-pointer">
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+            {links.map((link) => {
+              const active = pathname === link.href || pathname.startsWith(`${link.href}/`)
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`font-mono text-[10px] uppercase tracking-[0.08em] transition-colors ${
+                    active ? 'text-forge-600' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
+            <a
+              href="/#contact"
+              className="font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+            >
               Contact
-            </TallyButton>
-          </div>
+            </a>
+          </nav>
 
-          {/* Mobile: theme switcher + hamburger */}
-          <div className="flex md:hidden items-center gap-3">
-            <ThemeSwitcher />
+          <div className="flex items-center gap-2">
+            <TallyButton className="hidden bg-forge-600 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-forge-500 md:inline-flex">
+              Start a project
+            </TallyButton>
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="w-10 h-10 flex items-center justify-center text-neutral-700 dark:text-neutral-300 cursor-pointer"
+              type="button"
+              onClick={() => setMobileOpen((open) => !open)}
+              className="flex h-9 w-9 items-center justify-center border border-[var(--border-color)] text-[var(--text-secondary)] md:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileOpen ? (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
             </button>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile Menu — rendered outside <nav> to avoid backdrop-blur stacking context */}
       {mobileOpen && (
-        <div className="md:hidden fixed top-[65px] left-0 right-0 z-50 bg-white dark:bg-[#0a0a0a] border-b border-neutral-200 dark:border-neutral-800 shadow-lg dark:shadow-neutral-950/50">
-          <div className="px-6 py-4 space-y-1">
-            {/* Services section */}
-            <p className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 mb-2 px-4">SERVICES</p>
-            <a
-              href="/ai-chatbot"
-              className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/ai-chatbot' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
-            >
-              AI Chatbot
-            </a>
-            <a
-              href="/ai-agent"
-              className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/ai-agent' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
-            >
-              AI Agent
-            </a>
-            <a
-              href="/content-writing"
-              className={`block px-4 py-3 rounded-xl text-base transition-colors ${pathname === '/content-writing' ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
-            >
-              Content Writing
-            </a>
-
-            <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
-
-            <a
-              href="/blog"
-              className={`block px-4 py-3 rounded-xl text-base transition-colors ${isBlog ? 'text-forge-600 dark:text-forge-500 bg-forge-500/10' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50'}`}
-            >
-              Blog
-            </a>
-
-            <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
-
-            {/* Contact */}
-            <TallyButton className="block w-full text-left px-4 py-3 rounded-xl text-base text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-colors cursor-pointer">
+        <div className="fixed inset-x-0 top-[62px] z-40 border-b border-[var(--border-color)] bg-[var(--bg-primary)] px-5 py-4 md:hidden">
+          <nav className="mx-auto flex max-w-[1280px] flex-col" aria-label="Mobile navigation">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="border-b border-[var(--border-color-subtle)] py-3 font-mono text-xs uppercase tracking-[0.08em] text-[var(--text-secondary)]"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a href="/#contact" className="border-b border-[var(--border-color-subtle)] py-3 font-mono text-xs uppercase tracking-[0.08em] text-[var(--text-secondary)]">
               Contact
+            </a>
+            <TallyButton className="mt-4 bg-forge-600 px-4 py-3 text-center text-sm font-medium text-white">
+              Start a project
             </TallyButton>
-          </div>
+          </nav>
         </div>
       )}
     </>

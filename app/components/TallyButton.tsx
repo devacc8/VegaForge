@@ -24,7 +24,7 @@ export function TallyButton({
       data-tally-hide-title={TALLY_CONFIG.hideTitle}
       data-tally-emoji-text={TALLY_CONFIG.emojiText}
       data-tally-emoji-animation={TALLY_CONFIG.emojiAnimation}
-      className={className}
+      className={`cursor-pointer ${className ?? ''}`}
     >
       {children}
     </button>

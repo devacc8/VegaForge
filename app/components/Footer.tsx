@@ -1,42 +1,46 @@
-import { XIcon, GitHubIcon } from './Icons'
+import { GitHubIcon, XIcon } from './Icons'
 
 export function Footer() {
   return (
-    <footer className="px-6 md:px-12 lg:px-20 py-12 border-t border-neutral-200 dark:border-neutral-900">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex items-center gap-2">
-          <span className="font-display font-bold text-lg text-neutral-900 dark:text-white">
+    <footer className="border-t border-[var(--border-color)] px-5 py-8 md:px-8">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col justify-between gap-6 md:flex-row md:items-center">
+        <div className="flex items-baseline gap-3">
+          <a href="/" className="font-display text-lg font-bold tracking-[-0.055em] text-[var(--text-primary)]">
             Vega<span className="text-forge-500">Forge</span>
+          </a>
+          <span className="font-mono text-[9px] uppercase tracking-[0.06em] text-[var(--text-muted)]">
+            Custom software as a service
           </span>
-          <span className="text-neutral-400 dark:text-neutral-600 text-sm">&copy; 2026</span>
         </div>
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           <a
             href="mailto:alex@vegaforge.dev"
-            className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            className="font-mono text-[10px] uppercase tracking-[0.06em] text-[var(--text-secondary)] transition-colors hover:text-forge-600"
           >
             alex@vegaforge.dev
           </a>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://x.com/vvegalex"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow on X (Twitter)"
-              className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-            >
-              <XIcon />
-            </a>
-            <a
-              href="https://github.com/devacc8"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View GitHub profile"
-              className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
-            >
-              <GitHubIcon />
-            </a>
-          </div>
+          <a
+            href="https://github.com/devacc8"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-[var(--text-muted)] transition-colors hover:text-forge-600"
+          >
+            <GitHubIcon className="h-4 w-4" />
+          </a>
+          <a
+            href="https://x.com/vvegalex"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X"
+            className="text-[var(--text-muted)] transition-colors hover:text-forge-600"
+          >
+            <XIcon className="h-4 w-4" />
+          </a>
+          <span className="font-mono text-[9px] uppercase tracking-[0.06em] text-[var(--text-muted)]">
+            © 2026
+          </span>
         </div>
       </div>
     </footer>

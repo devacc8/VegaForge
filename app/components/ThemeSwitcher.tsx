@@ -23,12 +23,12 @@ const MonitorIcon = () => (
 )
 
 function getSystemTheme(): 'dark' | 'light' {
-  if (typeof window === 'undefined') return 'dark'
+  if (typeof window === 'undefined') return 'light'
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 export function ThemeSwitcher() {
-  const [theme, setThemeState] = useState<Theme>('dark')
+  const [theme, setThemeState] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function ThemeSwitcher() {
     if (stored && ['dark', 'light', 'system'].includes(stored)) {
       setThemeState(stored)
     }
-    // Default is 'dark' if nothing stored
+    // Default is light if nothing stored
   }, [])
 
   useEffect(() => {

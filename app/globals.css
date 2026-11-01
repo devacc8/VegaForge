@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap')
 layer(base);
 
 @import 'tailwindcss';
@@ -6,17 +6,17 @@ layer(base);
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-forge-50: #fdf8f6;
-  --color-forge-100: #f2e8e5;
-  --color-forge-200: #eaddd7;
-  --color-forge-300: #e0cec7;
-  --color-forge-400: #d2bab0;
-  --color-forge-500: #c87941;
-  --color-forge-600: #b5651d;
-  --color-forge-700: #96521a;
-  --color-forge-800: #7a4419;
-  --color-forge-900: #633717;
-  --color-forge-950: #3d2110;
+  --color-forge-50: #fdf3ee;
+  --color-forge-100: #fbe4da;
+  --color-forge-200: #f7c8b5;
+  --color-forge-300: #f2a88b;
+  --color-forge-400: #ef8a63;
+  --color-forge-500: #e2531f;
+  --color-forge-600: #c94516;
+  --color-forge-700: #a63812;
+  --color-forge-800: #852d11;
+  --color-forge-900: #6b2712;
+  --color-forge-950: #3a1207;
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -46,10 +46,10 @@ layer(base);
   }
   @keyframes glow {
     0% {
-      box-shadow: 0 0 20px rgba(200, 121, 65, 0.3);
+      box-shadow: 0 0 20px rgba(226, 83, 31, 0.3);
     }
     100% {
-      box-shadow: 0 0 40px rgba(200, 121, 65, 0.6);
+      box-shadow: 0 0 40px rgba(226, 83, 31, 0.6);
     }
   }
 }
@@ -73,43 +73,44 @@ layer(base);
 }
 
 :root {
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
 
-  --forge-glow: rgba(200, 121, 65, 0.4);
-  --forge-ember: #c87941;
-  --forge-copper: #b5651d;
+  --forge-glow: rgba(226, 83, 31, 0.4);
+  --forge-ember: #e2531f;
+  --forge-copper: #c94516;
+  --forge-teal: #1d5b63;
 
   /* Light theme (default) */
-  --bg-primary: #fafafa;
-  --bg-secondary: #f5f5f5;
+  --bg-primary: #f4f7f7;
+  --bg-secondary: #f4f7f7;
   --bg-card: #ffffff;
-  --bg-card-hover: #f9f9f9;
-  --text-primary: #171717;
-  --text-secondary: #525252;
-  --text-muted: #737373;
-  --border-color: #e5e5e5;
-  --border-color-subtle: #f0f0f0;
-  --nav-bg: rgba(250, 250, 250, 0.8);
-  --grain-opacity: 0.02;
+  --bg-card-hover: #eef3f2;
+  --text-primary: #0b1d22;
+  --text-secondary: #52625f;
+  --text-muted: #6b7a77;
+  --border-color: #cbd5d3;
+  --border-color-subtle: #e3eae8;
+  --nav-bg: rgba(244, 247, 247, 0.9);
+  --grain-opacity: 0;
 
   /* Chevron for the in-article spoiler; used as a mask so it takes the label colour. */
   --spoiler-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4l6 6-6 6'/%3E%3C/svg%3E");
 }
 
 .dark {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #050505;
-  --bg-card: rgba(23, 23, 23, 0.8);
-  --bg-card-hover: rgba(23, 23, 23, 0.9);
-  --text-primary: #fafafa;
-  --text-secondary: #a3a3a3;
-  --text-muted: #737373;
-  --border-color: #262626;
-  --border-color-subtle: #1a1a1a;
-  --nav-bg: rgba(10, 10, 10, 0.8);
-  --grain-opacity: 0.03;
+  --bg-primary: #0b1d22;
+  --bg-secondary: #081619;
+  --bg-card: rgba(15, 35, 38, 0.86);
+  --bg-card-hover: rgba(21, 45, 48, 0.92);
+  --text-primary: #f4f7f7;
+  --text-secondary: #b8c9c4;
+  --text-muted: #8fa39e;
+  --border-color: #284145;
+  --border-color-subtle: #1a3034;
+  --nav-bg: rgba(8, 22, 25, 0.9);
+  --grain-opacity: 0;
 }
 
 html {
@@ -155,7 +156,7 @@ body {
 
 /* Light mode: subtle glow */
 :root .text-glow {
-  text-shadow: 0 0 30px rgba(200, 121, 65, 0.3);
+  text-shadow: 0 0 30px rgba(226, 83, 31, 0.3);
 }
 
 .dark .text-glow {
@@ -338,4 +339,8 @@ details[open] .faq-icon {
 
 h2, h3, h4 {
   position: relative;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
 }

@@ -3,64 +3,31 @@ import type { PostMeta } from '@/lib/blog'
 export function PostCard({ post }: { post: PostMeta }) {
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   })
 
   return (
     <a href={`/blog/${post.slug}`} className="group block" aria-label={`Read: ${post.title}`}>
-      <article className="relative bg-white dark:bg-linear-to-br dark:from-neutral-900/80 dark:to-neutral-950/80 border border-neutral-200 dark:border-neutral-800 hover:border-forge-500/50 dark:hover:border-forge-600/50 rounded-2xl overflow-hidden transition-all duration-500 shadow-xs dark:shadow-none">
-        <div className="absolute inset-0 bg-forge-500/5 dark:bg-forge-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        <div className="relative z-10 flex flex-row">
-          {/* Hero image — fits to card height, cropped to fill */}
-          {post.image && (
-            <div className="hidden md:block w-[160px] shrink-0">
-              <img
-                src={post.image}
-                alt=""
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          )}
-
-          <div className="p-6 md:p-8 min-w-0 flex-1">
-            {/* Category + reading time */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 uppercase">
-                {post.category}
-              </span>
-              <span className="text-neutral-300 dark:text-neutral-700">/</span>
-              <span className="text-xs text-neutral-500 dark:text-neutral-500">
-                {post.readingTime} min read
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2 className="font-display font-bold text-lg md:text-xl text-neutral-900 dark:text-white mb-3 group-hover:text-forge-600 dark:group-hover:text-forge-500 transition-colors">
-              {post.title}
-            </h2>
-
-            {/* Description */}
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
-              {post.description}
-            </p>
-
-            {/* Date + tags */}
-            <div className="flex flex-wrap items-center gap-3">
-              <time dateTime={post.date} className="text-xs text-neutral-500 dark:text-neutral-500">
-                {formattedDate}
-              </time>
-              {post.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+      <article className="flex overflow-hidden border border-[var(--border-color)] bg-white transition-colors hover:border-forge-500">
+        {post.image && (
+          <div className="hidden w-[180px] shrink-0 border-r border-[var(--border-color)] md:block">
+            <img src={post.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+          </div>
+        )}
+        <div className="min-w-0 flex-1 p-5 md:p-7">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[9px] uppercase tracking-[.06em]">
+            <span className="text-forge-500">{post.category}</span>
+            <span className="text-[var(--text-muted)]">/</span>
+            <span className="text-[var(--text-muted)]">{post.readingTime} min read</span>
+          </div>
+          <h2 className="mt-3 font-display text-xl font-medium leading-tight tracking-[-.035em] transition-colors group-hover:text-forge-500 md:text-2xl">{post.title}</h2>
+          <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-[var(--text-secondary)]">{post.description}</p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <time dateTime={post.date} className="font-mono text-[9px] text-[var(--text-muted)]">{formattedDate}</time>
+            {post.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="border border-[var(--border-color)] px-2 py-1 font-mono text-[8px] text-[var(--text-muted)]">{tag}</span>
+            ))}
           </div>
         </div>
       </article>

@@ -10,6 +10,7 @@ import { mdxComponents } from '../../components/mdx/MDXComponents'
 import { Navigation } from '../../components/Navigation'
 import { Footer } from '../../components/Footer'
 import { RelatedPosts } from '../../components/blog/RelatedPosts'
+import { AuthorCard } from '../../components/AuthorCard'
 
 export const dynamicParams = false
 
@@ -137,10 +138,10 @@ export default async function BlogPostPage({
   }
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
+    <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-forge-600 focus:text-white focus:rounded-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-forge-600 focus:text-white focus:outline-none"
       >
         Skip to main content
       </a>
@@ -150,18 +151,15 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
 
-      <div className="fixed inset-0 bg-linear-to-b from-neutral-100 via-neutral-50 to-white dark:from-[#0a0a0a] dark:via-[#0d0908] dark:to-[#050505] -z-10 transition-colors duration-300" />
-      <div className="fixed top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-forge-500/5 dark:bg-forge-600/5 rounded-full blur-[120px] -z-10" />
-
       <Navigation />
 
-      <article id="main-content" className="px-6 md:px-12 lg:px-20 pt-28 md:pt-32 pb-12 md:pb-24">
-        <div className="max-w-3xl mx-auto">
+      <article id="main-content" className="px-5 md:px-8 pt-16 md:pt-20 pb-12 md:pb-24">
+        <div className="mx-auto max-w-[880px]">
           {/* Header */}
           <header className="mb-10">
             <a
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-500 hover:text-forge-600 dark:hover:text-forge-500 transition-colors mb-6"
+              className="mb-8 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[.06em] text-[var(--text-muted)] transition-colors hover:text-forge-500"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -169,39 +167,32 @@ export default async function BlogPostPage({
               Back to Blog
             </a>
 
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-mono text-xs tracking-widest text-forge-600 dark:text-forge-500 uppercase">
-                {meta.category}
-              </span>
-              <span className="text-neutral-300 dark:text-neutral-700">/</span>
-              <span className="text-xs text-neutral-500 dark:text-neutral-500">
-                {meta.readingTime} min read
-              </span>
+            <div className="mb-4 flex flex-wrap items-center gap-2 font-mono text-[9px] uppercase tracking-[.06em]">
+              <span className="text-forge-500">{meta.category}</span>
+              <span className="text-[var(--text-muted)]">/</span>
+              <span className="text-[var(--text-muted)]">{meta.readingTime} min read</span>
             </div>
 
-            <h1 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-900 dark:text-white mb-4 leading-tight">
+            <h1 className="mb-4 max-w-[820px] font-display text-[clamp(2.2rem,4.6vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">
               {meta.title}
             </h1>
 
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            <p className="mb-4 max-w-[720px] text-[16px] leading-relaxed text-[var(--text-secondary)]">
               {meta.description}
             </p>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <time dateTime={meta.date} className="text-sm text-neutral-500 dark:text-neutral-500">
+            <div className="flex flex-wrap items-center gap-2">
+              <time dateTime={meta.date} className="font-mono text-[9px] text-[var(--text-muted)]">
                 {formattedDate}
               </time>
               {meta.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 rounded-full text-xs text-neutral-600 dark:text-neutral-400"
-                >
+                <span key={tag} className="border border-[var(--border-color)] px-2 py-1 font-mono text-[8px] text-[var(--text-muted)]">
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div className="h-px bg-neutral-200 dark:bg-neutral-800 mt-8" />
+            <div className="mt-8 h-px bg-[var(--border-color)]" />
           </header>
 
           {/* Hero image */}
@@ -212,7 +203,7 @@ export default async function BlogPostPage({
                 alt={meta.title}
                 width={1400}
                 height={780}
-                className="w-full rounded-none md:rounded-2xl"
+                className="w-full border border-[var(--border-color)]"
               />
             </div>
           )}
@@ -222,19 +213,19 @@ export default async function BlogPostPage({
             {mdxContent}
           </div>
 
+          <AuthorCard />
+
           {/* Baseline reader CTA, written as a postscript. Suppressed on articles that
               carry a targeted one. */}
           {meta.cta && (
             <p className="mt-12 text-sm text-neutral-500 dark:text-neutral-500">
-              <strong className="font-medium text-neutral-600 dark:text-neutral-400">P.S.</strong>{' '}
-              Working on something in AI or crypto and want a second opinion?{' '}
+              <strong className="font-medium text-[var(--text-secondary)]">P.S.</strong>{' '}
+              Working on something in this space and want a second opinion?{' '}
               <a
-                href="https://x.com/vvegalex"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-forge-600 dark:text-forge-500 hover:text-forge-500 dark:hover:text-forge-400 underline underline-offset-2 decoration-forge-500/30 hover:decoration-forge-500 transition-colors"
+                href="mailto:alex@vegaforge.dev"
+                className="text-forge-600 underline underline-offset-2 decoration-forge-500/30 transition-colors hover:decoration-forge-500"
               >
-                DM me on X
+                Write to VegaForge
               </a>
               .
             </p>
@@ -244,11 +235,11 @@ export default async function BlogPostPage({
           <RelatedPosts posts={relatedPosts} />
 
           {/* Footer divider */}
-          <div className="h-px bg-neutral-200 dark:bg-neutral-800 mt-12 mb-8" />
+          <div className="mt-12 mb-8 h-px bg-[var(--border-color)]" />
 
           <a
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-500 hover:text-forge-600 dark:hover:text-forge-500 transition-colors"
+            className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[.06em] text-[var(--text-muted)] transition-colors hover:text-forge-500"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
