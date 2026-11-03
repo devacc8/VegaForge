@@ -1,6 +1,6 @@
 # VegaForge site
 
-Next.js 16 site with an MDX blog, deployed by Vercel from `master` in this repository.
+Next.js 16 site with an MDX blog, deployed by Vercel from `main` in this repository.
 The workspace root is one level up; the studio that writes the articles is `../voice`.
 
 ## Commands
@@ -29,6 +29,6 @@ date that disagrees with the sitemap. Fix what it reports, never bypass it.
 - No dashes as punctuation in content or code.
 - Everything written to a file is English.
 - Never commit `.env`.
-- Push `master` only after `npm run build` passes; Vercel deploys on push.
+- Push `main` only after `npm run build` passes; Vercel deploys on push.
 - An article's Russian source and its history file live in `../voice`, a different
   repository. Commit and push them there on their own, never in the same commit.
