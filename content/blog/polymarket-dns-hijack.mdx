@@ -22,7 +22,7 @@ On October 30 the status page published a post-mortem: \$3.9M returned, of which
 
 No claims were needed: the affected wallets were identified from on-chain and trading data.
 
-And here it is hard to tell which number is the real one, because there are three and they measure different things. The platform reports \$2.7M in direct losses and \$3.9M including compensation. Bitquery counted 737 wallets and about \$2.73M in one hour on chain, which is a separate account ([KuCoin](https://www.kucoin.com/news/flash/polymarket-hacked-2-73m-stolen-from-737-wallets-in-one-hour), [Gate](https://www.gateweb3.net/zh/news/detail/POL/polymarket-hack-drains-737-wallets-of-273m-via-compromised-script-25330656)). And the chain shows 985 unauthorized withdrawals in that same hour, all of them through Polymarket's official relayer with valid wallet authorizations.
+On chain the count is different. Bitquery counted 737 wallets and about \$2.73M in one hour on chain ([KuCoin](https://www.kucoin.com/news/flash/polymarket-hacked-2-73m-stolen-from-737-wallets-in-one-hour), [Gate](https://www.gateweb3.net/zh/news/detail/POL/polymarket-hack-drains-737-wallets-of-273m-via-compromised-script-25330656)). And the chain shows 985 unauthorized withdrawals in that same hour, all of them through Polymarket's official relayer with valid wallet authorizations.
 
 I run a trading tool on this market, so the situation is not abstract to me. I know what a day like this looks like from the user's side.
 
@@ -62,9 +62,9 @@ And here you can see what the chain is actually made of: browser storage hands o
 
 737 wallets, about \$2.73M, one hour. The largest single loss was about \$358k. Four accounts made up 43% of the damage, and 276 accounts lost less than \$1k each.
 
-That distribution does not look like whale hunting. It looks like everyone who was online when the script was swapped: a few big accounts, many medium ones, a long tail of small ones. For the attacker that is not a problem, because the sum comes from the tail, not from one big account.
+That distribution does not look like whale hunting. It looks like everyone who was online when the script was swapped: a few big accounts, many medium ones, a long tail of small ones.
 
-The funds were converted to POL and spread across several wallets. From there the usual route is a mixer and complex bridges between networks to hide the trail. That part has nothing to do with the entry point.
+The funds were converted to POL and spread across several wallets. From there the usual route is a mixer and complex bridges between networks to hide the trail.
 
 ## The Same Attack Class: Ledger Connect Kit
 
@@ -82,9 +82,11 @@ The page itself is the most privileged client in the system. It has storage, the
 
 We trust a monitoring script more than the rest because it supposedly only measures speed. But what it does on the page is decided by someone else, not by the person who added it.
 
-I opened my own page and looked at what loads there. There are third-party scripts, of course, and until this story I never checked what each of them does.
+My own product loads third-party scripts too, and until this story I never checked what each of them does.
 
 So a product has three levels of authority: the page, the session, the relayer. The contract is a fourth, and it has nothing to do with this attack. Protection is needed on all three. If one level trusts another one on its word, the whole chain rests on that trust.
+
+The same mistake shows up elsewhere. In [the compaction article](/blog/compaction-summaries) a model reads a summary it wrote itself and treats it as an instruction.
 
 ## What to Do, and What Is Still Unknown
 
