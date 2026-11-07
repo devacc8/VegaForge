@@ -1,0 +1,112 @@
+---
+title: "They Didn't Hack Polymarket. They Hijacked Its Speed Test"
+description: "On October 29 someone took over the DNS of the vendor that measured page speed for Polymarket, and a malicious script used live sessions to sell positions and move funds. The smart contract was never touched. The trust boundary was the browser, and every third-party tag on the page inherits it."
+date: "2026-11-07"
+category: "Security"
+tags: ["polymarket", "prediction-markets", "security", "dns", "supply-chain"]
+image: "/blog/polymarket-dns-hijack-hero.webp"
+cta: false
+---
+
+## What Happened
+
+Everyone has heard about the Binance hack: about \$6.3B stolen, the biggest crypto hack in history. The keys did not leak. According to the exchange's own report, a developer was pulled in by a fake job interview and the attackers put malicious code on his machine ([BBC](https://www.bbc.com/news/articles/ck5ynwz9gy67o)).
+
+But that story, by its sheer size, eclipsed another one that happened the same day. An order of magnitude smaller, a different market, almost unnoticed. That one was Polymarket. Nobody hacked the infrastructure or the smart contract. The way in was a third-party provider that measured how fast Polymarket pages loaded.
+
+On October 29 users started reporting withdrawals and forced sells of their positions. The international platform went into cancel-only mode, then trading and the relayer, the service that submits trading orders, were stopped. About an hour later trading was back ([The Paypers](https://thepaypers-nuxt-prod-63935790743.europe-west4.run.app/crypto-web3-and-cbdc/news/polymarket-briefly-halts-international-trading-after-security-incident)).
+
+The same day came an official statement: a third-party provider had been compromised, and the case went to law enforcement. The provider was not named.
+
+On October 30 the status page published a post-mortem: \$3.9M returned, of which \$2.7M were direct losses and \$1.2M compensation for forced sells and for the pause itself. 95% of the affected wallets were refunded in full on October 30 ([post-mortem](https://status.polymarket.com/cmvvek1i90eme14ruga1z6tuj)).
+
+No claims were needed: the affected wallets were identified from on-chain and trading data.
+
+And here it is hard to tell which number is the real one, because there are three and they measure different things. The platform reports \$2.7M in direct losses and \$3.9M including compensation. Bitquery counted 737 wallets and about \$2.73M in one hour on chain, which is a separate account ([KuCoin](https://www.kucoin.com/news/flash/polymarket-hacked-2-73m-stolen-from-737-wallets-in-one-hour), [Gate](https://www.gateweb3.net/zh/news/detail/POL/polymarket-hack-drains-737-wallets-of-273m-via-compromised-script-25330656)). And the chain shows 985 unauthorized withdrawals in that same hour, all of them through Polymarket's official relayer with valid wallet authorizations.
+
+I run a trading tool on this market, so the situation is not abstract to me. I know what a day like this looks like from the user's side.
+
+## How It Worked
+
+DebugBear is a real user monitoring service. Its script measures how fast a page loads for real visitors, and it sits on every page of the site, otherwise the speed statistics do not add up.
+
+The attackers took over the vendor's DNS records and served malicious JavaScript from the same address. For the browser nothing changed: the right domain, the same address, the same origin as the site itself.
+
+Polymarket did not name the vendor publicly. The name DebugBear came from the press, and the vendor confirmed that its DNS records had been compromised and asked customers to remove the RUM script from their sites ([Search Engine Journal](https://www.searchenginejournal.com/debugbear-rum-attack-seo-site-owner-actions/595412/)).
+
+The script was not only on Polymarket. That is what makes the entry point convenient: it ran on every page, including the ones where the user was already logged in.
+
+Hudson Rock looked at what exactly was served from that address. A summary of their work is in [SecurityWeek](https://www.securityweek.com/2-million-drained-from-polymarket-traders-in-new-supply-chain-attack/), [The Hacker News](https://thehackernews.com/2026/11/hackers-steal-about-27-million-from.html?m=1) and [Freebuf](https://www.freebuf.com/news/509752.html). The researchers downloaded the file twice from the address Polymarket used for the monitoring script and got an identical copy both times.
+
+I think it went roughly like this. The code read the account data, the wallet address and the trading API credentials from browser storage. Then it found the trading client and its signer in the app's React components, the thing that signs requests. Then it sent its own withdrawal requests through Polymarket's official relayer.
+
+The behavior depended on the account: some logic moved the tokens of open positions straight to the attacker's address, some sold the positions first and only then withdrew the free balance.
+
+The researchers did not run the sample, so this is a reading of the code, not a recording of an attack.
+
+No password or seed phrase is needed for this. The access is already there, granted to the app and living in the same browser tab. That is the difference from the usual hack and key theft: there is nothing to brute force and nothing to guess.
+
+## Why the Smart Contract Was Not Involved
+
+None of the 985 transactions was a contract exploit. Every one used a valid wallet authorization, and from the network's point of view the request was legitimate: the user's signer signed it, the platform's official relayer submitted it.
+
+No check at the contract level could have stopped these transactions. The contract did exactly what it was designed to do, and that is the trouble: the transaction was correct in form. Real signature, official recipient, no error code.
+
+The same explains the approvals: the spending permissions had been granted in advance, nobody forged them, and the malicious code simply used what was already in place.
+
+One more number answers the question of who was pressing the buttons. In a sample of 30 withdrawals each one executed on chain three to seven seconds after the authorization appeared. No human is that fast. It was automated.
+
+And here you can see what the chain is actually made of: browser storage hands over access to the account, a React component hands over the signer, the relayer accepts a signed request and sends it to the network. Each link is fine on its own. Only the relayer turns a read into a write, and it did its job.
+
+## Who Was Targeted
+
+737 wallets, about \$2.73M, one hour. The largest single loss was about \$358k. Four accounts made up 43% of the damage, and 276 accounts lost less than \$1k each.
+
+That distribution does not look like whale hunting. It looks like everyone who was online when the script was swapped: a few big accounts, many medium ones, a long tail of small ones. For the attacker that is not a problem, because the sum comes from the tail, not from one big account.
+
+The funds were converted to POL and spread across several wallets. From there the usual route is a mixer and complex bridges between networks to hide the trail. That part has nothing to do with the entry point.
+
+## The Same Attack Class: Ledger Connect Kit
+
+On December 14, 2023 someone replaced a package in the supply chain of the Ledger Connect Kit library. The malicious code ended up in dapps, and users signed transactions that drained their own funds. What was replaced was not a key but a library that dapps had installed themselves.
+
+The incident was handled fast, but some users still signed. Both the official [Ledger report](https://www.ledger.com/blog/security-incident-report) and the [CEO's letter](https://www.ledger.com/blog/a-letter-from-ledger-chairman-ceo-pascal-gauthier-regarding-ledger-connect-kit-exploit) reach the same conclusion: browser signing and the front-end supply chain are a trust boundary.
+
+The class is not new. Only the entry point changes: a package then, a monitoring vendor's DNS records now. What does not change is that the attacker does not need your keys. He needs the code your page loads itself.
+
+## The Trust Boundary Is the Browser
+
+A session in a web app is an API with full privileges. While the user is in, the tab can read the balance, sign transactions and withdraw funds, and the server has to accept those requests, otherwise the product does not work.
+
+The page itself is the most privileged client in the system. It has storage, the network, the DOM and a signer. Everything loaded into it gets the same access. Including third-party tags.
+
+We trust a monitoring script more than the rest because it supposedly only measures speed. But what it does on the page is decided by someone else, not by the person who added it.
+
+I opened my own page and looked at what loads there. There are third-party scripts, of course, and until this story I never checked what each of them does.
+
+So a product has three levels of authority: the page, the session, the relayer. The contract is a fourth, and it has nothing to do with this attack. Protection is needed on all three. If one level trusts another one on its word, the whole chain rests on that trust.
+
+## What to Do, and What Is Still Unknown
+
+The practice I worked out for myself after this incident.
+
+1. Fewer third-party scripts. Every one that can go, goes.
+2. CSP, so the page cannot load code from anywhere.
+3. SRI and explicit version pinning: the page should know exactly which file it is loading.
+4. A sandbox for the third-party scripts that cannot be removed.
+5. A confirmation for every movement of money, not only for signing in.
+6. Limits on operations and a delay on withdrawals.
+7. Split the authority: one tool for trading, another for withdrawals.
+8. Integrity monitoring, so a swap is visible at once.
+
+The order is not accidental. The first four shrink the surface that can be swapped at all, the rest limit the damage when it happens.
+
+After the incident Polymarket promises roughly the same: a stronger CSP, version pinning for third-party scripts, a sandbox and continuous integrity monitoring.
+
+Now the honest part. How many attempts never reached a withdrawal is unknown, and the description of the code stays a description: it was read, not run. Who was behind the attack is not said in any source I could find. Whether Polymarket will ever name the vendor is unknown too.
+
+And protection is not free. Almost every item on the list makes the product slower and noisier, and users do not like that. But the choice is not between convenient and safe. It is between an honest answer to what someone else's code can see in my tab and the hope that they swap someone else's.
+
+There will be more attacks with AI, and they will come not at contracts but at scripts and contractors like this one. Even an experienced programmer is defenceless here: there was nowhere to look, everything seemed fine. So the only thing that really limits the damage is not keeping everything in one place. Several wallets, several machines, separate access.
+
+**P.S.** If you keep other people's money in a web app and the page still loads a dozen third-party scripts, that is the part I keep coming back to. I have been taking trading tools and harnesses apart, rebuilding the parts that hold the money, and writing down what breaks. If you need a second pair of eyes on yours, DM me on [X](https://x.com/vvegalex) and tell me what you are working on.
