@@ -94,7 +94,7 @@ const cases = [
 const steps = [
   ['01', 'Diagnostic', '1 to 2 weeks', 'We audit the data, the model and the execution path. You get a short report: what is missing, what to build first, what not to build.'],
   ['02', 'Prototype', '4 to 6 weeks', 'A scanner or a paper-trading agent on your data. No live money until the evaluation is clear and the failure modes are named.'],
-  ['03', 'Production', 'Ongoing', 'Live system, monitoring, calibration and a retainer. We stay on the failure modes, not just the launch.'],
+  ['03', 'Production', 'Ongoing', 'Live system, monitoring, calibration and a retainer. We stick around for the failure modes, not just the launch.'],
 ]
 
 const research = [
@@ -160,7 +160,7 @@ export default function PredictionMarketsPage() {
           </div>
 
           <p className="mt-8 max-w-[720px] border-l-2 border-forge-500 pl-5 text-[15px] leading-relaxed text-[var(--text-secondary)]">
-            Most teams start by plugging an LLM into an API key. That is the first week, not the product. The market does not pay for the demo.
+            Most teams start by plugging an LLM into an API key. That is the first week, not the product. The market does not care about your demo.
           </p>
         </div>
       </section>
@@ -253,7 +253,7 @@ export default function PredictionMarketsPage() {
           <div className="grid border-t border-[var(--text-primary)] md:grid-cols-3">
             {[
               ['Trading', 'Signals, sizing and execution on liquid markets. The harness decides what reaches the book.'],
-              ['Hedging', 'Exposure that has to be measured, not guessed. Limits, scenarios and a clear audit trail.'],
+              ['Hedging', 'You cannot hedge what you cannot measure. Limits, scenarios and a clear audit trail.'],
               ['Arbitrage', 'Two prices, one position. Latency, fees and fill probability are the whole game.'],
             ].map(([title, description], index) => (
               <div key={title} className={`border-b border-[var(--border-color)] py-6 md:px-7 ${index < 2 ? 'md:border-r' : ''} ${index === 0 ? 'md:pl-0' : ''} ${index === 2 ? 'md:pr-0' : ''}`}>
@@ -313,7 +313,7 @@ export default function PredictionMarketsPage() {
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">Start with a diagnostic</p>
             <h2 className="mt-4 max-w-[760px] font-display text-[clamp(2.5rem,5vw,5rem)] font-medium leading-[.9] tracking-[-.06em]">Bring us the market. We will build the harness.</h2>
-            <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-white/75">Tell us what you are trying to trade and what you have already tried. We will answer with a point of view, not a brochure.</p>
+            <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-white/75">Tell us what you are trying to trade and what you have already tried. We will answer with a point of view, not a sales deck.</p>
             <a href="mailto:alex@vegaforge.dev" className="mt-6 inline-flex border border-white px-5 py-3 text-xs font-medium transition-colors hover:bg-white hover:text-forge-600">alex@vegaforge.dev <span className="ml-2">↗</span></a>
           </div>
           <div className="md:text-right">

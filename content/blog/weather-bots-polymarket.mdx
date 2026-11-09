@@ -80,9 +80,9 @@ The core logic is simple. For a market like "Will London's high temperature exce
 2. Count how many of the 31 ensemble members show temperatures above 15C
 3. If 25 of 31 members say yes, that's roughly 81% probability
 4. If Polymarket prices the YES share at $0.65 (65% implied probability), you have a 16% edge
-5. If the edge exceeds the threshold (typically 8%), place a bet sized by fractional Kelly
+5. If the edge exceeds the threshold (typically 8%), place a bet sized by [fractional Kelly](/blog/polymarket-top-1-percent)
 
-The bot doesn't need an LLM for this. It's straightforward math on ensemble data. But an LLM layer adds value when synthesizing multiple conflicting models, handling edge cases (model transitions, unusual weather patterns), and monitoring for conditions where the models are known to be unreliable.
+The bot doesn't need an LLM for this. It's straightforward math on ensemble data. But an LLM layer adds value when synthesizing multiple conflicting models, handling edge cases (model transitions, unusual weather patterns), and monitoring for conditions where the models are known to be unreliable. The harness is what turns that math into a trade: [how we build it](/blog/prediction-markets-harness).
 
 ### Execution Strategies
 
@@ -155,6 +155,10 @@ The numbers above hide one thing: none of this stays still. I work on several Po
 
 I have been building my own weather-first prediction agent: GFS ensemble data, paper trading on temperature markets, and live bets where the edge holds. The architecture, the code, and the real P&L go up on this blog as the work continues. If you're interested in building something similar, stay tuned, or better yet, start building. The data is free and the markets aren't getting any less mispriced.
 
-<PredictionMarketsCTA />
+<PredictionMarketsCTA
+  title="The weather bots won on the data pipeline."
+  body="An ensemble, a clean feed and the discipline to size small. The model was the easy part."
+  label="See the data layer"
+/>
 
 **P.S.** Building a data-driven trading bot? I have been building these pipelines myself, from the data to the sizing, and I am happy to compare notes or give your approach a second pair of eyes. DM me on [X](https://x.com/vvegalex).
