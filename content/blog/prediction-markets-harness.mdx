@@ -96,9 +96,11 @@ In the systems I have built, the model was maybe twenty percent of the work. The
 
 **Data infrastructure.** Several APIs, each with its own rate limit, schema and downtime. Normalization, time alignment, snapshots you can replay. Backfills, schema changes, a vendor that renames a field at 2 a.m.
 
-**Oracles and resolution.** Reading the rules, mapping the source, handling ambiguity, disputes, voided markets and settlement delays. The oracle is not a detail. It decides whether the position was right.
+**Market resolution.** Reading the rules, mapping the source, handling ambiguity, disputes, voided markets and settlement delays. The rule decides whether the position was right.
 
-**Reconciliation.** Positions, fills, balances and profit and loss, the venue state against the local ledger. If the two disagree, the system is wrong until proven otherwise. Idempotency and retries matter: an order sent twice is a different position.
+**Internal oracles.** Three views of the same position: the local ledger, the Polymarket API and the on-chain state. The oracle compares them. When they disagree, it applies a rule: the chain wins on settlement, the API wins on open orders, and everything else goes to a human with a ticket. Without this, the profit and loss number is a guess.
+
+**Reconciliation.** Fills and balances are reconciled after every order. Idempotency and retries matter: an order sent twice is a different position.
 
 **Tests.** Unit tests for the math, replay tests for the strategy, contract tests for the API, failure injection for the feed. Paper trading through the same execution path, not a separate script.
 
@@ -142,6 +144,10 @@ Whether you are building a prediction market product, a trading desk or a resear
 
 The model is the easiest component to buy and the hardest to trust.
 
-<PredictionMarketsCTA />
+<PredictionMarketsCTA
+  title="The harness is the work."
+  body="Data, calibration, execution and the infrastructure around them. We build the system the model runs inside."
+  label="See how we build it"
+/>
 
 **P.S.** If you are building a prediction market system and want advice on the harness, [write to me](mailto:alex@vegaforge.dev) or see [how we build these systems](/prediction-markets).

@@ -23,14 +23,28 @@ function PredictionMarketsCTA({
   label?: string
   href?: string
 }) {
+  const steps = ['Data', 'Model', 'Edge', 'Execution', 'Evaluation']
   return (
-    <aside className="my-10 border border-[var(--border-color)] bg-forge-500/5 p-6">
-      <p className="font-mono text-[9px] uppercase tracking-[.08em] text-forge-500">Prediction markets</p>
-      <p className="mt-2 font-display text-xl font-medium tracking-[-.03em] text-neutral-900 dark:text-white">{title}</p>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-        {body}{' '}
-        <a href={href} className="text-forge-600 underline underline-offset-2 decoration-forge-500/30 hover:decoration-forge-500">{label}</a>.
-      </p>
+    <aside className="my-12 overflow-hidden bg-[#0b1d22] text-white">
+      <div className="p-6 md:p-8">
+        <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
+          <p className="font-mono text-[9px] uppercase tracking-[.08em] text-forge-300">Prediction markets</p>
+          <p className="font-mono text-[9px] uppercase tracking-[.06em] text-white/40">VegaForge / harness</p>
+        </div>
+        <p className="mt-5 max-w-[620px] font-display text-2xl font-medium leading-tight tracking-[-.03em] text-white md:text-3xl">{title}</p>
+        <p className="mt-3 max-w-[560px] text-sm leading-relaxed text-white/55">{body}</p>
+        <div className="mt-6 grid grid-cols-5 gap-2 border-t border-white/15 pt-4">
+          {steps.map((step, index) => (
+            <div key={step}>
+              <p className="font-mono text-[8px] text-forge-300">0{index + 1}</p>
+              <p className="mt-1 font-mono text-[8px] uppercase tracking-[.04em] text-white/55 md:text-[9px]">{step}</p>
+            </div>
+          ))}
+        </div>
+        <a href={href} className="mt-6 inline-flex items-center gap-2 bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">
+          {label} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </aside>
   )
 }
