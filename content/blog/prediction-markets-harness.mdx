@@ -58,6 +58,62 @@ I had a position that was small compared to my bankroll and large compared to th
 
 None of these were model failures. They were harness failures.
 
+## The mistakes that look like progress
+
+The hard part is not the model. It is knowing when the model is wrong.
+
+### Thinking you have a strategy when you do not
+
+You ask an LLM for a probability, compare it with the price, place a trade. It feels like a strategy. It is a sentence with a number in it.
+
+The model does not know the base rate for this market. It does not know the resolution rules. It does not know what the price already implies. A probability with no calibration history is a guess with a decimal point.
+
+### Leaky backtests
+
+A backtest is a simulation of a decision, not an outcome. The most common error is temporal leakage. You read the market price at the close and trade at the open. You use a forecast published after the decision. The row knows the outcome because it was written after the market resolved.
+
+A random train/test split makes it worse: you train on Tuesday and test on Monday. Use time-ordered folds, a locked test period, and a rule that no data after the decision timestamp enters the features.
+
+### Test set leakage
+
+If you fit the calibration on the same period you evaluate on, the result is in-sample. If you tune the threshold on the test set, it is no longer a test set. If you try fifty variants and report the best, part of the result is luck.
+
+Write the hypothesis first, lock the test set, report every variant, and correct for the number of attempts.
+
+### Ignoring costs
+
+Fees, spread, slippage, gas and failed transactions. A four percent edge with a three percent spread and a one percent fee is not an edge. A backtest that fills at the mid price is a fantasy.
+
+### The resolution rule you did not read
+
+Markets resolve on a sentence. The sentence has a source, a time zone and edge cases. If the model prices the headline and not the rule, it is trading a different contract.
+
+None of these mistakes look like mistakes in a notebook. They look like progress.
+
+## The unglamorous 80%
+
+In the systems I have built, the model was maybe twenty percent of the work. The rest was plumbing, checks and tools that never appear in a demo.
+
+**Data infrastructure.** Several APIs, each with its own rate limit, schema and downtime. Normalization, time alignment, snapshots you can replay. Backfills, schema changes, a vendor that renames a field at 2 a.m.
+
+**Oracles and resolution.** Reading the rules, mapping the source, handling ambiguity, disputes, voided markets and settlement delays. The oracle is not a detail. It decides whether the position was right.
+
+**Reconciliation.** Positions, fills, balances and profit and loss, the venue state against the local ledger. If the two disagree, the system is wrong until proven otherwise. Idempotency and retries matter: an order sent twice is a different position.
+
+**Tests.** Unit tests for the math, replay tests for the strategy, contract tests for the API, failure injection for the feed. Paper trading through the same execution path, not a separate script.
+
+**Internal tools.** A market browser, a decision log, a calibration dashboard, a profit and loss attribution view, an alert console. None of this is customer-facing. All of it is the difference between a demo and a system.
+
+The model is the part you can buy. The infrastructure is the part you have to build.
+
+## Beating the market
+
+The market price is a forecast. A good one, made by people with money at stake. Your model has to beat it, not the headline.
+
+Start with the baseline: the market price, the base rate, a simple model. Report the baseline next to your strategy. If the model cannot beat it after costs, on a locked test set, on the markets you would actually trade, it is not an edge. It is a story.
+
+The test is not whether the model can explain the market. It is whether it can beat the price, out of sample, after fees and spread.
+
 ## Start with an edge scanner
 
 The first system you should build does not trade. It scans.
