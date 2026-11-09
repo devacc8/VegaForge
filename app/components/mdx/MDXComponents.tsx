@@ -11,8 +11,23 @@ function Callout({ children }: { children: React.ReactNode }) {
   )
 }
 
+
+function PredictionMarketsCTA() {
+  return (
+    <aside className="my-10 border border-[var(--border-color)] bg-forge-500/5 p-6">
+      <p className="font-mono text-[9px] uppercase tracking-[.08em] text-forge-500">Prediction markets</p>
+      <p className="mt-2 font-display text-xl font-medium tracking-[-.03em] text-neutral-900 dark:text-white">We build the harness behind systems like this.</p>
+      <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+        Data, calibration, edge, execution and risk for Polymarket and other event markets.{' '}
+        <a href="/prediction-markets" className="text-forge-600 underline underline-offset-2 decoration-forge-500/30 hover:decoration-forge-500">See how we build it</a>.
+      </p>
+    </aside>
+  )
+}
+
 export const mdxComponents: MDXComponentsType = {
   Callout,
+  PredictionMarketsCTA,
 
   h1: (props: ComponentPropsWithoutRef<'h1'>) => (
     <h1

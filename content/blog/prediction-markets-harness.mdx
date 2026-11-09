@@ -1,0 +1,91 @@
+---
+title: "Your Polymarket Bot Is a Demo Until It Has a Harness"
+description: "An LLM can place a trade. A harness decides whether the trade should exist: data, calibration, edge, execution and risk. What I learned building one for Polymarket."
+date: "2026-11-09"
+category: "AI & Crypto"
+tags: ["polymarket", "prediction-markets", "ai-agents", "trading", "harness"]
+image: "/blog/prediction-markets-harness-hero.webp"
+cta: false
+---
+
+In March 2026, someone on X ran a contest: two AI agents, $1,000 each, 48 hours to trade on Polymarket. One finished with $14,216. The other was liquidated. The post went viral. LLMs can trade! (I discuss the fine print the screenshots do not show in the [original article](/blog/claude-polymarket-trading).)
+
+I took away a different lesson. The LLM was one component of the system.
+
+It is easy to build a demo trading bot. Get an API key, write a prompt, let the model read the market, choose a side, place an order. Repeat. It works for a while. Then you hit a market with a thin order book, or a fee structure you did not model, or a resolution sentence nobody read carefully. The bot loses money, and you blame the model.
+
+I recently built and operated a system that trades on prediction markets. The LLM was the least interesting part. The result was decided by the harness, the code around the model.
+
+## Prediction markets are an execution game
+
+It is tempting to think of prediction markets as a forecasting competition. They are not. They are an execution competition where forecasting is one of the inputs.
+
+**Calibration.** You need to output a probability, and you need to be right 70% of the time when you say 70%. LLMs are notoriously overconfident, especially in the tails. They will say 5% when it should be 20%, and the market will exploit your error. The [top 1% of Polymarket traders](/blog/polymarket-top-1-percent) succeed by trading small sizes, focusing on one or two categories, and exiting based on price, not the underlying outcome. None of that has to do with forecasting.
+
+**Information.** The market has already priced in the obvious. You need data the market has not seen, or a correct reading of the resolution rules. The LLM does not create information. It helps you process it, and only if you can get it into the model in a useful form.
+
+**Execution.** What is the price? The spread? The available liquidity? Can you actually execute on your edge at a size large enough to matter, after fees? The order book is part of the model. The [weather bots on Polymarket](/blog/weather-bots-polymarket) won because of a well-oiled data pipeline and the discipline to trade small.
+
+**Risk management.** You can be right 60% of the time and still go bust. Sizing and overall risk are a separate skill from forecasting.
+
+## Anatomy of a trading system
+
+**Data layer.** Market feeds, order book data, resolution rules, external data. You need to replay what the market looked like when the system made a decision, or you will never debug the losses.
+
+**Model layer.** Some code that outputs a probability. An LLM can do it, but so can a statistical model or an ensemble. Then a calibration layer converts raw confidence into a probability with the right frequency.
+
+**Edge.** Model probability minus market probability minus fees. Only trade when the number is large enough.
+
+**Execution.** Sizing, limit prices, order types, cancellation, a kill switch. Start with paper trading, graduate to real money, have a human approve large orders.
+
+**Evaluation.** Backtests, live paper trading, traces of every decision, profit and loss attribution, calibration. If you cannot explain a loss, you cannot fix it.
+
+I go into more detail on why the harness is the moat [here](/blog/harness-is-the-moat).
+
+## Failure modes I have seen in production
+
+### The overconfident forecaster
+
+The first version of my system used an LLM to output probabilities. It worked okay in the middle range and was overconfident in the tails. It was confident in long shots and sure things, and the market was less wrong than the model. The fix was a calibration layer trained on resolved markets. It helped more than a bigger model. An uncalibrated forecast is a liability.
+
+### The fee-blind strategy
+
+My naive strategy appeared to make money in backtesting. Once I included fees, spread and position size, it was a loser. The fix was a fee-aware sizer and a liquidity filter. The order book is part of the model.
+
+### The thin book
+
+I had a position that was small compared to my bankroll and large compared to the available liquidity. Getting in was easy. Getting out was impossible. The fix was a position cap tied to the book, not to the account.
+
+None of these were model failures. They were harness failures.
+
+## Start with an edge scanner
+
+The first system you should build does not trade. It scans.
+
+It ingests markets and resolution rules, builds a probability with evidence, compares that probability with the market price, and ranks the gaps. An edge scanner places no orders. It tells you whether a market is worth building a trading system for.
+
+The order I would build the components:
+
+1. Data snapshots you can replay.
+2. A model that produces a calibrated probability, with a reliability curve.
+3. The edge scanner.
+4. Paper trading with the same execution code you will use with real money.
+5. Real money with limits, human approval and a kill switch.
+6. Monitoring, alerting and a daily brief.
+
+## If you are building
+
+You do not need a better LLM. You need a system that can test, size, execute and explain. The model is a commodity. The harness is the moat.
+
+Whether you are building a prediction market product, a trading desk or a research agent, the work is the same:
+
+1. Data pipelines that produce clean data.
+2. A model that produces a calibrated number.
+3. An execution path with limits.
+4. An evaluation loop that tells you the truth.
+
+The model is the easiest component to buy and the hardest to trust.
+
+<PredictionMarketsCTA />
+
+**P.S.** If you are building a prediction market system and want advice on the harness, [write to me](mailto:alex@vegaforge.dev) or see [how we build these systems](/prediction-markets).

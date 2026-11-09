@@ -174,6 +174,9 @@ export default function AIAgentsPage() {
                   <span key={tag} className="border border-[var(--border-color)] px-2 py-1 font-mono text-[8px] text-[#1d5b63]">{tag}</span>
                 ))}
               </div>
+              <a href="/prediction-markets" className="mt-5 inline-flex font-mono text-[9px] uppercase tracking-[.06em] text-forge-500 hover:underline">
+                How we build prediction market systems ↗
+              </a>
             </article>
           </div>
         </div>
