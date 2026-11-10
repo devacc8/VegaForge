@@ -68,7 +68,7 @@ const offers: Array<[string, string, string, string[]]> = [
   [
     'Risk and monitoring',
     'See the failure before the loss.',
-    'Exposure, drawdown, reconciliation, failed orders and fee drag in one place. A short daily brief instead of another dashboard nobody opens.',
+    'Exposure, drawdown, reconciliation errors, failed orders and fee drag in one place. A short daily brief instead of another dashboard nobody opens.',
     ['Exposure', 'Drawdown', 'Reconciliation', 'Daily brief'],
   ],
 ]
@@ -119,7 +119,7 @@ export default function AITradingPage() {
             <span className="text-[#1d5b63]">built as a system.</span>
           </h1>
           <p className="mt-5 max-w-[660px] text-[15px] leading-relaxed text-[var(--text-secondary)]">
-            We build the harness around the model: data, calibration, execution, risk and the infrastructure in between. For trading teams, funds and market operators.
+            We build the harness that turns a model into a trading system: data pipelines, calibration, execution, risk limits and the infrastructure in between. For trading teams, funds and market operators.
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
             <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
@@ -145,7 +145,7 @@ export default function AITradingPage() {
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">01 / The failure</p>
             <div>
               <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">The model is not the strategy.</h2>
-              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">The demo works. The live book does not. The missing layer is the harness.</p>
+              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">The demo works. Live trading does not. The missing layer is the harness.</p>
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export default function AITradingPage() {
           </div>
 
           <p className="mt-8 max-w-[720px] border-l-2 border-forge-500 pl-5 text-[15px] leading-relaxed text-[var(--text-secondary)]">
-            Most teams start with a model and an API key. That is the first week, not the product. The market does not care about your backtest.
+            Most teams start with a model and an API key. That is the first week of a project, not the product. The market does not care about your backtest.
           </p>
         </div>
       </section>
@@ -197,7 +197,7 @@ export default function AITradingPage() {
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">03 / The work</p>
             <div>
               <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">Three ways to start.</h2>
-              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">You do not have to begin with live capital. Most teams should not.</p>
+              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">You do not have to start with live capital. Most teams should not.</p>
             </div>
           </div>
 
@@ -224,7 +224,7 @@ export default function AITradingPage() {
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">04 / From production</p>
             <div>
               <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">What carried over.</h2>
-              <p className="mt-4 max-w-[620px] text-[14px] leading-relaxed text-[var(--text-muted)]">We have built and run this harness on <a href="/prediction-markets" className="underline underline-offset-2">prediction markets</a>. The same layers apply to real markets. No client names, no P&amp;L promises.</p>
+              <p className="mt-4 max-w-[620px] text-[14px] leading-relaxed text-[var(--text-muted)]">We have built and run this harness in production on <a href="/prediction-markets" className="underline underline-offset-2">prediction markets</a>. The same layers apply to real markets. No client names, no P&amp;L promises.</p>
             </div>
           </div>
 
