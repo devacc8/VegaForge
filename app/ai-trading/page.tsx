@@ -26,82 +26,87 @@ export const metadata: Metadata = {
   },
 }
 
-const failures = [
+const systemRows: Array<[string, string, string]> = [
+  ['01', 'Data', 'Venues, reference data, corporate actions, snapshots.'],
+  ['02', 'Research', 'Signal, calibration, backtest, a baseline to beat.'],
+  ['03', 'Risk', 'Limits, exposure, drawdown, a kill switch.'],
+  ['04', 'Execution', 'Venues, order types, impact, reconciliation.'],
+  ['05', 'Monitoring', 'Traces, P&L attribution, drift, alerts.'],
+]
+
+const failures: Array<[string, string, string]> = [
+  ['A signal with no cost model', 'Fees, spread, market impact and borrow', 'A cost-aware edge'],
+  ['A backtest with leakage', 'Time-ordered folds, survivorship, regime shifts', 'A test you can replay'],
+  ['A model with no desk', 'Execution, risk, reconciliation, monitoring', 'The desk around it'],
+]
+
+const mapTop: Array<[string, string, string[]]> = [
+  ['01', 'Data', ['Venues', 'Reference data', 'Corporate actions', 'Snapshots']],
+  ['02', 'Research', ['Signal', 'Calibration', 'Backtest', 'Baseline']],
+  ['03', 'Risk', ['Limits', 'Exposure', 'Drawdown', 'Kill switch']],
+  ['04', 'Execution', ['Venues', 'Order types', 'Impact', 'Reconciliation']],
+]
+
+const mapBottom: Array<[string, string, string, boolean]> = [
+  ['05', 'Monitoring', 'Traces, P&L attribution, drift, alerts, on-call.', false],
+  ['06', 'Reconciliation', 'Ledger, venue and chain compared after every order.', false],
+  ['07', 'Model', 'A signal or a probability. One input, not the system.', true],
+]
+
+const services: Array<[string, string, string, string[], string]> = [
   [
     '01',
-    'A signal is not a trade',
-    'The market already prices the obvious. Fees, spread, impact and borrow decide whether the signal survives contact with the book.',
+    'Research scanner',
+    'Find the gap before risking capital. A ranked list of opportunities with the evidence and the costs attached.',
+    ['Universe scan', 'Signal with sources', 'Cost and liquidity model', 'Ranked shortlist'],
+    'It places no orders and takes no exposure.',
   ],
   [
     '02',
-    'A backtest is not a system',
-    'Leakage, time-ordered folds, costs and regime changes. A backtest you cannot replay is a story, not evidence.',
+    'Execution agent',
+    'The model proposes. The harness disposes. Orders inside explicit limits, paper first, human approval where the size justifies it.',
+    ['Sizing and limits', 'Paper trading', 'Human approval', 'Kill switch'],
+    'It does not promise returns, and it does not hide the downside.',
   ],
   [
     '03',
-    'A model is not a desk',
-    'Execution, reconciliation, risk and monitoring are separate work. The model is one input, not the operation.',
-  ],
-]
-
-const layers = [
-  ['01 / Data', 'Venues, order books, reference data, corporate actions, timestamps.', 'Snapshots you can replay, not a stream you hope to catch.'],
-  ['02 / Model', 'A signal or a probability, not a paragraph.', 'One calibration layer, regime awareness and a baseline you have to beat.'],
-  ['03 / Edge', 'Signal minus fees, spread, impact and borrow.', 'Ranked opportunities, not a watchlist of everything.'],
-  ['04 / Execution', 'Venues, order types, sizing, limits, kill switch.', 'Paper before live. Human approval where the size justifies it.'],
-  ['05 / Evaluation', 'Backtests, paper, traces, P&L attribution, drift.', 'If you cannot explain the loss, you cannot fix it.'],
-]
-
-const offers: Array<[string, string, string, string[]]> = [
-  [
-    'Research scanner',
-    'Find the gap before risking capital.',
-    'Scans the universe, normalizes the data, builds a signal with evidence and ranks it against costs and liquidity. No orders, no exposure.',
-    ['Universe', 'Signals', 'Costs', 'Ranking'],
-  ],
-  [
-    'Execution agent',
-    'The model proposes. The harness disposes.',
-    'Places orders inside explicit limits: size, price, liquidity, daily loss, venue. Paper trading first, human approval and a kill switch.',
-    ['Sizing', 'Limits', 'Paper trading', 'Kill switch'],
-  ],
-  [
     'Risk and monitoring',
-    'See the failure before the loss.',
-    'Exposure, drawdown, reconciliation errors, failed orders and fee drag in one place. A short daily brief instead of another dashboard nobody opens.',
-    ['Exposure', 'Drawdown', 'Reconciliation', 'Daily brief'],
+    'Exposure, drawdown, reconciliation errors, failed orders and fee drag in one place. A short daily brief instead of another dashboard.',
+    ['Exposure and drawdown', 'Reconciliation', 'Fee drag', 'Daily brief'],
+    'It is not a dashboard nobody opens. If it does not change a decision, we cut it.',
   ],
 ]
 
-const cases = [
-  [
-    'The data pipeline carried the edge',
-    'An open weather ensemble, a calibrated mapping to the market question and a liquidity filter. The model was the easy part.',
-    'Lesson: the data layer is the edge.',
-  ],
-  [
-    'Calibration was the difference',
-    'Raw model probabilities were overconfident at the tails. A calibration layer and a market filter made the output usable.',
-    'Lesson: calibrate before you size.',
-  ],
-  [
-    'Fees and liquidity ate the naive edge',
-    'The signal looked profitable until spread, fees and size were included. A fee-aware sizer and a liquidity filter changed the result.',
-    'Lesson: the book is part of the model.',
-  ],
+const gates: Array<[string, string, string]> = [
+  ['01', 'Data you can replay', 'Snapshots, timestamps and the version of the rules at the moment of the decision.'],
+  ['02', 'A test set you have not touched', 'Time-ordered folds, a locked period, no peeking at the answer.'],
+  ['03', 'A cost model, not a mid-price fantasy', 'Fees, spread, impact, borrow and failed transactions.'],
+  ['04', 'A risk limit for every position', 'Size, daily loss, venue, correlation. Written down, not implied.'],
+  ['05', 'A kill switch that works', 'Tested, not assumed. One person can stop the system.'],
+  ['06', 'An owner for reconciliation', 'Ledger, venue and chain, compared and signed off.'],
 ]
 
-const steps = [
-  ['01', 'Diagnostic', '1 to 2 weeks', 'We audit the data, the signal, the execution path and the risk limits. You get a short report: what is missing, what to build first, what not to build.'],
-  ['02', 'Prototype', '4 to 6 weeks', 'A scanner or a paper-trading agent on your data. No live capital until the evaluation is clear and the failure modes are named.'],
-  ['03', 'Production', 'Ongoing', 'Live system, monitoring, reconciliation and a retainer. We stay on the failure modes, not just the launch.'],
+const risks: Array<[string, string]> = [
+  ['Lookahead leakage', 'Time-ordered folds and a locked test set.'],
+  ['Survivorship', 'Delisted and voided markets stay in the sample.'],
+  ['Overfitting', 'Pre-registered variants and a correction for the number of attempts.'],
+  ['Fee blindness', 'A cost-aware sizer, not a mid-price fill.'],
+  ['Market impact', 'Liquidity and participation limits, sized before the order.'],
+  ['Broken feed', 'Stale-data guards, fallbacks and a visible failure state.'],
+  ['Model drift', 'Calibration monitoring, retraining rules and a rollback path.'],
+  ['Reconciliation drift', 'Three-way checks and one owner for the difference.'],
 ]
 
-const research = [
-  ["Your Polymarket Bot Is a Demo Until It Has a Harness", 'What the harness is, and what breaks without it.', '/blog/prediction-markets-harness'],
+const timeline: Array<[string, string, string]> = [
+  ['Week 0 to 2', 'Diagnostic', 'We audit the data, the signal, the execution path and the risk limits. You get a short report: what is missing, what to build first, what not to build.'],
+  ['Week 2 to 6', 'Prototype', 'A scanner or a paper-trading agent on your data. No live capital until the evaluation is clear and the failure modes are named.'],
+  ['Week 6 and later', 'Production', 'Live system, monitoring, reconciliation and a retainer. We stay on the failure modes, not just the launch.'],
+]
+
+const reading: Array<[string, string, string]> = [
+  ['Your Polymarket Bot Is a Demo Until It Has a Harness', 'What the harness is, and what breaks without it.', '/blog/prediction-markets-harness'],
   ["The Five Things Polymarket's Winners Do and 87% Don't", 'What 112,000 wallets say about sizing, focus and exits.', '/blog/polymarket-top-1-percent'],
   ['The Weather Bots Quietly Making Millions on Polymarket', 'Why the boring markets attracted the best data pipelines.', '/blog/weather-bots-polymarket'],
-  ['AI Agents and Prediction Markets', 'How forecasting agents change research, and where they still fail.', '/blog/ai-agents-prediction-markets'],
   ['The harness is the moat', 'Why the model is a commodity and the system is the advantage.', '/blog/harness-is-the-moat'],
 ]
 
@@ -110,28 +115,75 @@ export default function AITradingPage() {
     <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
       <Navigation />
 
-      <section className="border-b border-[var(--border-color)]">
-        <div className="mx-auto w-full max-w-[1280px] px-5 pb-14 pt-14 md:px-8 md:pb-20 md:pt-20">
-          <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">AI trading / Financial markets</p>
-          <h1 className="mt-4 max-w-[980px] font-display text-[clamp(3rem,6vw,5.8rem)] font-medium leading-[.9] tracking-[-.06em]">
-            AI trading systems,
-            <br />
-            <span className="text-[#1d5b63]">built as a system.</span>
-          </h1>
-          <p className="mt-5 max-w-[660px] text-[15px] leading-relaxed text-[var(--text-secondary)]">
-            We build the harness that turns a model into a trading system: data pipelines, calibration, execution, risk limits and the infrastructure in between. For trading teams, funds and market operators.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
-            <a href="#harness" className="border border-[var(--text-primary)] px-5 py-3 text-xs font-medium transition-colors hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)]">See the harness</a>
+      <section className="relative overflow-hidden bg-[#0b1d22] text-white">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[.22]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px)',
+            backgroundSize: '72px 72px',
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto grid w-full max-w-[1280px] gap-12 px-5 pb-16 pt-14 md:grid-cols-[1.1fr_.9fr] md:items-end md:gap-16 md:px-8 md:pb-20 md:pt-20">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">AI trading / Financial markets</p>
+            <h1 className="mt-5 max-w-[760px] font-display text-[clamp(2.6rem,4.4vw,4.4rem)] font-medium leading-[.9] tracking-[-.06em]">
+              AI trading systems,
+              <br />
+              <span className="text-forge-300">built as infrastructure.</span>
+            </h1>
+            <p className="mt-6 max-w-[560px] text-[15px] leading-relaxed text-white/60">
+              We build the harness that turns a model into a trading system: data pipelines, calibration, execution, risk limits and the infrastructure in between. For trading teams, funds and market operators.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
+              <a href="#system" className="border border-white/40 px-5 py-3 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10">See the system</a>
+            </div>
           </div>
 
-          <div className="mt-12 border-t border-[var(--text-primary)] pt-4">
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3 md:grid-cols-5">
-              {['Data', 'Model', 'Edge', 'Execution', 'Evaluation'].map((step, index) => (
-                <div key={step} className="flex items-baseline gap-2">
-                  <span className="font-mono text-[9px] text-forge-500">0{index + 1}</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[.06em] text-[var(--text-secondary)]">{step}</span>
+          <div className="border border-white/15 bg-white/[.03]">
+            <div className="flex items-center justify-between gap-4 border-b border-white/15 px-5 py-3">
+              <p className="font-mono text-[9px] uppercase tracking-[.08em] text-forge-300">System map</p>
+              <p className="font-mono text-[9px] uppercase tracking-[.06em] text-white/35">One model / five layers</p>
+            </div>
+            <div className="divide-y divide-white/10">
+              {systemRows.map(([n, title, description]) => (
+                <div key={n} className="grid grid-cols-[26px_84px_1fr] gap-3 px-5 py-3.5">
+                  <span className="pt-0.5 font-mono text-[8px] text-forge-300">{n}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[.06em] text-white">{title}</span>
+                  <span className="text-[12px] leading-relaxed text-white/45">{description}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-3 border-t border-white/15 px-5 py-4">
+              <span className="border border-forge-500/50 bg-forge-500/10 px-2 py-1 font-mono text-[8px] uppercase tracking-[.06em] text-forge-300">Model</span>
+              <span className="font-mono text-[8px] uppercase tracking-[.05em] text-white/35">One input, not the system</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border-color)] bg-white">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-16 md:grid-cols-[.85fr_1.15fr] md:gap-16 md:px-8 md:py-24">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">The failure</p>
+            <h2 className="mt-4 max-w-[460px] font-display text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[.96] tracking-[-.05em]">The model is the smallest part.</h2>
+            <p className="mt-5 max-w-[440px] text-[14px] leading-relaxed text-[var(--text-secondary)]">Most teams start with a model and an API key. That is the first week of a project, not the product. The market does not care about your backtest.</p>
+          </div>
+
+          <div className="self-end">
+            <div className="hidden border-t border-[var(--text-primary)] pb-3 pt-3 font-mono text-[9px] uppercase tracking-[.06em] text-[var(--text-muted)] md:grid md:grid-cols-[1fr_1fr_1fr] md:gap-6">
+              <span>What fails</span>
+              <span>Why</span>
+              <span>What we build</span>
+            </div>
+            <div className="border-t border-[var(--text-primary)]">
+              {failures.map(([what, why, build]) => (
+                <div key={what} className="grid gap-2 border-b border-[var(--border-color)] py-5 md:grid-cols-[1fr_1fr_1fr] md:gap-6">
+                  <h3 className="font-display text-lg font-medium leading-tight tracking-[-.02em]">{what}</h3>
+                  <p className="text-[13px] leading-relaxed text-[var(--text-muted)]">{why}</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[.05em] text-forge-500 md:pt-1">{build}</p>
                 </div>
               ))}
             </div>
@@ -139,101 +191,40 @@ export default function AITradingPage() {
         </div>
       </section>
 
-      <section className="border-b border-[var(--border-color)] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-[var(--text-primary)] pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">01 / The failure</p>
+      <section id="system" className="bg-[#0b1d22] text-white">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-16 md:px-8 md:py-24">
+          <div className="flex flex-col justify-between gap-5 border-b border-white/15 pb-6 md:flex-row md:items-end">
             <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">The model is not the strategy.</h2>
-              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">The demo works. Live trading does not. The missing layer is the harness.</p>
+              <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">The system</p>
+              <h2 className="mt-4 max-w-[720px] font-display text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[.96] tracking-[-.05em] text-white">One model. Five layers. One owner.</h2>
             </div>
+            <p className="max-w-[360px] text-[13px] leading-relaxed text-white/45">The model is one box. The rest is the system that decides whether it is allowed to act.</p>
           </div>
 
-          <div className="grid border-t border-[var(--text-primary)] md:grid-cols-3">
-            {failures.map(([n, title, description], index) => (
-              <div key={n} className={`border-b border-[var(--border-color)] py-6 md:px-7 ${index < 2 ? 'md:border-r' : ''} ${index === 0 ? 'md:pl-0' : ''} ${index === 2 ? 'md:pr-0' : ''}`}>
-                <span className="font-mono text-[9px] text-forge-500">{n}</span>
-                <h3 className="mt-3 font-display text-2xl font-medium leading-tight tracking-[-.035em]">{title}</h3>
-                <p className="mt-3 max-w-[360px] text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-8 max-w-[720px] border-l-2 border-forge-500 pl-5 text-[15px] leading-relaxed text-[var(--text-secondary)]">
-            Most teams start with a model and an API key. That is the first week of a project, not the product. The market does not care about your backtest.
-          </p>
-        </div>
-      </section>
-
-      <section id="harness" className="border-b border-[var(--border-color)] bg-[var(--text-primary)] text-[var(--bg-primary)]">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-white/30 pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">02 / The harness</p>
-            <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em] text-white">Five layers the model does not write for you.</h2>
-              <p className="mt-4 max-w-[620px] text-[14px] leading-relaxed text-white/50">The model is a commodity. The system around it is the advantage.</p>
-            </div>
-          </div>
-
-          <div className="border-t border-white/20">
-            {layers.map(([label, title, description]) => (
-              <div key={label} className="grid gap-2 border-b border-white/15 py-5 md:grid-cols-[150px_320px_1fr] md:gap-6">
-                <span className="font-mono text-[9px] uppercase tracking-[.05em] text-forge-300">{label}</span>
-                <h3 className="font-display text-xl font-medium leading-tight tracking-[-.03em] text-white">{title}</h3>
-                <p className="max-w-[560px] text-[13px] leading-relaxed text-white/55">{description}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-6 font-mono text-[9px] uppercase tracking-[.06em] text-white/40">
-            More on the thesis: <a href="/blog/harness-is-the-moat" className="text-forge-300 underline underline-offset-2">the harness is the moat</a>
-          </p>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--border-color)]">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-[var(--text-primary)] pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">03 / The work</p>
-            <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">Three ways to start.</h2>
-              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">You do not have to start with live capital. Most teams should not.</p>
-            </div>
-          </div>
-
-          <div className="grid gap-4 lg:grid-cols-3">
-            {offers.map(([title, kicker, description, tags]) => (
-              <article key={title} className="flex flex-col border border-[var(--border-color)] bg-white p-6 transition-colors hover:border-forge-500 md:p-7">
-                <h3 className="font-display text-2xl font-medium tracking-[-.04em]">{title}</h3>
-                <p className="mt-1 font-mono text-[9px] uppercase tracking-[.06em] text-forge-500">{kicker}</p>
-                <p className="mt-4 text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>
-                <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
-                  {tags.map((tag) => (
-                    <span key={tag} className="border border-[var(--border-color)] px-2 py-1 font-mono text-[8px] text-[#1d5b63]">{tag}</span>
-                  ))}
+          <div className="mt-8 grid gap-px bg-white/15 md:grid-cols-4">
+            {mapTop.map(([n, title, items]) => (
+              <div key={n} className="bg-[#0b1d22] p-5">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="font-display text-xl font-medium tracking-[-.03em] text-white">{title}</h3>
+                  <span className="font-mono text-[8px] text-forge-300">{n}</span>
                 </div>
-              </article>
+                <ul className="mt-4 space-y-1.5">
+                  {items.map((item) => (
+                    <li key={item} className="font-mono text-[9px] uppercase tracking-[.04em] text-white/40">{item}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="border-b border-[var(--border-color)] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-[var(--text-primary)] pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">04 / From production</p>
-            <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">What carried over.</h2>
-              <p className="mt-4 max-w-[620px] text-[14px] leading-relaxed text-[var(--text-muted)]">We have built and run this harness in production on <a href="/prediction-markets" className="underline underline-offset-2">prediction markets</a>. The same layers apply to real markets. No client names, no P&amp;L promises.</p>
-            </div>
-          </div>
-
-          <div className="grid border-t border-[var(--text-primary)] md:grid-cols-3">
-            {cases.map(([title, body, lesson], index) => (
-              <div key={title} className={`border-b border-[var(--border-color)] py-6 md:px-7 ${index < 2 ? 'md:border-r' : ''} ${index === 0 ? 'md:pl-0' : ''} ${index === 2 ? 'md:pr-0' : ''}`}>
-                <h3 className="font-display text-xl font-medium leading-tight tracking-[-.03em]">{title}</h3>
-                <p className="mt-3 text-[13px] leading-relaxed text-[var(--text-secondary)]">{body}</p>
-                <p className="mt-4 font-mono text-[9px] uppercase tracking-[.06em] text-forge-500">{lesson}</p>
+          <div className="mt-px grid gap-px bg-white/15 md:grid-cols-[1.5fr_1fr_1fr]">
+            {mapBottom.map(([n, title, description, accent]) => (
+              <div key={n} className={`p-5 ${accent ? 'bg-forge-500/10' : 'bg-[#0b1d22]'}`}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className={`font-display text-xl font-medium tracking-[-.03em] ${accent ? 'text-forge-300' : 'text-white'}`}>{title}</h3>
+                  <span className="font-mono text-[8px] text-forge-300">{n}</span>
+                </div>
+                <p className="mt-3 max-w-[420px] text-[12px] leading-relaxed text-white/45">{description}</p>
               </div>
             ))}
           </div>
@@ -241,67 +232,131 @@ export default function AITradingPage() {
       </section>
 
       <section className="border-b border-[var(--border-color)]">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-[var(--text-primary)] pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">05 / Real markets</p>
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-16 md:px-8 md:py-24">
+          <div className="flex flex-col justify-between gap-4 border-b border-[var(--text-primary)] pb-5 md:flex-row md:items-end">
             <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">From event markets to real markets.</h2>
-              <p className="mt-4 max-w-[640px] text-[14px] leading-relaxed text-[var(--text-muted)]">The harness is the same. The details are harder: data vendors, execution venues, market impact, corporate actions and regulation.</p>
+              <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">The work</p>
+              <h2 className="mt-4 font-display text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[.96] tracking-[-.05em]">Three ways to start.</h2>
             </div>
+            <p className="max-w-[380px] text-[13px] leading-relaxed text-[var(--text-muted)]">You do not have to start with live capital. Most teams should not.</p>
           </div>
 
-          <div className="grid border-t border-[var(--text-primary)] md:grid-cols-3">
-            {[
-              ['Data', 'Vendors, reference data, corporate actions, survivorship, time zones. The data problem gets wider, not deeper.'],
-              ['Execution', 'Venues, market impact, dark liquidity, borrow and short, derivatives. The book is bigger and less forgiving.'],
-              ['Risk', 'Overnight gaps, correlation, currency, regulation. The failure modes are slower and larger.'],
-            ].map(([title, description], index) => (
-              <div key={title} className={`border-b border-[var(--border-color)] py-6 md:px-7 ${index < 2 ? 'md:border-r' : ''} ${index === 0 ? 'md:pl-0' : ''} ${index === 2 ? 'md:pr-0' : ''}`}>
-                <h3 className="font-display text-2xl font-medium tracking-[-.035em]">{title}</h3>
+          <div className="border-t border-[var(--text-primary)]">
+            {services.map(([n, title, description, gets, nots]) => (
+              <div key={n} className="grid gap-5 border-b border-[var(--border-color)] py-7 md:grid-cols-[46px_1.1fr_1fr_1fr] md:gap-8">
+                <span className="font-mono text-[9px] text-forge-500">{n}</span>
+                <div>
+                  <h3 className="font-display text-2xl font-medium tracking-[-.03em]">{title}</h3>
+                  <p className="mt-3 max-w-[380px] text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>
+                </div>
+                <div>
+                  <p className="font-mono text-[8px] uppercase tracking-[.06em] text-[var(--text-muted)]">What you get</p>
+                  <ul className="mt-3 space-y-1.5">
+                    {gets.map((item) => (
+                      <li key={item} className="text-[12px] leading-relaxed text-[var(--text-secondary)]">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-mono text-[8px] uppercase tracking-[.06em] text-[var(--text-muted)]">What it does not do</p>
+                  <p className="mt-3 max-w-[300px] text-[12px] leading-relaxed text-[var(--text-muted)]">{nots}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#0b1d22] text-white">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-16 md:grid-cols-[.8fr_1.2fr] md:gap-16 md:px-8 md:py-24">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">Before live capital</p>
+            <h2 className="mt-4 max-w-[400px] font-display text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[.96] tracking-[-.05em] text-white">Six gates.</h2>
+            <p className="mt-5 max-w-[360px] text-[13px] leading-relaxed text-white/45">If one of them is missing, the model does not trade. The order is not a preference.</p>
+          </div>
+
+          <div className="grid gap-px bg-white/15 sm:grid-cols-2">
+            {gates.map(([n, title, description]) => (
+              <div key={n} className="bg-[#0b1d22] p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="h-1.5 w-1.5 bg-forge-500" aria-hidden="true" />
+                  <span className="font-mono text-[8px] text-forge-300">{n}</span>
+                </div>
+                <h3 className="mt-4 font-display text-lg font-medium leading-tight tracking-[-.02em] text-white">{title}</h3>
+                <p className="mt-2 text-[12px] leading-relaxed text-white/45">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border-color)] bg-white">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-16 md:grid-cols-[.7fr_1.3fr] md:gap-16 md:px-8 md:py-24">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">The risk register</p>
+            <h2 className="mt-4 max-w-[400px] font-display text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[.96] tracking-[-.05em]">What we look for before it looks for us.</h2>
+          </div>
+
+          <div className="border-t border-[var(--text-primary)]">
+            {risks.map(([risk, control]) => (
+              <div key={risk} className="grid gap-2 border-b border-[var(--border-color)] py-4 md:grid-cols-[.9fr_1.1fr] md:gap-8">
+                <span className="font-mono text-[10px] uppercase tracking-[.05em] text-[var(--text-primary)]">{risk}</span>
+                <span className="text-[13px] leading-relaxed text-[var(--text-muted)]">{control}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border-color)]">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-5 py-16 md:grid-cols-[1.1fr_.9fr] md:gap-16 md:px-8 md:py-20">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">From production</p>
+            <h2 className="mt-4 max-w-[560px] font-display text-[clamp(2rem,3.6vw,3.2rem)] font-medium leading-[.98] tracking-[-.05em]">We have run this harness on prediction markets.</h2>
+            <p className="mt-5 max-w-[500px] text-[14px] leading-relaxed text-[var(--text-secondary)]">The same layers apply to real markets. No client names, no P&amp;L promises.</p>
+            <a href="/prediction-markets" className="mt-6 inline-flex font-mono text-[9px] uppercase tracking-[.06em] text-forge-500 underline underline-offset-4">See the event market work</a>
+          </div>
+          <div className="border-l border-[var(--border-color)] pl-6 md:pl-10">
+            <p className="border-b border-[var(--border-color)] py-3 text-[13px] leading-relaxed text-[var(--text-secondary)]">A weather ensemble priced against a market.</p>
+            <p className="border-b border-[var(--border-color)] py-3 text-[13px] leading-relaxed text-[var(--text-secondary)]">An LLM forecaster with a calibration layer.</p>
+            <p className="border-b border-[var(--border-color)] py-3 text-[13px] leading-relaxed text-[var(--text-secondary)]">A fee-aware sizer that survived live.</p>
+            <a href="/blog/prediction-markets-harness" className="mt-4 inline-flex font-mono text-[9px] uppercase tracking-[.06em] text-forge-500 underline underline-offset-4">Read the harness article</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border-color)] bg-white">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-16 md:px-8 md:py-24">
+          <div className="flex flex-col justify-between gap-4 border-b border-[var(--text-primary)] pb-5 md:flex-row md:items-end">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">How we start</p>
+              <h2 className="mt-4 font-display text-[clamp(2.2rem,4vw,3.6rem)] font-medium leading-[.96] tracking-[-.05em]">Diagnostic, prototype, live.</h2>
+            </div>
+            <p className="max-w-[340px] text-[13px] leading-relaxed text-[var(--text-muted)]">No live capital on day one. The first deliverable is a decision, not a trade.</p>
+          </div>
+
+          <div className="relative mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
+            <div className="absolute left-0 right-0 top-[5px] hidden h-px bg-[var(--border-color)] md:block" aria-hidden="true" />
+            {timeline.map(([week, title, description]) => (
+              <div key={week} className="relative border-l border-[var(--border-color)] pl-5 md:border-l-0 md:pl-0">
+                <span className="absolute -left-[3px] top-[2px] h-2 w-2 bg-forge-500 md:left-0" aria-hidden="true" />
+                <p className="font-mono text-[8px] uppercase tracking-[.06em] text-forge-500">{week}</p>
+                <h3 className="mt-3 font-display text-2xl font-medium tracking-[-.03em]">{title}</h3>
                 <p className="mt-3 max-w-[340px] text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>
               </div>
             ))}
           </div>
-          <p className="mt-6 font-mono text-[9px] uppercase tracking-[.06em] text-[var(--text-muted)]">
-            The same harness on event markets: <a href="/prediction-markets" className="text-forge-500 underline underline-offset-2">prediction markets</a>
-          </p>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--border-color)] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 grid gap-4 border-t border-[var(--text-primary)] pt-4 md:grid-cols-[180px_1fr] md:gap-10">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">06 / How we start</p>
-            <div>
-              <h2 className="max-w-[820px] font-display text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[.96] tracking-[-.055em]">Diagnostic, prototype, production.</h2>
-              <p className="mt-4 max-w-[600px] text-[14px] leading-relaxed text-[var(--text-muted)]">No live capital on day one. The first deliverable is a decision, not a trade.</p>
-            </div>
-          </div>
-
-          <div className="border-t border-[var(--text-primary)]">
-            {steps.map(([n, title, time, description]) => (
-              <div key={n} className="grid gap-2 border-b border-[var(--border-color)] py-5 md:grid-cols-[80px_220px_150px_1fr] md:gap-6">
-                <span className="font-mono text-[9px] text-forge-500">{n}</span>
-                <h3 className="font-display text-xl font-medium tracking-[-.03em]">{title}</h3>
-                <span className="font-mono text-[9px] uppercase tracking-[.05em] text-[var(--text-muted)]">{time}</span>
-                <p className="max-w-[560px] text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       <section className="border-b border-[var(--border-color)]">
         <div className="mx-auto w-full max-w-[1280px] px-5 py-14 md:px-8 md:py-20">
-          <div className="mb-8 flex flex-col justify-between gap-3 border-t border-[var(--text-primary)] pt-4 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-500">07 / From the blog</p>
-              <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.2rem)] font-medium tracking-[-.05em]">The research behind the system.</h2>
-            </div>
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-medium tracking-[-.05em]">Reading</h2>
             <a href="/blog" className="font-mono text-[9px] uppercase tracking-[.06em] text-forge-500 hover:underline">All writing ↗</a>
           </div>
           <div className="border-t border-[var(--text-primary)]">
-            {research.map(([title, description, href]) => (
+            {reading.map(([title, description, href]) => (
               <a key={href} href={href} className="group grid gap-2 border-b border-[var(--border-color)] py-4 md:grid-cols-[1fr_320px] md:gap-6">
                 <h3 className="font-display text-lg font-medium leading-tight tracking-[-.02em] transition-colors group-hover:text-forge-500">{title}</h3>
                 <p className="text-[12px] leading-relaxed text-[var(--text-muted)]">{description}</p>
@@ -311,17 +366,17 @@ export default function AITradingPage() {
         </div>
       </section>
 
-      <section className="bg-forge-500 text-white">
-        <div className="mx-auto grid w-full max-w-[1280px] gap-8 px-5 py-14 md:grid-cols-[1.25fr_.75fr] md:items-end md:px-8 md:py-20">
+      <section className="border-t border-forge-500 bg-[#0b1d22] text-white">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-8 px-5 py-16 md:grid-cols-[1.3fr_.7fr] md:items-end md:px-8 md:py-24">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">Start with a diagnostic</p>
-            <h2 className="mt-4 max-w-[760px] font-display text-[clamp(2.5rem,5vw,5rem)] font-medium leading-[.9] tracking-[-.06em]">Bring us the market. We will build the harness.</h2>
-            <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-white/75">Tell us what you are trying to trade and what you have already tried. We will answer with a point of view, not a sales deck.</p>
-            <a href="mailto:alex@vegaforge.dev" className="mt-6 inline-flex border border-white px-5 py-3 text-xs font-medium transition-colors hover:bg-white hover:text-forge-600">alex@vegaforge.dev <span className="ml-2">↗</span></a>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">Start with a diagnostic</p>
+            <h2 className="mt-4 max-w-[760px] font-display text-[clamp(2.4rem,4.8vw,4.8rem)] font-medium leading-[.9] tracking-[-.06em]">Bring us the market. We will build the harness.</h2>
+            <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-white/55">Tell us what you are trying to trade and what you have already tried. We will answer with a point of view, not a sales deck.</p>
+            <a href="mailto:alex@vegaforge.dev" className="mt-6 inline-flex border border-white/50 px-5 py-3 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10">alex@vegaforge.dev <span className="ml-2">↗</span></a>
           </div>
           <div className="md:text-right">
-            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">VegaForge / AI trading</p>
-            <TallyButton className="mt-3 border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
+            <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/40">VegaForge / AI trading</p>
+            <TallyButton className="mt-3 border-b border-forge-500 pb-1 font-display text-2xl text-white transition-transform hover:translate-x-1">Start a project</TallyButton>
           </div>
         </div>
       </section>
