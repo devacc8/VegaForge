@@ -272,7 +272,7 @@ export default function AITradingPage() {
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-forge-300">Before live capital</p>
             <h2 className="mt-4 max-w-[400px] font-display text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-[.96] tracking-[-.05em] text-white">Six gates.</h2>
-            <p className="mt-5 max-w-[360px] text-[13px] leading-relaxed text-white/45">If one of them is missing, the model does not trade. The order is not a preference.</p>
+            <p className="mt-5 max-w-[360px] text-[13px] leading-relaxed text-white/45">If one of them is missing, the model does not trade. None of them is optional.</p>
           </div>
 
           <div className="grid gap-px bg-white/15 sm:grid-cols-2">
@@ -338,8 +338,8 @@ export default function AITradingPage() {
           <div className="relative mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
             <div className="absolute left-0 right-0 top-[5px] hidden h-px bg-[var(--border-color)] md:block" aria-hidden="true" />
             {timeline.map(([week, title, description]) => (
-              <div key={week} className="relative border-l border-[var(--border-color)] pl-5 md:border-l-0 md:pl-0">
-                <span className="absolute -left-[3px] top-[2px] h-2 w-2 bg-forge-500 md:left-0" aria-hidden="true" />
+              <div key={week} className="relative border-l border-[var(--border-color)] pl-5 pt-6 md:border-l-0 md:pl-0 md:pt-8">
+                <span className="absolute -left-[3px] top-[1px] h-2 w-2 bg-forge-500 md:left-0" aria-hidden="true" />
                 <p className="font-mono text-[8px] uppercase tracking-[.06em] text-forge-500">{week}</p>
                 <h3 className="mt-3 font-display text-2xl font-medium tracking-[-.03em]">{title}</h3>
                 <p className="mt-3 max-w-[340px] text-[13px] leading-relaxed text-[var(--text-secondary)]">{description}</p>

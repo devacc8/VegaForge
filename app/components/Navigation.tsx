@@ -28,7 +28,7 @@ export function Navigation() {
             Vega<span className="text-forge-500">Forge</span>
           </a>
 
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
             {links.map((link) => {
               const active = pathname === link.href || pathname.startsWith(`${link.href}/`)
               return (
@@ -58,7 +58,7 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => setMobileOpen((open) => !open)}
-              className="flex h-9 w-9 items-center justify-center border border-[var(--border-color)] text-[var(--text-secondary)] md:hidden"
+              className="flex h-9 w-9 items-center justify-center border border-[var(--border-color)] text-[var(--text-secondary)] lg:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileOpen ? (
@@ -76,7 +76,7 @@ export function Navigation() {
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-[62px] z-40 border-b border-[var(--border-color)] bg-[var(--bg-primary)] px-5 py-4 md:hidden">
+        <div className="fixed inset-x-0 top-[62px] z-40 border-b border-[var(--border-color)] bg-[var(--bg-primary)] px-5 py-4 lg:hidden">
           <nav className="mx-auto flex max-w-[1280px] flex-col" aria-label="Mobile navigation">
             {links.map((link) => (
               <a
