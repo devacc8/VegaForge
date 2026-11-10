@@ -262,6 +262,9 @@ export default function PredictionMarketsPage() {
               </div>
             ))}
           </div>
+          <p className="mt-6 font-mono text-[9px] uppercase tracking-[.06em] text-[var(--text-muted)]">
+            The same harness on real markets: <a href="/ai-trading" className="text-forge-500 underline underline-offset-2">AI trading</a>
+          </p>
         </div>
       </section>
 

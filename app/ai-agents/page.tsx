@@ -154,6 +154,9 @@ export default function AIAgentsPage() {
                   <span key={tag} className="border border-[var(--border-color)] px-2 py-1 font-mono text-[8px] text-[#1d5b63]">{tag}</span>
                 ))}
               </div>
+              <a href="/ai-trading" className="mt-5 inline-flex font-mono text-[9px] uppercase tracking-[.06em] text-forge-500 hover:underline">
+                See AI trading systems ↗
+              </a>
             </article>
 
             <article className="border border-[var(--border-color)] bg-[var(--bg-primary)] p-6 md:p-8">

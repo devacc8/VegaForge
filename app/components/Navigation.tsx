@@ -7,6 +7,7 @@ import { TallyButton } from './TallyButton'
 const links = [
   { href: '/work', label: 'Work' },
   { href: '/ai-agents', label: 'AI Agents' },
+  { href: '/ai-trading', label: 'AI Trading' },
   { href: '/prediction-markets', label: 'Prediction Markets' },
   { href: '/blog', label: 'Blog' },
 ]
