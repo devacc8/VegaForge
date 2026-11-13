@@ -1,0 +1,128 @@
+---
+title: "The Price Is Not the Probability: Inside Robinhood's 15-Minute Crypto Markets"
+description: "Robinhood sells crypto event contracts through Kalshi, with the term compressed to 15 minutes and dozens of strikes per asset. On the deep strikes the quote is often zero, which is an empty book, not a probability. A look at what the price means when the book is thin."
+date: "2026-11-13"
+category: "AI & Crypto"
+tags: ["robinhood", "prediction-markets", "kalshi", "order-book", "crypto"]
+cta: false
+---
+
+I look at the order book before I look at the price. The habit stuck after I started building trading tools, and on short-dated markets it saves more money than any model.
+
+On Robinhood's 15-minute crypto contracts the price looks like a probability. One cent, five cents, ninety-nine. But when the book is empty, that number tells you about the last trade, not about the chance of the event.
+
+That gap is what I want to take apart: what is actually being sold, how the term compressed to 15 minutes, why deep strikes show zero, and what a trader should do about it.
+
+## What Robinhood Sells
+
+Robinhood Prediction Markets is a set of event contracts offered through its partner, the regulated exchange Kalshi. That is how the product is described in [Robinhood's own guide](https://robinhood.com/us/en/learn/articles/trading-crypto-event-contracts/).
+
+The contract is binary: YES or NO, priced between \$0.01 and \$0.99. A correct outcome settles at \$1, an incorrect one at \$0. You can hold to settlement or close at the market price, but closing needs someone on the other side.
+
+While the position is open its price moves, but the obligation stays the same: a dollar or nothing. So closing at the market is not stepping out of the bet, it is handing it to someone else.
+
+The money lands in buying power within one business day of settlement ([settlement guide](https://robinhood.com/us/en/support/articles/event-contracts-settlement/)). It sits in a regular brokerage account, not in an on-chain position.
+
+Here is the first fork. A price in cents reads as a probability, and that reading feels natural. But the payoff is binary: a dollar or nothing. A probability has shades, a settlement does not.
+
+And one more thing. The price of a probability lives in your head, the price of a contract lives in the order book. While the book is thick, the two stay close. When the book is empty, they drift apart.
+
+## A Week, a Day, Fifteen Minutes
+
+The term compressed in steps: a week, then a day, then fifteen minutes. That comes from JB Mackenzie, Robinhood's vice president and general manager for futures and prediction markets, in [CoinDesk via KuCoin](https://www.kucoin.com/zh-hant/news/flash/robinhood-s-prediction-markets-grow-with-bitcoin-gold-and-oil-contracts).
+
+Compressing the term is not cosmetic. It changes how much information can get into the price at all.
+
+Mackenzie compares these ultra-short crypto contracts to zero-day options, 0DTE. The comparison holds: in both, the position lives less than a day, and in both the price runs into noise rather than horizon.
+
+The asset list is wide. Crypto contracts cover BTC, ETH, HYPE and XRP, with gold and oil alongside. Kalshi runs hourly contracts on the S&P 500, Nasdaq, BTC and ETH that expire within 60 minutes.
+
+I see it not as a new category but as an acceleration of an old one. The product walked into the territory of short bets. And with the term, the time in which the price can learn anything disappeared: a weekly contract has time to react to news, a fifteen-minute one has almost none.
+
+## The Strike Ladder
+
+Every asset carries a ladder of strikes, dozens of contracts on one page. It looks like a precise scale of opinions: a price below, a price above, a price far out in the tail.
+
+But the ladder creates a precision the book does not have. Dozens of rows do not mean dozens of opinions. Often it is one thin book stretched across strikes.
+
+Deep strikes show zero cents. Zero reads as "the event is impossible", when all it means is that this strike has no book.
+
+A strike is a boundary, not a forecast. The price at the boundary depends on whether anyone trades at that boundary. If nobody does, the price stays where the last trade left it, and may sit there until the next one.
+
+The ladder gives a person plenty of options on paper. But if the price exists on one row only, that is not a choice, it is a shop window.
+
+## A Price Without a Book
+
+When the book is thin, the price stops being the market's opinion. It becomes the trace of the last trade.
+
+What is left in that price is flow and spread, not a forecast.
+
+A two-sided quote means someone will buy and someone will sell. Without both sides there is no agreement in the price. There is only the person who pressed the button last.
+
+Spread matters more than forecast in that situation. On a wide spread you pay to enter and pay to leave, and the probability has to be very far from the price for that to pay off.
+
+Depth matters more than price. If a single order sits at the entry, a price of five cents does not mean you can buy size at five cents.
+
+The main thing my own experience taught me: a price without a book is not a signal. The signal is a strike with two sides and a narrow spread. Everything else is decoration.
+
+When I build a tool, I look first not at the price but at how much size is standing in the book. A price without that number explains nothing.
+
+## Forty-Eight Dogecoin Contracts
+
+On September 11, 2026 the Dogecoin page carried 48 contracts. Only the "\$0.085 or above" strike had a two-sided price, at five cents. The rest showed zero.
+
+Spot was around \$0.0843 at the time, so the 0.085 strike sat just above the price. The example comes from [the otontechnology blog](https://otontechnology.com/dogecoin-085-robinhood-prediction-market-4am/), not from a primary source, and I take it as such. I did not check the live Robinhood page myself; a geo-block may keep it shut.
+
+Read zero as a probability and the market would be claiming the coin cannot reach those levels. But those strikes simply had no book.
+
+That is the whole trick. Forty-eight rows look like a complete map of probabilities, and the live price sits on one row. The rest are empty last trades, not verdicts on the event.
+
+Five cents on the strike just above spot is a real price: someone will take one side, someone the other. Zero on the row next to it means only that no such people showed up.
+
+## Why Fifteen Minutes Break the Probability
+
+On a fifteen-minute horizon, noise is stronger than any opinion about probability. That is the main practical point.
+
+A model can be right on a long horizon and have no edge on a short one. In fifteen minutes the price can bounce off a random trade, and the forecast drowns in the spread.
+
+What gives an edge on that horizon is not the opinion about probability but execution: where you got in, what the spread was, whether you got out before settlement. The opinion itself is worth almost nothing.
+
+Then the costs. Since June 1, 2026 Robinhood charges a commission per contract proportional to the product of the contract price and its complement to a dollar: 10% without Gold and 5% with Gold ([Robinhood's guide](https://robinhood.com/us/en/support/articles/event-contracts-overview/)).
+
+Plus an exchange fee of one cent per contract on each side.
+
+Kalshi charges takers 7% of the same product, capped at \$1.75 per 100 contracts at a price of 50 cents ([Kalshi](https://help.kalshi.com/en/articles/13823805-fees.md)).
+
+Which leads to the consequence that changes how the ladder reads. The percentage part of the fee peaks in the middle, around 50 cents, and goes to zero at the edges. But the fixed one-cent fee per side does not go anywhere. On a one-cent contract that fee is larger than the stake itself, and on a fifty-cent contract it dissolves.
+
+So cheap contracts look cheap while costing the most in percentage terms. The middle is expensive in absolute money, the tail in relative.
+
+One more gap: the guide does not say which price source settlement uses or when it is fixed. That is the first thing I would check by hand before counting anything on this market.
+
+Fifteen minutes is not a forecast. It is a window in which information does not have time to become price. And this is not investment advice: I am describing the mechanics, not telling anyone what to buy.
+
+## Distribution, Not Accuracy
+
+To the numbers. Kalshi takes 96% of non-sports prediction market volume, and about a third of Kalshi's daily flow comes from Robinhood ([Artemis via Gate](https://www.gate.com/zh/news/detail/KALSHI/kalshi-captures-96b-of-10b-prediction-market-volume-in-week-ending-sept-13-24292626), week ending September 13, 2026).
+
+Kalshi contracts are not sold only in Robinhood: they are also on Coinbase, Webull and Moomoo. So this is not a unique product, it is the same good in different shop windows.
+
+Polymarket works differently: a CLOB with on-chain settlement through UMA, while Robinhood is a brokerage front end to Kalshi, with the money in a regular brokerage account. A good comparison is at [KuCoin](https://www.kucoin.com/news/flash/turboflow-polymarket-and-robinhood-a-comparative-analysis-of-short-term-event-contracts).
+
+And here is the conclusion that changes how all those numbers read: this is a story about distribution, not about the accuracy of a market. The contract is sold where a person already has an account open, and that beats any accuracy.
+
+## What to Do With It
+
+For a trader the conclusion is short. Look at the book, the strike and the settlement terms, not at the price. A price without a book is not a signal, it is just the last trade.
+
+And look at the costs. Commission and spread matter more than the opinion about probability: you pay them at entry, while being right arrives later, if it arrives.
+
+I would add a simple set of checks: are there two sides, what is the spread, how is settlement calculated. Everything else is secondary.
+
+For the market the conclusion is heavier. The shorter the term and the thinner the book, the less forecast there is in the price and the more bet. When the product is closer to a bet, the predictive power of a prediction market disappears, and so does the point of citing its price as a probability.
+
+And here I am back where I started. I look at the book. Where there are two sides, the price means something. Where there is zero and silence, it means exactly one thing: no trades happened.
+
+My next step is simple: open a live page and count how many strikes actually have two sides. While the book is silent, the price is not a probability to me.
+
+**P.S.** If you trade short-dated contracts or build tools around them, I would like to compare notes on the order book and the settlement. Find me on [X](https://x.com/vvegalex).
