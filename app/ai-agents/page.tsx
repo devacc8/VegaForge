@@ -64,7 +64,7 @@ export default function AIAgentsPage() {
             We build AI agents for support, operations, financial monitoring and prediction market research. Retrieval, tools, evaluations and human approval, built into the systems your team already uses.
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
-            <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start a conversation</TallyButton>
+            <TallyButton placement="hero" className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start a conversation</TallyButton>
             <a href="#how-it-works" className="border border-[var(--text-primary)] px-5 py-3 text-xs font-medium transition-colors hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)]">How it works</a>
           </div>
         </div>
@@ -237,7 +237,7 @@ export default function AIAgentsPage() {
           </div>
           <div className="md:text-right">
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">VegaForge / AI systems</p>
-            <TallyButton className="mt-3 border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
+            <TallyButton placement="contact" className="mt-3 border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
           </div>
         </div>
       </section>

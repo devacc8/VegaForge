@@ -137,7 +137,7 @@ export default function AITradingPage() {
               We build the harness that turns a model into a trading system: data pipelines, calibration, execution, risk limits and the infrastructure in between. For trading teams, funds and market operators.
             </p>
             <div className="mt-7 flex flex-wrap gap-2.5">
-              <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
+              <TallyButton placement="hero" className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
               <a href="#system" className="border border-white/40 px-5 py-3 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10">See the system</a>
             </div>
           </div>
@@ -376,7 +376,7 @@ export default function AITradingPage() {
           </div>
           <div className="md:text-right">
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/40">VegaForge / AI trading</p>
-            <TallyButton className="mt-3 border-b border-forge-500 pb-1 font-display text-2xl text-white transition-transform hover:translate-x-1">Start a project</TallyButton>
+            <TallyButton placement="contact" className="mt-3 border-b border-forge-500 pb-1 font-display text-2xl text-white transition-transform hover:translate-x-1">Start a project</TallyButton>
           </div>
         </div>
       </section>

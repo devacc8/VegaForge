@@ -265,7 +265,7 @@ export default function Home() {
           </div>
           <div className="md:text-right">
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">VegaForge / Product systems</p>
-            <TallyButton className="mt-3 inline-block border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
+            <TallyButton placement="contact" className="mt-3 inline-block border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
           </div>
         </div>
       </section>

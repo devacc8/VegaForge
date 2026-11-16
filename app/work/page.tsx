@@ -149,7 +149,7 @@ export default function WorkPage() {
             <p className="mt-4 max-w-[480px] text-[13px] leading-relaxed text-white/55">Tell us what the business runs on today and where it breaks.</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start a project</TallyButton>
+            <TallyButton placement="contact" className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start a project</TallyButton>
             <a href="mailto:alex@vegaforge.dev" className="border border-white/30 px-5 py-3 text-xs font-medium transition-colors hover:border-white">alex@vegaforge.dev</a>
           </div>
         </div>

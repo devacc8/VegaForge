@@ -52,7 +52,7 @@ export function Navigation() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <TallyButton className="hidden bg-forge-600 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-forge-500 md:inline-flex">
+            <TallyButton placement="nav" className="hidden bg-forge-600 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-forge-500 md:inline-flex">
               Start a project
             </TallyButton>
             <button
@@ -90,7 +90,7 @@ export function Navigation() {
             <a href="/#contact" className="border-b border-[var(--border-color-subtle)] py-3 font-mono text-xs uppercase tracking-[0.08em] text-[var(--text-secondary)]">
               Contact
             </a>
-            <TallyButton className="mt-4 bg-forge-600 px-4 py-3 text-center text-sm font-medium text-white">
+            <TallyButton placement="nav_mobile" className="mt-4 bg-forge-600 px-4 py-3 text-center text-sm font-medium text-white">
               Start a project
             </TallyButton>
           </nav>

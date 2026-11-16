@@ -1,7 +1,9 @@
 'use client'
 
+export const TALLY_FORM_ID = 'RG4QQ9'
+
 const TALLY_CONFIG = {
-  formId: 'RG4QQ9',
+  formId: TALLY_FORM_ID,
   layout: 'modal',
   width: '500',
   hideTitle: '1',
@@ -12,9 +14,13 @@ const TALLY_CONFIG = {
 export function TallyButton({
   children,
   className,
+  placement = 'page',
+  cta = 'start_project',
 }: {
   children: React.ReactNode
   className?: string
+  placement?: string
+  cta?: string
 }) {
   return (
     <button
@@ -24,6 +30,9 @@ export function TallyButton({
       data-tally-hide-title={TALLY_CONFIG.hideTitle}
       data-tally-emoji-text={TALLY_CONFIG.emojiText}
       data-tally-emoji-animation={TALLY_CONFIG.emojiAnimation}
+      data-umami-event="cta_click"
+      data-umami-event-cta={cta}
+      data-umami-event-placement={placement}
       className={`cursor-pointer ${className ?? ''}`}
     >
       {children}

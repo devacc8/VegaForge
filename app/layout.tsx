@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { TallyEvents } from './components/TallyEvents'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
@@ -103,6 +104,7 @@ export default function RootLayout({
           data-website-id="0ca1af6e-fc0c-4e05-8945-f14bcf4425d7"
           defer
         />
+        <TallyEvents />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -122,7 +122,7 @@ export default function PredictionMarketsPage() {
             We build the harness around the model: data, calibration, edge detection, execution and risk. For Polymarket and other event markets.
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
-            <TallyButton className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
+            <TallyButton placement="hero" className="bg-forge-500 px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-forge-600">Start with a diagnostic</TallyButton>
             <a href="#harness" className="border border-[var(--text-primary)] px-5 py-3 text-xs font-medium transition-colors hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)]">See the harness</a>
           </div>
 
@@ -321,7 +321,7 @@ export default function PredictionMarketsPage() {
           </div>
           <div className="md:text-right">
             <p className="font-mono text-[10px] uppercase tracking-[.08em] text-white/70">VegaForge / Prediction markets</p>
-            <TallyButton className="mt-3 border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
+            <TallyButton placement="contact" className="mt-3 border-b border-white pb-1 font-display text-2xl transition-transform hover:translate-x-1">Start a project</TallyButton>
           </div>
         </div>
       </section>
